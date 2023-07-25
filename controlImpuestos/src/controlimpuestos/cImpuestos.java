@@ -6,7 +6,7 @@ public class cImpuestos{
     private double tasa_impuesto;
     private String fecha;
     
-    public Impuestos (String descripcion, double tasa_impuesto, String fecha){
+    public cImpuestos (String descripcion, double tasa_impuesto, String fecha){
         this.descripcion = descripcion;
         this.tasa_impuesto = tasa_impuesto;
         this.fecha = fecha;
@@ -36,7 +36,7 @@ public class cImpuestos{
         this.fecha = fecha;
     }
 
-    @Override
+
     public void showdata(){
     System.out.println("Indique el tipo de impuesto: " + getDescripcion());
     System.out.println("Indique la tasa de impuesto: " + getTasa_impuesto());
