@@ -38,6 +38,13 @@ public class cConexion {
                                 "direccion VARCHAR(50) NOT NULL," + 
                                 "PRIMARY KEY (idCliente))");
             
+            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Pagos (" + //Crear tabla pagos si no existe
+                                "idCliente int NOT NULL AUTO_INCREMENT," + 
+                                "Impuesto Double," + 
+                                "fecha DATE," +
+                                "Pago FLOAT,"+
+                                "PRIMARY KEY (idCliente))");
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error al inicializar base de datos", JOptionPane.ERROR_MESSAGE);
         }
