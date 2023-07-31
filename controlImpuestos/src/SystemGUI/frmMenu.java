@@ -20,6 +20,7 @@ public class frmMenu extends javax.swing.JFrame {
      */
     public frmMenu() {
         initComponents();
+        
         frmClientesCrear clientesCrear = new frmClientesCrear();
         clientesCrear.setSize(630, 560);
         clientesCrear.setLocation(0, 0);
