@@ -48,9 +48,9 @@ public class cConexion {
             
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Pagos (" + //Crear tabla pagos si no existe
                                 "idCliente int NOT NULL AUTO_INCREMENT," + 
-                                "Impuesto Double," + 
+                                "impuesto Double," + 
                                 "fecha DATE," +
-                                "Pago FLOAT,"+
+                                "pago FLOAT,"+
                                 "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente))");
             
         } catch (Exception e) {
