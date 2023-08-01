@@ -51,8 +51,7 @@ public class cConexion {
                                 "Impuesto Double," + 
                                 "fecha DATE," +
                                 "Pago FLOAT,"+
-                                "PRIMARY KEY (idCliente)"+
-                    "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente))");
+                                "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente))");
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error al inicializar base de datos", JOptionPane.ERROR_MESSAGE);
