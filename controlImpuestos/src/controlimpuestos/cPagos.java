@@ -1,6 +1,12 @@
 
 package controlimpuestos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author danie
@@ -10,15 +16,15 @@ public class cPagos {
     cClientes idCliente;
     cImpuestos tasa_impuesto;
     cImpuestos fecha;
-    private Float Pagos;
+    private Float pagos;
 
-    public cPagos(cClientes idCliente, cImpuestos tasa_impuesto, cImpuestos fecha, float Pagos) {
+    public cPagos(cClientes idCliente, cImpuestos tasa_impuesto, cImpuestos fecha, Float pagos) {
         this.idCliente = idCliente;
         this.tasa_impuesto = tasa_impuesto;
         this.fecha = fecha;
-        this.Pagos=Pagos;
+        this.pagos = pagos;
     }
-
+    
     public cClientes getIdCliente() {
         return idCliente;
     }
@@ -44,19 +50,19 @@ public class cPagos {
     }
 
     public Float getPagos() {
-        return Pagos;
+        return pagos;
     }
 
     public void setPagos(Float Pagos) {
-        this.Pagos = Pagos;
+        this.pagos = Pagos;
     }
 
     @Override
     public String toString() {
-        return "cPagos{" + "idCliente=" + idCliente + ", tasa_impuesto=" + tasa_impuesto + ", fecha=" + fecha + ", Pagos=" + Pagos + '}';
+        return "cPagos{" + "idCliente=" + idCliente + ", tasa_impuesto=" + tasa_impuesto + ", fecha=" + fecha + ", Pagos=" + pagos + '}';
     }
 
-    
+   
     //==========================================================================
     
     public void crearPago(){
@@ -74,14 +80,40 @@ public class cPagos {
         
     }
     
-    public void buscarPago(){
-
-    //metodo to string pago
+    public void buscarPago(String nombreCliente){
+      
+        try{
         
-        //conexion bd
+            Connection conn = cConexion.getConnection();        
+            String consulta = "SELECT idCliente, Impuesto, fecha, Pago FROM pagos WHERE idCliente IN (SELECT idCLiente FROM clientes WHERE nombreCliente = ?)";            
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            
+            ps.setString(1, nombreCliente);
+            ResultSet res = ps.executeQuery();
+            
+            while(res.next()){
+                int idCliente = res.getInt("idCliente");
+                double impuesto = res.getDouble("Impuesto");
+                Date fecha = res.getDate("fecha");
+                float pago = res.getFloat("Pago");
+                
+                
+            //imprimir en pantalla informacion (temporal)
+            System.out.println("ID del Cliente: " + idCliente);
+            System.out.println("Impuesto correspondiente: " + impuesto);
+            System.out.println("Fecha de pago: " + fecha);
+            System.out.println("Pago: " + pago);
+            
+            }
+            
+            conn.close();
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error" +e);
+        }
     
         //buscar Pago
-    
+        
         //mostrar en pantalla (interfaz)
     
         //cerrar conexion
