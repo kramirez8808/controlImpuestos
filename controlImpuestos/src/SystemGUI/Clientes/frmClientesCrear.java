@@ -88,11 +88,6 @@ public class frmClientesCrear extends javax.swing.JPanel {
                 tfNombreFocusGained(evt);
             }
         });
-        tfNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombreMousePressed(evt);
-            }
-        });
         add(tfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 230, 30));
 
         jlTelefono.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -108,9 +103,9 @@ public class frmClientesCrear extends javax.swing.JPanel {
         tfTelefono.setForeground(new java.awt.Color(153, 153, 153));
         tfTelefono.setText("Ingrese el teléfono");
         tfTelefono.setBorder(null);
-        tfTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfTelefonoMousePressed(evt);
+        tfTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfTelefonoFocusGained(evt);
             }
         });
         add(tfTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 230, 30));
@@ -133,11 +128,6 @@ public class frmClientesCrear extends javax.swing.JPanel {
                 tfCorreoFocusGained(evt);
             }
         });
-        tfCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfCorreoMousePressed(evt);
-            }
-        });
         add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 230, 30));
 
         jlCedula.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -149,9 +139,9 @@ public class frmClientesCrear extends javax.swing.JPanel {
         tfCedula.setForeground(new java.awt.Color(153, 153, 153));
         tfCedula.setText("Ingrese la cédula");
         tfCedula.setBorder(null);
-        tfCedula.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfCedulaMousePressed(evt);
+        tfCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfCedulaFocusGained(evt);
             }
         });
         add(tfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 230, 30));
@@ -227,38 +217,6 @@ public class frmClientesCrear extends javax.swing.JPanel {
         jlContribuyente.setText("Contribuyente:");
         add(jlContribuyente, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
-        // //Efecto tipo placeholder para el campo Nombre
-        // if (tfNombre.getText().equals("Ingrese el nombre")) {
-        //     tfNombre.setText("");
-        //     tfNombre.setForeground(btnCrear.getForeground());
-        // }
-    }//GEN-LAST:event_tfNombreMousePressed
-
-    private void tfCedulaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfCedulaMousePressed
-        //Efecto tipo placeholder para el campo Cedula
-        if (tfCedula.getText().equals("Ingrese la cédula")) {
-            tfCedula.setText("");
-            tfCedula.setForeground(btnCrear.getForeground());
-        }
-    }//GEN-LAST:event_tfCedulaMousePressed
-
-    private void tfCorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfCorreoMousePressed
-        // //Efecto tipo placeholder para el campo Correo
-        // if (tfCorreo.getText().equals("Ingrese el correo")) {
-        //     tfCorreo.setText("");
-        //     tfCorreo.setForeground(btnCrear.getForeground());
-        // }
-    }//GEN-LAST:event_tfCorreoMousePressed
-
-    private void tfTelefonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfTelefonoMousePressed
-        //Efecto tipo placeholder para el campo Cedula
-        if (tfTelefono.getText().equals("Ingrese el teléfono")) {
-            tfTelefono.setText("");
-            tfTelefono.setForeground(btnCrear.getForeground());
-        }
-    }//GEN-LAST:event_tfTelefonoMousePressed
 
     private void jlCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCrearMouseClicked
         //Obtener los datos de los campos
@@ -336,6 +294,22 @@ public class frmClientesCrear extends javax.swing.JPanel {
             tfCorreo.setForeground(btnCrear.getForeground());
         }
     }//GEN-LAST:event_tfCorreoFocusGained
+
+    private void tfCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCedulaFocusGained
+        //Efecto tipo placeholder para el campo Cedula
+        if (tfCedula.getText().equals("Ingrese la cédula")) {
+            tfCedula.setText("");
+            tfCedula.setForeground(btnCrear.getForeground());
+        }
+    }//GEN-LAST:event_tfCedulaFocusGained
+
+    private void tfTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTelefonoFocusGained
+        //Efecto tipo placeholder para el campo Telefono
+        if (tfTelefono.getText().equals("Ingrese el teléfono")) {
+            tfTelefono.setText("");
+            tfTelefono.setForeground(btnCrear.getForeground());
+        }
+    }//GEN-LAST:event_tfTelefonoFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

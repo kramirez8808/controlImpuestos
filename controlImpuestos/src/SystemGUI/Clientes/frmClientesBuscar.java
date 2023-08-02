@@ -127,6 +127,11 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfCorreo.setForeground(new java.awt.Color(153, 153, 153));
         tfCorreo.setText("Ingrese el correo");
         tfCorreo.setBorder(null);
+        tfCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfCorreoFocusGained(evt);
+            }
+        });
         tfCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCorreoActionPerformed(evt);
@@ -538,6 +543,10 @@ public class frmClientesBuscar extends javax.swing.JPanel {
     private void cbTipoContribuyenteResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoContribuyenteResultadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoContribuyenteResultadoActionPerformed
+
+    private void tfCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCorreoFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCorreoFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
