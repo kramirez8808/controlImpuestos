@@ -40,7 +40,7 @@ public class cConexion {
             
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS impuestos (" + //Crear tabla pagos si no existe
                                 "descripcion VARCHAR(50) NOT NULL," + 
-                                "tasaImpuesto DOUBLE(5) NOT NULL," +
+                                "tasaImpuesto DOUBLE NOT NULL," +
                                 "fechaVencimiento DATE NOT NULL)");
             
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Pagos (" + //Crear tabla pagos si no existe
