@@ -10,23 +10,17 @@ package controlimpuestos;
  */
 public class cClientes extends scPersona {
     //Atributos
-    private String idCliente;
     private String tipoCliente; //Persona fisica o juridica
     private String tipoContribuyente; //Contribuyente especial o no
 
     //Constructor
-    public cClientes(String idCliente, String tipoCliente, String tipoContribuyente, String nombre, String telefono, String correo, String cedula, String direccion) {
+    public cClientes(String nombre, String telefono, String correo, String cedula, String direccion, String tipoCliente, String tipoContribuyente) {
         super(nombre, telefono, correo, cedula, direccion);
-        this.idCliente = idCliente;
         this.tipoCliente = tipoCliente;
         this.tipoContribuyente = tipoContribuyente;
     }
 
     //GET
-    public String getIdCliente() {
-        return idCliente;
-    }
-
     public String getTipoCliente() {
         return tipoCliente;
     }
@@ -36,10 +30,6 @@ public class cClientes extends scPersona {
     }
 
     //SET
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
-    }
-
     public void setTipoCliente(String tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
@@ -56,7 +46,6 @@ public class cClientes extends scPersona {
         System.out.println("Correo: " + getCorreo());
         System.out.println("Cedula: " + getCedula());
         System.out.println("Direccion: " + getDireccion());
-        System.out.println("ID Cliente: " + getIdCliente());
         System.out.println("Tipo de cliente: " + getTipoCliente());
         System.out.println("Tipo de contribuyente: " + getTipoContribuyente());
     }

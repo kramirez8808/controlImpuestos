@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rachel/Documents/controlImpuestos/controlImpuestos/src/controlimpuestos/cConexion.java</file>
-            <file>file:/C:/Users/Rachel/Documents/controlImpuestos/controlImpuestos/src/SystemGUI/Login/frmLogin.java</file>
+            <file>file:/C:/Users/fanta/OneDrive/Documents/GitHub%20Workplaces/controlImpuestos/controlImpuestos/src/SystemGUI/Clientes/frmClientesCrear.java</file>
+            <file>file:/C:/Users/fanta/OneDrive/Documents/GitHub%20Workplaces/controlImpuestos/controlImpuestos/src/SystemGUI/Clientes/frmClientesBuscar.java</file>
+            <file>file:/C:/Users/fanta/OneDrive/Documents/GitHub%20Workplaces/controlImpuestos/controlImpuestos/src/controlimpuestos/cClientes.java</file>
+            <file>file:/C:/Users/fanta/OneDrive/Documents/GitHub%20Workplaces/controlImpuestos/controlImpuestos/src/controlimpuestos/SystemCRUD/crudClientes.java</file>
         </group>
     </open-files>
 </project-private>

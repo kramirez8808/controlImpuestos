@@ -15,7 +15,7 @@ public class cConexion {
 
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            JOptionPane.showMessageDialog(null, "Conexion exitosa", "Conexion", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Conexion con el servidor", "Conexion", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -41,7 +41,7 @@ public class cConexion {
                                 "correo VARCHAR(50) NOT NULL," + 
                                 "cedula VARCHAR(10) NOT NULL," + 
                                 "direccion VARCHAR(100) NOT NULL," +
-                                "tipoCliente VARCHAR(10) NOT NULL," +
+                                "tipoCliente VARCHAR(20) NOT NULL," +
                                 "tipoContribuyente VARCHAR(30) NOT NULL," +
                                 "PRIMARY KEY (idCliente))");
             

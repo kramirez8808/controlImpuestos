@@ -4,11 +4,24 @@
  */
 package SystemGUI.Clientes;
 
+import java.awt.Color;
+import controlimpuestos.SystemCRUD.crudClientes;
+import controlimpuestos.cClientes;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fanta
  */
 public class frmClientesCrear extends javax.swing.JPanel {
+
+    //Variables requeridas para obtener los datos del formulario
+    private String nombre, telefono, 
+    correo, cedula, direccion, 
+    tipoCliente, tipoContribuyente;
+
+    //Instancia del objeto SystemCRUD.crudClientes
+    private crudClientes crudClientes;
 
     /**
      * Creates new form frmClientesCrear1
@@ -44,6 +57,10 @@ public class frmClientesCrear extends javax.swing.JPanel {
         jlcharWarning = new javax.swing.JLabel();
         btnCrear = new javax.swing.JPanel();
         jlCrear = new javax.swing.JLabel();
+        cbTipoCliente = new javax.swing.JComboBox<>();
+        jlCliente = new javax.swing.JLabel();
+        cbTipoContribuyente = new javax.swing.JComboBox<>();
+        jlContribuyente = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -66,6 +83,11 @@ public class frmClientesCrear extends javax.swing.JPanel {
         tfNombre.setForeground(new java.awt.Color(153, 153, 153));
         tfNombre.setText("Ingrese el nombre");
         tfNombre.setBorder(null);
+        tfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfNombreFocusGained(evt);
+            }
+        });
         tfNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tfNombreMousePressed(evt);
@@ -86,9 +108,9 @@ public class frmClientesCrear extends javax.swing.JPanel {
         tfTelefono.setForeground(new java.awt.Color(153, 153, 153));
         tfTelefono.setText("Ingrese el teléfono");
         tfTelefono.setBorder(null);
-        tfTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTelefonoActionPerformed(evt);
+        tfTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tfTelefonoMousePressed(evt);
             }
         });
         add(tfTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 230, 30));
@@ -106,9 +128,14 @@ public class frmClientesCrear extends javax.swing.JPanel {
         tfCorreo.setForeground(new java.awt.Color(153, 153, 153));
         tfCorreo.setText("Ingrese el correo");
         tfCorreo.setBorder(null);
-        tfCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCorreoActionPerformed(evt);
+        tfCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfCorreoFocusGained(evt);
+            }
+        });
+        tfCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tfCorreoMousePressed(evt);
             }
         });
         add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 230, 30));
@@ -122,9 +149,9 @@ public class frmClientesCrear extends javax.swing.JPanel {
         tfCedula.setForeground(new java.awt.Color(153, 153, 153));
         tfCedula.setText("Ingrese la cédula");
         tfCedula.setBorder(null);
-        tfCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCedulaActionPerformed(evt);
+        tfCedula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tfCedulaMousePressed(evt);
             }
         });
         add(tfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 230, 30));
@@ -159,6 +186,11 @@ public class frmClientesCrear extends javax.swing.JPanel {
         jlCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/newMini.png"))); // NOI18N
         jlCrear.setText("Crear");
+        jlCrear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlCrearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnCrearLayout = new javax.swing.GroupLayout(btnCrear);
         btnCrear.setLayout(btnCrearLayout);
@@ -172,37 +204,152 @@ public class frmClientesCrear extends javax.swing.JPanel {
         );
 
         add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 500, -1, 40));
+
+        cbTipoCliente.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        cbTipoCliente.setForeground(new java.awt.Color(21, 14, 48));
+        cbTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Persona Física", "Persona Jurídica" }));
+        cbTipoCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 14, 48)));
+        add(cbTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 150, 30));
+
+        jlCliente.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlCliente.setForeground(new java.awt.Color(21, 14, 48));
+        jlCliente.setText("Cliente:");
+        add(jlCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
+
+        cbTipoContribuyente.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        cbTipoContribuyente.setForeground(new java.awt.Color(21, 14, 48));
+        cbTipoContribuyente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especial", "Especial" }));
+        cbTipoContribuyente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 14, 48)));
+        add(cbTipoContribuyente, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 150, 30));
+
+        jlContribuyente.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlContribuyente.setForeground(new java.awt.Color(21, 14, 48));
+        jlContribuyente.setText("Contribuyente:");
+        add(jlContribuyente, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTelefonoActionPerformed
-
-    private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCorreoActionPerformed
-
-    private void tfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCedulaActionPerformed
-
     private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
-        // TODO add your handling code here:
+        // //Efecto tipo placeholder para el campo Nombre
+        // if (tfNombre.getText().equals("Ingrese el nombre")) {
+        //     tfNombre.setText("");
+        //     tfNombre.setForeground(btnCrear.getForeground());
+        // }
+    }//GEN-LAST:event_tfNombreMousePressed
+
+    private void tfCedulaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfCedulaMousePressed
+        //Efecto tipo placeholder para el campo Cedula
+        if (tfCedula.getText().equals("Ingrese la cédula")) {
+            tfCedula.setText("");
+            tfCedula.setForeground(btnCrear.getForeground());
+        }
+    }//GEN-LAST:event_tfCedulaMousePressed
+
+    private void tfCorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfCorreoMousePressed
+        // //Efecto tipo placeholder para el campo Correo
+        // if (tfCorreo.getText().equals("Ingrese el correo")) {
+        //     tfCorreo.setText("");
+        //     tfCorreo.setForeground(btnCrear.getForeground());
+        // }
+    }//GEN-LAST:event_tfCorreoMousePressed
+
+    private void tfTelefonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfTelefonoMousePressed
+        //Efecto tipo placeholder para el campo Cedula
+        if (tfTelefono.getText().equals("Ingrese el teléfono")) {
+            tfTelefono.setText("");
+            tfTelefono.setForeground(btnCrear.getForeground());
+        }
+    }//GEN-LAST:event_tfTelefonoMousePressed
+
+    private void jlCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlCrearMouseClicked
+        //Obtener los datos de los campos
+        nombre = tfNombre.getText();
+        cedula = tfCedula.getText();
+        correo = tfCorreo.getText();
+        telefono = tfTelefono.getText();
+        direccion = taDireccion.getText();
+        tipoCliente = cbTipoCliente.getSelectedItem().toString();
+        tipoContribuyente = cbTipoContribuyente.getSelectedItem().toString();
+
+        //DEBUGGING ------->>>>>>>
+        System.out.println("Tipo Cliente: " + tipoCliente);
+        System.out.println("Tipo Contribuyente: " + tipoContribuyente);
+
+        //Validar que los campos no esten vacios
+        if (nombre == null || nombre.equals("Ingrese el nombre")) {
+            JOptionPane.showMessageDialog(null, "Ingrese el nombre");
+        } else if (cedula == null || cedula.equals("Ingrese la cédula")) {
+            JOptionPane.showMessageDialog(null, "Ingrese la cédula");
+        } else if (correo == null || correo.equals("Ingrese el correo")) {
+            JOptionPane.showMessageDialog(null, "Ingrese el correo");
+        } else if (telefono == null || telefono.equals("Ingrese el télefono")) {
+            JOptionPane.showMessageDialog(null, "Ingrese el teléfono");
+        } else if (direccion == null || direccion.equals("Ingrese la dirección")) {
+            JOptionPane.showMessageDialog(null, "Ingrese la dirección");
+        } else {
+            //Crear el objeto cliente
+            cClientes cliente = new cClientes(nombre, cedula, correo, telefono, direccion, tipoCliente, tipoContribuyente);
+
+            //Agregar el los datos del objeto cliente a la DB
+            try {
+                //Instanciar la clase crudClientes
+                crudClientes crud = new crudClientes();
+
+                //Llamar al metodo para guardar el cliente en DB
+                crud.guardarCliente(cliente);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar el cliente");
+            }
+
+
+            //Limpiar los campos
+            tfNombre.setText("Ingrese el nombre");
+            tfNombre.setForeground(new Color(153, 153, 153));
+            tfCedula.setText("Ingrese la cédula");
+            tfCedula.setForeground(new Color(153, 153, 153));
+            tfCorreo.setText("Ingrese el correo");
+            tfCorreo.setForeground(new Color(153, 153, 153));
+            tfTelefono.setText("Ingrese el télefono");
+            tfTelefono.setForeground(new Color(153, 153, 153));
+            taDireccion.setText("Ingrese la dirección");
+            taDireccion.setForeground(new Color(153, 153, 153));
+            //Mostrar mensaje de exito
+            JOptionPane.showMessageDialog(null, "Cliente creado con éxito");
+        }
+
+        
+
+    }//GEN-LAST:event_jlCrearMouseClicked
+
+    private void tfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusGained
+        //Efecto tipo placeholder para el campo Nombre
         if (tfNombre.getText().equals("Ingrese el nombre")) {
             tfNombre.setText("");
             tfNombre.setForeground(btnCrear.getForeground());
         }
-    }//GEN-LAST:event_tfNombreMousePressed
+    }//GEN-LAST:event_tfNombreFocusGained
+
+    private void tfCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCorreoFocusGained
+        //Efecto tipo placeholder para el campo Correo
+        if (tfCorreo.getText().equals("Ingrese el correo")) {
+            tfCorreo.setText("");
+            tfCorreo.setForeground(btnCrear.getForeground());
+        }
+    }//GEN-LAST:event_tfCorreoFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCrear;
+    private javax.swing.JComboBox<String> cbTipoCliente;
+    private javax.swing.JComboBox<String> cbTipoContribuyente;
     private javax.swing.JLabel h1Registro;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel jlCedula;
+    private javax.swing.JLabel jlCliente;
+    private javax.swing.JLabel jlContribuyente;
     private javax.swing.JLabel jlCorreo;
     private javax.swing.JLabel jlCrear;
     private javax.swing.JLabel jlDireccion;

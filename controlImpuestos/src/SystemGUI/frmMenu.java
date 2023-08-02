@@ -20,6 +20,7 @@ public class frmMenu extends javax.swing.JFrame {
      */
     public frmMenu() {
         initComponents();
+        mainLogo.requestFocusInWindow(); //Metodo para darle el foco al logo y evitar que el textField se seleccione al iniciar
         
         frmClientesCrear clientesCrear = new frmClientesCrear();
         clientesCrear.setSize(630, 560);
