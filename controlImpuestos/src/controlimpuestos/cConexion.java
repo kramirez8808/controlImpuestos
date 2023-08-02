@@ -38,7 +38,6 @@ public class cConexion {
                                 "direccion VARCHAR(50) NOT NULL," + 
                                 "PRIMARY KEY (idCliente))");
             
-            conn.createStatement().execute("USE controlimpuestos"); //Usar base de datos controlImpuestos
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS impuestos (" + //Crear tabla pagos si no existe
                                 "descripcion VARCHAR(50) NOT NULL," + 
                                 "tasaImpuesto DOUBLE(5) NOT NULL," +
