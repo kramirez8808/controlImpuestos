@@ -52,6 +52,19 @@ public class cConexion {
                                 "pago FLOAT,"+
                                 "PRIMARY KEY (idPagos)"+
                                 "FOREIGN KEY (idCliente))");
+            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS usuarios (" + //Crear tabla clientes si no existe
+                                "idUsuario int NOT NULL AUTO_INCREMENT," + 
+                                "usuario VARCHAR(50) NOT NULL," + 
+                                "contrasena VARCHAR(50) NOT NULL," +
+                                "PRIMARY KEY (idUsuario))");
+            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS empleados (" + //Crear tabla empleados si no existe
+                                "idEmpleado int NOT NULL AUTO_INCREMENT," + 
+                                "nombre VARCHAR(50) NOT NULL," + 
+                                "telefono VARCHAR(10) NOT NULL," + 
+                                "correo VARCHAR(50) NOT NULL," + 
+                                "cedula VARCHAR(10) NOT NULL," + 
+                                "direccion VARCHAR(50) NOT NULL," + 
+                                "PRIMARY KEY (idEmpleado))");
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error al inicializar base de datos", JOptionPane.ERROR_MESSAGE);

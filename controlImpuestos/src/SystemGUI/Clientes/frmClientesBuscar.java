@@ -243,7 +243,7 @@ public class frmClientesBuscar extends javax.swing.JPanel {
                         .addComponent(jlCorreo))
                     .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(250, 250, 250)
+                .addGap(238, 238, 238)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -504,32 +504,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         add(pnlResultado, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
-        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-        if (tfNombre.getText().equals("Ingrese el nombre del cliente")) {
-            tfNombre.setText("");
-            tfNombre.setForeground(btnBuscar.getForeground());
-        }
-    }//GEN-LAST:event_tfNombreMousePressed
-
-    private void tfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIDActionPerformed
-
-    private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCorreoActionPerformed
-
-    private void tfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCedulaActionPerformed
-
-    private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
-        pnlBuscar.setVisible(false);
-        pnlResultado.setVisible(true);
-
-    }//GEN-LAST:event_jlBuscarMouseClicked
-
     private void tfNombre1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombre1MousePressed
         // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
         if (tfNombre.getText().equals("Ingrese el nombre del cliente")) {
@@ -553,6 +527,31 @@ public class frmClientesBuscar extends javax.swing.JPanel {
     private void tfID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfID1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfID1ActionPerformed
+
+    private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
+        pnlBuscar.setVisible(false);
+        pnlResultado.setVisible(true);
+    }//GEN-LAST:event_jlBuscarMouseClicked
+
+    private void tfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCedulaActionPerformed
+
+    private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCorreoActionPerformed
+
+    private void tfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfIDActionPerformed
+
+    private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+        if (tfNombre.getText().equals("Ingrese el nombre del cliente")) {
+            tfNombre.setText("");
+            tfNombre.setForeground(btnBuscar.getForeground());
+        }
+    }//GEN-LAST:event_tfNombreMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
