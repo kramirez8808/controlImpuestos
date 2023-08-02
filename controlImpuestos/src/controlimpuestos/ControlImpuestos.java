@@ -12,6 +12,8 @@ public class ControlImpuestos {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        cConexion.initializeDB();
+        //Test
     }
     
 }

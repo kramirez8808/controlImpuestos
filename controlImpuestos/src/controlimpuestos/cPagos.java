@@ -13,14 +13,20 @@ import javax.swing.JOptionPane;
  */
 public class cPagos {
     
-    cClientes idCliente;
-    cImpuestos tasa_impuesto;
-    cImpuestos fecha;
-    private Float pagos;
+    //Atributos faltantes
+    //Pendiente arreglar los tipos de datos de la clase y modificarla para que haga match con los campos de la base de datos
+    private int idPago;
+    private double monto;
 
-    public cPagos(cClientes idCliente, cImpuestos tasa_impuesto, cImpuestos fecha, Float pagos) {
+    //Atributos por default
+    cClientes idCliente;
+    cImpuestos tasaImpuesto;
+    cImpuestos fecha;
+    private double pagos;
+
+    public cPagos(cClientes idCliente, cImpuestos tasaImpuesto, cImpuestos fecha, double pagos) {
         this.idCliente = idCliente;
-        this.tasa_impuesto = tasa_impuesto;
+        this.tasaImpuesto = tasaImpuesto;
         this.fecha = fecha;
         this.pagos = pagos;
     }
@@ -33,12 +39,12 @@ public class cPagos {
         this.idCliente = idCliente;
     }
 
-    public cImpuestos getTasa_impuesto() {
-        return tasa_impuesto;
+    public cImpuestos getTasaImpuesto() {
+        return tasaImpuesto;
     }
 
-    public void setTasa_impuesto(cImpuestos tasa_impuesto) {
-        this.tasa_impuesto = tasa_impuesto;
+    public void setTasaImpuesto(cImpuestos tasaImpuesto) {
+        this.tasaImpuesto = tasaImpuesto;
     }
 
     public cImpuestos getFecha() {
@@ -49,17 +55,17 @@ public class cPagos {
         this.fecha = fecha;
     }
 
-    public Float getPagos() {
+    public double getPagos() {
         return pagos;
     }
 
-    public void setPagos(Float Pagos) {
+    public void setPagos(double Pagos) {
         this.pagos = Pagos;
     }
 
     @Override
     public String toString() {
-        return "cPagos{" + "idCliente=" + idCliente + ", tasa_impuesto=" + tasa_impuesto + ", fecha=" + fecha + ", Pagos=" + pagos + '}';
+        return "cPagos{" + "idCliente=" + idCliente + ", tasa_impuesto=" + tasaImpuesto + ", fecha=" + fecha + ", Pagos=" + pagos + '}';
     }
 
    
@@ -95,7 +101,7 @@ public class cPagos {
                 int idCliente = res.getInt("idCliente");
                 double impuesto = res.getDouble("Impuesto");
                 Date fecha = res.getDate("fecha");
-                float pago = res.getFloat("Pago");
+                double pago = res.getDouble("Pago");
                 
                 
             //imprimir en pantalla informacion (temporal)
