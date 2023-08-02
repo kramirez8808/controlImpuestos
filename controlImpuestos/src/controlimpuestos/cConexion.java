@@ -8,7 +8,7 @@ public class cConexion {
     //Variables para la conexion con el servidor de base de datos (MySQL)
     public static final String DB_URL = "jdbc:mysql://localhost:3306/"; //URL de la base de datos
     public static final String DB_USER = "root"; //Usuario de la base de datos
-    public static final String DB_PASS = "root1234"; //Contraseña de la base de datos
+    public static final String DB_PASS = "fidelitas1232ytu-"; //Contraseña de la base de datos
 
     public static Connection getConnection() {
         Connection conn = null;
@@ -35,19 +35,22 @@ public class cConexion {
                                 "telefono VARCHAR(10) NOT NULL," + 
                                 "correo VARCHAR(50) NOT NULL," + 
                                 "cedula VARCHAR(10) NOT NULL," + 
-                                "direccion VARCHAR(50) NOT NULL," + 
+                                "direccion VARCHAR(50) NOT NULL," +
+                                "PRIMARY KEY (idImpuestos)"+
                                 "PRIMARY KEY (idCliente))");
             
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS impuestos (" + //Crear tabla pagos si no existe
+                                "idImpuestos int NOT NULL AUTO_INCREMENT," +
                                 "descripcion VARCHAR(50) NOT NULL," + 
                                 "tasaImpuesto DOUBLE NOT NULL," +
                                 "fechaVencimiento DATE NOT NULL)");
             
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Pagos (" + //Crear tabla pagos si no existe
-                                "idCliente int NOT NULL AUTO_INCREMENT," + 
+                                "idPagos int NOT NULL AUTO_INCREMENT," + 
                                 "impuesto Double," + 
                                 "fecha DATE," +
                                 "pago FLOAT,"+
+                                "PRIMARY KEY (idPagos)"+
                                 "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente))");
             
         } catch (Exception e) {
