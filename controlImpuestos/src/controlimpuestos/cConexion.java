@@ -51,7 +51,7 @@ public class cConexion {
                                 "fecha DATE," +
                                 "pago FLOAT,"+
                                 "PRIMARY KEY (idPagos)"+
-                                "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente))");
+                                "FOREIGN KEY (idCliente))");
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error al inicializar base de datos", JOptionPane.ERROR_MESSAGE);
