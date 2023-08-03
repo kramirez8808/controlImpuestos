@@ -93,6 +93,11 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfNombre.setForeground(new java.awt.Color(153, 153, 153));
         tfNombre.setText("Ingrese el nombre");
         tfNombre.setBorder(null);
+        tfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfNombreFocusGained(evt);
+            }
+        });
         tfNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tfNombreMousePressed(evt);
@@ -110,9 +115,9 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfID.setForeground(new java.awt.Color(153, 153, 153));
         tfID.setText("Ingrese el ID");
         tfID.setBorder(null);
-        tfID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfIDActionPerformed(evt);
+        tfID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfIDFocusGained(evt);
             }
         });
 
@@ -132,11 +137,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
                 tfCorreoFocusGained(evt);
             }
         });
-        tfCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCorreoActionPerformed(evt);
-            }
-        });
 
         jlCedula.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlCedula.setForeground(new java.awt.Color(21, 14, 48));
@@ -146,9 +146,9 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfCedula.setForeground(new java.awt.Color(153, 153, 153));
         tfCedula.setText("Ingrese la cédula");
         tfCedula.setBorder(null);
-        tfCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCedulaActionPerformed(evt);
+        tfCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfCedulaFocusGained(evt);
             }
         });
 
@@ -282,11 +282,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfNombreResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfNombreResultado.setForeground(new java.awt.Color(21, 14, 48));
         tfNombreResultado.setBorder(null);
-        tfNombreResultado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombreResultadoMousePressed(evt);
-            }
-        });
         pnlResultado.add(tfNombreResultado);
         tfNombreResultado.setBounds(90, 90, 230, 30);
 
@@ -304,11 +299,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfTelefonoResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfTelefonoResultado.setForeground(new java.awt.Color(21, 14, 48));
         tfTelefonoResultado.setBorder(null);
-        tfTelefonoResultado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTelefonoResultadoActionPerformed(evt);
-            }
-        });
         pnlResultado.add(tfTelefonoResultado);
         tfTelefonoResultado.setBounds(90, 270, 230, 30);
 
@@ -326,11 +316,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfCorreoResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfCorreoResultado.setForeground(new java.awt.Color(21, 14, 48));
         tfCorreoResultado.setBorder(null);
-        tfCorreoResultado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCorreoResultadoActionPerformed(evt);
-            }
-        });
         pnlResultado.add(tfCorreoResultado);
         tfCorreoResultado.setBounds(90, 210, 230, 30);
 
@@ -343,11 +328,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfCedulaResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfCedulaResultado.setForeground(new java.awt.Color(21, 14, 48));
         tfCedulaResultado.setBorder(null);
-        tfCedulaResultado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCedulaResultadoActionPerformed(evt);
-            }
-        });
         pnlResultado.add(tfCedulaResultado);
         tfCedulaResultado.setBounds(90, 150, 230, 30);
 
@@ -381,11 +361,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfIDResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfIDResultado.setForeground(new java.awt.Color(21, 14, 48));
         tfIDResultado.setBorder(null);
-        tfIDResultado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfIDResultadoActionPerformed(evt);
-            }
-        });
         pnlResultado.add(tfIDResultado);
         tfIDResultado.setBounds(530, 90, 80, 30);
 
@@ -452,11 +427,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         cbTipoClienteResultado.setForeground(new java.awt.Color(21, 14, 48));
         cbTipoClienteResultado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Persona Física", "Persona Jurídica" }));
         cbTipoClienteResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 14, 48)));
-        cbTipoClienteResultado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoClienteResultadoActionPerformed(evt);
-            }
-        });
         pnlResultado.add(cbTipoClienteResultado);
         cbTipoClienteResultado.setBounds(460, 210, 150, 30);
 
@@ -470,11 +440,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         cbTipoContribuyenteResultado.setForeground(new java.awt.Color(21, 14, 48));
         cbTipoContribuyenteResultado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contribuyente No Especial", "Contribuyente Especial" }));
         cbTipoContribuyenteResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 14, 48)));
-        cbTipoContribuyenteResultado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoContribuyenteResultadoActionPerformed(evt);
-            }
-        });
         pnlResultado.add(cbTipoContribuyenteResultado);
         cbTipoContribuyenteResultado.setBounds(460, 270, 150, 30);
 
@@ -487,66 +452,46 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         add(pnlResultado, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNombreResultadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreResultadoMousePressed
-        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-        if (tfNombre.getText().equals("Ingrese el nombre del cliente")) {
-            tfNombre.setText("");
-            tfNombre.setForeground(btnEliminar.getForeground());
-        }
-    }//GEN-LAST:event_tfNombreResultadoMousePressed
-
-    private void tfTelefonoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonoResultadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTelefonoResultadoActionPerformed
-
-    private void tfCorreoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoResultadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCorreoResultadoActionPerformed
-
-    private void tfCedulaResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaResultadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCedulaResultadoActionPerformed
-
-    private void tfIDResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDResultadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIDResultadoActionPerformed
-
     private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
         pnlBuscar.setVisible(false);
         pnlResultado.setVisible(true);
     }//GEN-LAST:event_jlBuscarMouseClicked
 
-    private void tfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCedulaActionPerformed
-
-    private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCorreoActionPerformed
-
-    private void tfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIDActionPerformed
-
     private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
+        
+    }//GEN-LAST:event_tfNombreMousePressed
+
+    private void tfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusGained
         // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-        if (tfNombre.getText().equals("Ingrese el nombre del cliente")) {
+        if (tfNombre.getText().equals("Ingrese el nombre")) {
             tfNombre.setText("");
             tfNombre.setForeground(btnBuscar.getForeground());
         }
-    }//GEN-LAST:event_tfNombreMousePressed
+    }//GEN-LAST:event_tfNombreFocusGained
 
-    private void cbTipoClienteResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoClienteResultadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoClienteResultadoActionPerformed
-
-    private void cbTipoContribuyenteResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoContribuyenteResultadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoContribuyenteResultadoActionPerformed
+    private void tfCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCedulaFocusGained
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+        if (tfCedula.getText().equals("Ingrese la cédula")) {
+            tfCedula.setText("");
+            tfCedula.setForeground(btnBuscar.getForeground());
+        }
+    }//GEN-LAST:event_tfCedulaFocusGained
 
     private void tfCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCorreoFocusGained
-        // TODO add your handling code here:
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+            if (tfCorreo.getText().equals("Ingrese el correo")) {
+            tfCorreo.setText("");
+            tfCorreo.setForeground(btnBuscar.getForeground());
+        }
     }//GEN-LAST:event_tfCorreoFocusGained
+
+    private void tfIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfIDFocusGained
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+        if (tfCedula.getText().equals("Ingrese la cédula")) {
+            tfCedula.setText("");
+            tfCedula.setForeground(btnBuscar.getForeground());
+        }
+    }//GEN-LAST:event_tfIDFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
