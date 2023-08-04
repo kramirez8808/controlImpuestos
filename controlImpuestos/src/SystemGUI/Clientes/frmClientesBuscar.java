@@ -4,17 +4,36 @@
  */
 package SystemGUI.Clientes;
 
+import javax.swing.JOptionPane;
+
+import controlimpuestos.cClientes;
+import controlimpuestos.SystemCRUD.crudClientes;
+
 /**
  *
  * @author fanta
  */
 public class frmClientesBuscar extends javax.swing.JPanel {
 
+    //Variables requeridas para obtener los datos del formulario
+    private String nombre, telefono, 
+    correo, cedula, direccion, 
+    tipoCliente, tipoContribuyente, idCliente;
+
+    //Instancia del objeto SystemCRUD.crudClientes
+    private crudClientes crudClientes;
+
+
+
     /**
      * Creates new form frmTest
      */
     public frmClientesBuscar() {
         initComponents();
+
+        //Instanciar la clase crudClientes
+        crudClientes = new crudClientes();
+
         pnlBuscar.setVisible(true);
         pnlResultado.setVisible(false);
     }
@@ -61,9 +80,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         jlDireccion = new javax.swing.JLabel();
         taDireccionResultado = new javax.swing.JTextArea();
         jlcharWarning = new javax.swing.JLabel();
-        tfIDResultado = new javax.swing.JTextField();
-        jSeparator9 = new javax.swing.JSeparator();
-        jlID1 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JPanel();
         jlEliminar = new javax.swing.JLabel();
         btnEditar = new javax.swing.JPanel();
@@ -96,11 +112,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         tfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tfNombreFocusGained(evt);
-            }
-        });
-        tfNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombreMousePressed(evt);
             }
         });
 
@@ -356,25 +367,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         pnlResultado.add(jlcharWarning);
         jlcharWarning.setBounds(500, 450, 106, 15);
 
-        tfIDResultado.setEditable(false);
-        tfIDResultado.setBackground(new java.awt.Color(255, 255, 255));
-        tfIDResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfIDResultado.setForeground(new java.awt.Color(21, 14, 48));
-        tfIDResultado.setBorder(null);
-        pnlResultado.add(tfIDResultado);
-        tfIDResultado.setBounds(530, 90, 80, 30);
-
-        jSeparator9.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator9.setForeground(new java.awt.Color(21, 14, 48));
-        pnlResultado.add(jSeparator9);
-        jSeparator9.setBounds(530, 120, 80, 10);
-
-        jlID1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlID1.setForeground(new java.awt.Color(21, 14, 48));
-        jlID1.setText("ID:");
-        pnlResultado.add(jlID1);
-        jlID1.setBounds(500, 100, 16, 17);
-
         btnEliminar.setBackground(new java.awt.Color(255, 51, 51));
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -428,38 +420,139 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         cbTipoClienteResultado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Persona Física", "Persona Jurídica" }));
         cbTipoClienteResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 14, 48)));
         pnlResultado.add(cbTipoClienteResultado);
-        cbTipoClienteResultado.setBounds(460, 210, 150, 30);
+        cbTipoClienteResultado.setBounds(460, 130, 150, 30);
 
         jlCliente.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlCliente.setForeground(new java.awt.Color(21, 14, 48));
         jlCliente.setText("Cliente:");
         pnlResultado.add(jlCliente);
-        jlCliente.setBounds(350, 220, 45, 17);
+        jlCliente.setBounds(350, 140, 45, 17);
 
         cbTipoContribuyenteResultado.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         cbTipoContribuyenteResultado.setForeground(new java.awt.Color(21, 14, 48));
         cbTipoContribuyenteResultado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contribuyente No Especial", "Contribuyente Especial" }));
         cbTipoContribuyenteResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 14, 48)));
         pnlResultado.add(cbTipoContribuyenteResultado);
-        cbTipoContribuyenteResultado.setBounds(460, 270, 150, 30);
+        cbTipoContribuyenteResultado.setBounds(460, 250, 150, 30);
 
         jlContribuyente.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlContribuyente.setForeground(new java.awt.Color(21, 14, 48));
         jlContribuyente.setText("Contribuyente:");
         pnlResultado.add(jlContribuyente);
-        jlContribuyente.setBounds(350, 280, 91, 17);
+        jlContribuyente.setBounds(350, 260, 91, 17);
 
         add(pnlResultado, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
-        pnlBuscar.setVisible(false);
-        pnlResultado.setVisible(true);
-    }//GEN-LAST:event_jlBuscarMouseClicked
+        //Obtener el texto de los campos
+        nombre = tfNombre.getText();
+        cedula = tfCedula.getText();
+        correo = tfCorreo.getText();
+        idCliente = tfID.getText();
 
-    private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
-        
-    }//GEN-LAST:event_tfNombreMousePressed
+        //Buscar y mostrar los datos segun el campo llenado
+        if (!nombre.equals("") && !nombre.equals("Ingrese el nombre")) {
+
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                cClientes clienteResultado = crudClientes.buscarClienteNombre(nombre);
+
+                //Verificar que el cliente exista y mostrar los datos en el nuevo panel
+                if (clienteResultado != null) {
+                    tfNombreResultado.setText(clienteResultado.getNombre());
+                    tfCedulaResultado.setText(clienteResultado.getCedula());
+                    tfCorreoResultado.setText(clienteResultado.getCorreo());
+                    tfTelefonoResultado.setText(clienteResultado.getTelefono());
+                    taDireccionResultado.setText(clienteResultado.getDireccion());
+                    cbTipoClienteResultado.setSelectedItem(clienteResultado.getTipoCliente());
+                    cbTipoContribuyenteResultado.setSelectedItem(clienteResultado.getTipoContribuyente());
+
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else if (!cedula.equals("") && !cedula.equals("Ingrese la cédula")) {
+
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                cClientes clienteResultado = crudClientes.buscarClienteCedula(cedula);
+
+                //Verificar que el cliente exista y mostrar los datos en el nuevo panel
+                if (clienteResultado != null) {
+                    tfNombreResultado.setText(clienteResultado.getNombre());
+                    tfCedulaResultado.setText(clienteResultado.getCedula());
+                    tfCorreoResultado.setText(clienteResultado.getCorreo());
+                    tfTelefonoResultado.setText(clienteResultado.getTelefono());
+                    taDireccionResultado.setText(clienteResultado.getDireccion());
+                    cbTipoClienteResultado.setSelectedItem(clienteResultado.getTipoCliente());
+                    cbTipoContribuyenteResultado.setSelectedItem(clienteResultado.getTipoContribuyente());
+
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (!correo.equals("") && !correo.equals("Ingrese el correo")) {
+            
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                cClientes clienteResultado = crudClientes.buscarClienteCorreo(correo);
+
+                //Verificar que el cliente exista y mostrar los datos en el nuevo panel
+                if (clienteResultado != null) {
+                    tfNombreResultado.setText(clienteResultado.getNombre());
+                    tfCedulaResultado.setText(clienteResultado.getCedula());
+                    tfCorreoResultado.setText(clienteResultado.getCorreo());
+                    tfTelefonoResultado.setText(clienteResultado.getTelefono());
+                    taDireccionResultado.setText(clienteResultado.getDireccion());
+                    cbTipoClienteResultado.setSelectedItem(clienteResultado.getTipoCliente());
+                    cbTipoContribuyenteResultado.setSelectedItem(clienteResultado.getTipoContribuyente());
+
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (!idCliente.equals("") && !idCliente.equals("Ingrese el ID")) {
+
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                cClientes clienteResultado = crudClientes.buscarClienteID(idCliente);
+
+                //Verificar que el cliente exista y mostrar los datos en el nuevo panel
+                if (clienteResultado != null) {
+                    tfNombreResultado.setText(clienteResultado.getNombre());
+                    tfCedulaResultado.setText(clienteResultado.getCedula());
+                    tfCorreoResultado.setText(clienteResultado.getCorreo());
+                    tfTelefonoResultado.setText(clienteResultado.getTelefono());
+                    taDireccionResultado.setText(clienteResultado.getDireccion());
+                    cbTipoClienteResultado.setSelectedItem(clienteResultado.getTipoCliente());
+                    cbTipoContribuyenteResultado.setSelectedItem(clienteResultado.getTipoContribuyente());
+
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar al menos un campo para realizar la búsqueda", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jlBuscarMouseClicked
 
     private void tfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusGained
         // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
@@ -487,9 +580,9 @@ public class frmClientesBuscar extends javax.swing.JPanel {
 
     private void tfIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfIDFocusGained
         // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-        if (tfCedula.getText().equals("Ingrese la cédula")) {
-            tfCedula.setText("");
-            tfCedula.setForeground(btnBuscar.getForeground());
+        if (tfID.getText().equals("Ingrese el ID")) {
+            tfID.setText("");
+            tfID.setForeground(btnBuscar.getForeground());
         }
     }//GEN-LAST:event_tfIDFocusGained
 
@@ -510,7 +603,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel jlBuscar;
     private javax.swing.JLabel jlCedula;
     private javax.swing.JLabel jlCedula1;
@@ -522,7 +614,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
     private javax.swing.JLabel jlEditar;
     private javax.swing.JLabel jlEliminar;
     private javax.swing.JLabel jlID;
-    private javax.swing.JLabel jlID1;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JLabel jlNombre1;
     private javax.swing.JLabel jlTelefono;
@@ -535,7 +626,6 @@ public class frmClientesBuscar extends javax.swing.JPanel {
     private javax.swing.JTextField tfCorreo;
     private javax.swing.JTextField tfCorreoResultado;
     private javax.swing.JTextField tfID;
-    private javax.swing.JTextField tfIDResultado;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfNombreResultado;
     private javax.swing.JTextField tfTelefonoResultado;

@@ -228,10 +228,6 @@ public class frmClientesCrear extends javax.swing.JPanel {
         tipoCliente = cbTipoCliente.getSelectedItem().toString();
         tipoContribuyente = cbTipoContribuyente.getSelectedItem().toString();
 
-        //DEBUGGING ------->>>>>>>
-        System.out.println("Tipo Cliente: " + tipoCliente);
-        System.out.println("Tipo Contribuyente: " + tipoContribuyente);
-
         //Validar que los campos no esten vacios
         if (nombre == null || nombre.equals("Ingrese el nombre")) {
             JOptionPane.showMessageDialog(null, "Ingrese el nombre");
