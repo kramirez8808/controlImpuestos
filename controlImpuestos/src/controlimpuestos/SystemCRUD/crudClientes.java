@@ -105,8 +105,6 @@ public class crudClientes {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
 
-            //Mostrar mensaje de exito
-            JOptionPane.showMessageDialog(null, "Cliente encontrado.", "Busqueda exitosa", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al registrar buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -116,8 +114,7 @@ public class crudClientes {
         return null;
     }
 
-
-public cClientes buscarClienteCedula(String cedulaBusqueda) throws SQLException {
+    public cClientes buscarClienteCedula(String cedulaBusqueda) throws SQLException {
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
         
@@ -151,9 +148,6 @@ public cClientes buscarClienteCedula(String cedulaBusqueda) throws SQLException 
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
-
-            //Mostrar mensaje de exito
-            JOptionPane.showMessageDialog(null, "Cliente encontrado.", "Busqueda exitosa", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al registrar buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -198,8 +192,6 @@ public cClientes buscarClienteCedula(String cedulaBusqueda) throws SQLException 
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
 
-            //Mostrar mensaje de exito
-            JOptionPane.showMessageDialog(null, "Cliente encontrado.", "Busqueda exitosa", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al registrar buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -257,4 +249,43 @@ public cClientes buscarClienteCedula(String cedulaBusqueda) throws SQLException 
         }
         return null;
     }
+
+    //Metodo para actualizar la informacion del cliente encontrado
+    public void actualizarCliente(cClientes clienteResultado, String cedulaAnterior) throws SQLException {
+        //Crear conexion con DB
+        Connection conn = cConexion.getConnection();
+        
+        //Query para actualizar la informacion del cliente
+        String query = "UPDATE clientes SET nombre = ?, telefono = ?, correo = ?, cedula = ?, direccion = ?, tipoCliente = ?, tipoContribuyente = ? WHERE cedula = ?";
+
+        try {
+            //Crear objetos PreparedStatement para ejecutar los queries
+            PreparedStatement prStmt = conn.prepareStatement(query);
+
+            //Definir los campos a actualizar
+            prStmt.setString(1, clienteResultado.getNombre());
+            prStmt.setString(2, clienteResultado.getTelefono());
+            prStmt.setString(3, clienteResultado.getCorreo());
+            prStmt.setString(4, clienteResultado.getCedula());
+            prStmt.setString(5, clienteResultado.getDireccion());
+            prStmt.setString(6, clienteResultado.getTipoCliente());
+            prStmt.setString(7, clienteResultado.getTipoContribuyente());
+            prStmt.setString(8, cedulaAnterior);
+
+            //Se selecciona la base de datos
+            queryUseDB(conn);
+
+            //Ejecutar el query
+            prStmt.executeUpdate();
+
+            //Mostrar mensaje de exito
+            JOptionPane.showMessageDialog(null, "Cliente actualizado.", "Actualizacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            //Cerrar conexion con DB
+            conn.close();
+        }
+    }
+
 }

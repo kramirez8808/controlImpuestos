@@ -23,6 +23,9 @@ public class frmClientesBuscar extends javax.swing.JPanel {
     //Instancia del objeto SystemCRUD.crudClientes
     private crudClientes crudClientes;
 
+    public static cClientes clienteResultado;
+
+    private java.awt.Color lightGray = new java.awt.Color(153,153,153);
 
 
     /**
@@ -400,6 +403,11 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         jlEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/editMini.png"))); // NOI18N
         jlEditar.setText("Editar");
+        jlEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlEditarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnEditarLayout = new javax.swing.GroupLayout(btnEditar);
         btnEditar.setLayout(btnEditarLayout);
@@ -456,7 +464,17 @@ public class frmClientesBuscar extends javax.swing.JPanel {
 
             //Llamar al metodo de busqueda y guardar los resultados
             try {
-                cClientes clienteResultado = crudClientes.buscarClienteNombre(nombre);
+                clienteResultado = crudClientes.buscarClienteNombre(nombre);
+
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
 
                 //Verificar que el cliente exista y mostrar los datos en el nuevo panel
                 if (clienteResultado != null) {
@@ -471,6 +489,7 @@ public class frmClientesBuscar extends javax.swing.JPanel {
                     //Cambiar de panel
                     pnlBuscar.setVisible(false);
                     pnlResultado.setVisible(true);
+
                 }
 
             } catch (Exception e) {
@@ -481,7 +500,18 @@ public class frmClientesBuscar extends javax.swing.JPanel {
 
             //Llamar al metodo de busqueda y guardar los resultados
             try {
-                cClientes clienteResultado = crudClientes.buscarClienteCedula(cedula);
+                clienteResultado = crudClientes.buscarClienteCedula(cedula);
+
+
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
 
                 //Verificar que el cliente exista y mostrar los datos en el nuevo panel
                 if (clienteResultado != null) {
@@ -505,7 +535,17 @@ public class frmClientesBuscar extends javax.swing.JPanel {
             
             //Llamar al metodo de busqueda y guardar los resultados
             try {
-                cClientes clienteResultado = crudClientes.buscarClienteCorreo(correo);
+                clienteResultado = crudClientes.buscarClienteCorreo(correo);
+
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
 
                 //Verificar que el cliente exista y mostrar los datos en el nuevo panel
                 if (clienteResultado != null) {
@@ -529,7 +569,17 @@ public class frmClientesBuscar extends javax.swing.JPanel {
 
             //Llamar al metodo de busqueda y guardar los resultados
             try {
-                cClientes clienteResultado = crudClientes.buscarClienteID(idCliente);
+                clienteResultado = crudClientes.buscarClienteID(idCliente);
+
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
 
                 //Verificar que el cliente exista y mostrar los datos en el nuevo panel
                 if (clienteResultado != null) {
@@ -585,6 +635,45 @@ public class frmClientesBuscar extends javax.swing.JPanel {
             tfID.setForeground(btnBuscar.getForeground());
         }
     }//GEN-LAST:event_tfIDFocusGained
+
+    private void jlEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEditarMouseClicked
+        //Guardar cedula anterior para la busqueda en DB
+        String cedulaAnterior = clienteResultado.getCedula();
+
+        //Obtener los datos del formulario
+        nombre = tfNombreResultado.getText();
+        cedula = tfCedulaResultado.getText();
+        correo = tfCorreoResultado.getText();
+        telefono = tfTelefonoResultado.getText();
+        direccion = taDireccionResultado.getText();
+        tipoCliente = cbTipoClienteResultado.getSelectedItem().toString();
+        tipoContribuyente = cbTipoContribuyenteResultado.getSelectedItem().toString();
+
+        //Verificar que los campos no esten vacios
+        if (!nombre.equals("") || !cedula.equals("") || !correo.equals("") || !telefono.equals("") || !direccion.equals("")) {
+            try {
+                //Actualizar los datos del objeto cliente previamente encontrado
+                clienteResultado.setNombre(nombre);
+                clienteResultado.setCedula(cedula);
+                clienteResultado.setCorreo(correo);
+                clienteResultado.setTelefono(telefono);
+                clienteResultado.setDireccion(direccion);
+                clienteResultado.setTipoCliente(tipoCliente);
+                clienteResultado.setTipoContribuyente(tipoContribuyente);
+
+                //Llamar al metodo de actualizar
+                crudClientes.actualizarCliente(clienteResultado, cedulaAnterior);
+
+                //Mostrar mensaje de exito
+                JOptionPane.showMessageDialog(null, "Cliente actualizado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de actualización: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jlEditarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
