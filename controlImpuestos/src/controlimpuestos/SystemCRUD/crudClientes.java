@@ -288,4 +288,33 @@ public class crudClientes {
         }
     }
 
+    //Metodo para eliminar el cliente encontrado
+    public void eliminarCliente(cClientes clienteResultado){
+        //Crear conexion con DB
+        Connection conn = cConexion.getConnection();
+
+        //Query para eliminar el cliente
+        String query = "DELETE FROM clientes WHERE cedula = ?";
+
+        try {
+            //Crear objeto PreparedStatement para ejecutar el query
+            PreparedStatement prStmt = conn.prepareStatement(query);
+
+            //Definir el campo para buscar el cliente a eliminar dentro de la DB
+            prStmt.setString(1, clienteResultado.getCedula());
+
+            //Se selecciona la base de datos
+            queryUseDB(conn);
+
+            //Ejecutar el query
+            prStmt.executeUpdate();
+
+            //Mostrar mensaje de exito
+            JOptionPane.showMessageDialog(null, "Cliente eliminado.", "Eliminacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }

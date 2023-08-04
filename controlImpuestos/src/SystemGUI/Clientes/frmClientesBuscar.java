@@ -379,6 +379,11 @@ public class frmClientesBuscar extends javax.swing.JPanel {
         jlEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/deleteMini.png"))); // NOI18N
         jlEliminar.setText("Eliminar");
+        jlEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlEliminarMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnEliminarLayout = new javax.swing.GroupLayout(btnEliminar);
         btnEliminar.setLayout(btnEliminarLayout);
@@ -674,6 +679,36 @@ public class frmClientesBuscar extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jlEditarMouseClicked
+
+    private void jlEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEliminarMousePressed
+        //Obtener la cedula del cliente a eliminar, se toma desde el mismo panel de resultado
+        cedula = tfCedulaResultado.getText();
+
+        //Confirmar que se desea eliminar el cliente
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el cliente?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        try {
+            //Eliminar el cliente en caso de seleccionar confirmar
+            if (opcion == JOptionPane.YES_OPTION) {
+                //Se invoca el metodo de eliminarCliente
+                crudClientes.eliminarCliente(clienteResultado);
+
+                //Evitar que se seleccione el campo "Por Nombre:" por defecto al volver al panel de busqueda
+                h1Busqueda.requestFocusInWindow();
+
+                //Volver a la pantalla de busqueda
+                pnlResultado.setVisible(false);
+                pnlBuscar.setVisible(true);
+
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Se ha cancelado el proceso de eliminación", "Eliminación cancelada", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en el proceso de eliminación: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jlEliminarMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
