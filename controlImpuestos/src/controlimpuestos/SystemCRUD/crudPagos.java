@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,14 +34,17 @@ public class crudPagos {
             PreparedStatement ps = conn.prepareStatement(query);
             
             ps.setDouble(1, pago.getMonto());
-            ps.setString(1,pago.getFecha());
-            ps.setDouble(1,pago.getImpuesto());
-            ps.setString(1,pago.getNombre());
-        
+            ps.setString(2,pago.getFecha());
+            ps.setDouble(3,pago.getImpuesto());
+            ps.setString(4,pago.getNombre());
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null,"Pago realizado");
+            
         }catch(Exception e){
-        
+            JOptionPane.showMessageDialog(null,"Error al realizar el pago");
         }finally{
-        
+            conn.close();
         
         }
     }
