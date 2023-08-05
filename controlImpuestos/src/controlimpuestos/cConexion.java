@@ -9,6 +9,7 @@ public class cConexion {
     public static final String DB_URL = "jdbc:mysql://localhost:3306/"; //URL de la base de datos
     public static final String DB_USER = "root"; //Usuario de la base de datos
     public static final String DB_PASS = "root1234"; //Contraseña de la base de datos
+//    public static final String DB_PASS = "fidelitas1232ytu-";
 
     public static Connection getConnection() {
         Connection conn = null;
@@ -58,16 +59,15 @@ public class cConexion {
             //Crear Tabla Pagos
             //Recordar que el idCliente y el idImpuestos son llaves foraneas, falta definirlas
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS pagos (" + //Crear tabla pagos si no existe
-                                "idPago INT NOT NULL AUTO_INCREMENT,"+
+                                "idPago INT NOT NULL AUTO_INCREMENT," +
                                 "nombre varchar(50) NOT NULL," + 
                                 "monto DOUBLE NOT NULL," + 
                                 "fecha DATE NOT NULL," +
                                 "idCliente INT NOT NULL," +
                                 "idImpuestos INT NOT NULL," +
-                                "PRIMARY KEY (idPago),"
-                                + "FOREING KEY (idClientes) REFERENCES clientes(idClientes)"
-                                + "FOREING KEY (idImpuestos) REFERENCES impuestos(idImpuestos)"
-                                + "FOREING KEY (nombre) REFERENCES clientes(nombre))");
+                                "PRIMARY KEY (idPago)," +
+                                "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente)," +
+                                "FOREIGN KEY (idImpuestos) REFERENCES impuestos(idImpuestos))");
 
             //Crear Tabla Usuarios
             //Evaluar si se debe crear una clase cUsuarios en java para manejar los usuarios ¿?
