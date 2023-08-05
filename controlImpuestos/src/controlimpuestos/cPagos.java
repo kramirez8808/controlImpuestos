@@ -60,13 +60,15 @@ public class cPagos {
         this.impuesto = impuesto;
     }
 
-    public String getCliente() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setCliente(String cliente) {
-        this.nombre = cliente;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
+
+    
 
     @Override
     public String toString() {
