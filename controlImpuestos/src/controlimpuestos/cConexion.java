@@ -57,14 +57,17 @@ public class cConexion {
             
             //Crear Tabla Pagos
             //Recordar que el idCliente y el idImpuestos son llaves foraneas, falta definirlas
-            //Pendiente modificar la clase cPagos y los atributos para matchear con la base de datos
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS pagos (" + //Crear tabla pagos si no existe
-                                "idPago INT NOT NULL AUTO_INCREMENT," + 
+                                "idPago INT NOT NULL AUTO_INCREMENT,"+
+                                "nombre varchar(50) NOT NULL," + 
                                 "monto DOUBLE NOT NULL," + 
                                 "fecha DATE NOT NULL," +
                                 "idCliente INT NOT NULL," +
                                 "idImpuestos INT NOT NULL," +
-                                "PRIMARY KEY (idPago))");
+                                "PRIMARY KEY (idPago),"
+                                + "FOREING KEY (idClientes) REFERENCES clientes(idClientes)"
+                                + "FOREING KEY (idImpuestos) REFERENCES impuestos(idImpuestos)"
+                                + "FOREING KEY (nombre) REFERENCES clientes(nombre))");
 
             //Crear Tabla Usuarios
             //Evaluar si se debe crear una clase cUsuarios en java para manejar los usuarios ¿?
