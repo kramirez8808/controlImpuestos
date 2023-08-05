@@ -58,18 +58,11 @@ public class crudPagos {
                 String fecha = res.getString("fecha");
                 double impuesto = res.getDouble("impuesto");
                 String nombre = res.getString("nombre");
-    
-            //imprimir en pantalla informacion (temporal)
-            System.out.println("ID del Cliente: " + id);
-            System.out.println("nombre: " + nombre);
-            System.out.println("monto correspondiente: " + monto);
-            System.out.println("Fecha: " + fecha);
-            System.out.println("Impuesto: " + impuesto);
-            
+               
             return new cPagos(id, monto, fecha, impuesto, nombre);
             
             }else {
-                // Si no se encontró ningún pago con la cédula dada, retornar null
+                //no hay resultados
                 return null;
             }
         } catch (SQLException e) {
