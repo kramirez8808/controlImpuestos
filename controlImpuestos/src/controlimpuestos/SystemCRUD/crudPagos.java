@@ -19,22 +19,32 @@ import java.util.Date;
  */
 public class crudPagos {
     
-    //==========================================================================
+   
     
-    public void crearPago(){
+    public void guardarPago(cPagos pago)throws SQLException {
         
-        //conexion bd
+        Connection conn = cConexion.getConnection();
         
-        //busqueda de datos
+        String query = "INSERT INTO pagos (monto, fecha, impuesto, nombre)"
+                + "VALUES (?,?,?,?)";
+         
+        try{
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setDouble(1, pago.getMonto());
+            ps.setString(1,pago.getFecha());
+            ps.setDouble(1,pago.getImpuesto());
+            ps.setString(1,pago.getNombre());
         
-        //algoritmo de creacion de pagos
+        }catch(Exception e){
         
-        //guardar en bd
-        
-        //cerrar conexion
+        }finally{
         
         
+        }
     }
+ 
     
     public cPagos buscarPago(int idPago)throws SQLException {
         
