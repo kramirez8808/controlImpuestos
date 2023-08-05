@@ -36,7 +36,7 @@ public class crudPagos {
         
     }
     
-  public buscarPago(int idPago)throws SQLException{
+    public cPagos buscarPago(int idPago)throws SQLException {
         
         Connection conn = cConexion.getConnection();
         try{
@@ -55,18 +55,18 @@ public class crudPagos {
                 
                 int id = res.getInt("idPago");
                 double monto = res.getDouble("monto");
-                Date fecha = res.getDate("fecha");
+                String fecha = res.getString("fecha");
                 double impuesto = res.getDouble("impuesto");
                 String nombre = res.getString("nombre");
-                
-                return new cPagos(id, monto, fecha, impuesto, nombre);
-                
+    
             //imprimir en pantalla informacion (temporal)
             System.out.println("ID del Cliente: " + id);
             System.out.println("nombre: " + nombre);
             System.out.println("monto correspondiente: " + monto);
             System.out.println("Fecha: " + fecha);
             System.out.println("Impuesto: " + impuesto);
+            
+            return new cPagos(id, monto, fecha, impuesto, nombre);
             
             }else {
                 // Si no se encontró ningún pago con la cédula dada, retornar null
@@ -79,6 +79,7 @@ public class crudPagos {
             if (conn != null) {
                 conn.close();
             }
-        }
-    
+        }   
+}
+  
 }
