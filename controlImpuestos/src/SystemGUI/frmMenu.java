@@ -5,6 +5,8 @@
 package SystemGUI;
 
 import SystemGUI.Clientes.*;
+import controlimpuestos.cConexion;
+
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -20,6 +22,10 @@ public class frmMenu extends javax.swing.JFrame {
      */
     public frmMenu() {
         initComponents();
+
+        //Llamar al metodo para inicializar la DB
+        cConexion.initializeDB();
+
         mainLogo.requestFocusInWindow(); //Metodo para darle el foco al logo y evitar que el textField se seleccione al iniciar
         
         frmClientesCrear clientesCrear = new frmClientesCrear();

@@ -1,6 +1,7 @@
 package controlimpuestos;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -8,7 +9,7 @@ public class cConexion {
     //Variables para la conexion con el servidor de base de datos (MySQL)
     public static final String DB_URL = "jdbc:mysql://localhost:3306/"; //URL de la base de datos
     public static final String DB_USER = "root"; //Usuario de la base de datos
-    public static final String DB_PASS = "root1234";
+    public static final String DB_PASS = "root1234"; //Contrasena de la base de datos
 
     public static Connection getConnection() {
         Connection conn = null;
@@ -23,7 +24,7 @@ public class cConexion {
         return conn;
     }
 
-    public static void initializeDB() {
+    public static void initializeDB() throws SQLException {
         Connection conn = getConnection();
 
         try {
@@ -92,6 +93,8 @@ public class cConexion {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error al inicializar base de datos", JOptionPane.ERROR_MESSAGE);
+        }  finally {
+            conn.close();
         }
     }
 }   
