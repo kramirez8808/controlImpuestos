@@ -21,7 +21,6 @@ public class frmCrearPago extends javax.swing.JPanel {
     private String monto;
     private String impuesto;
     private String fecha;
-
     
     public frmCrearPago() {
         initComponents();
@@ -243,7 +242,7 @@ public class frmCrearPago extends javax.swing.JPanel {
         String impuestoStr = txtImpuesto.getText();
         fecha = txtFecha.getText();
 
-        //parse doble to string
+        //parse double to string
         double monto = Double.parseDouble(montoStr);
         double impuesto = Double.parseDouble(impuestoStr);
         

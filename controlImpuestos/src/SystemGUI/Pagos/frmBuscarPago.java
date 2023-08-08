@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package SystemGUI.Pagos;
+
+import controlimpuestos.SystemCRUD.crudPagos;
+import controlimpuestos.cPagos;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +14,19 @@ public class frmBuscarPago extends javax.swing.JPanel {
     /**
      * Creates new form frmPago
      */
+    private crudPagos cPagos;   //objeto
+    
+    //variables
+    private int idPago;
+    private String nombre;
+    private String monto;
+    private String impuesto;
+    private String fecha;
+
+    
     public frmBuscarPago() {
-        initComponents();
+        initComponents();   
+        cPagos = new crudPagos();
     }
 
     /**
@@ -27,33 +39,33 @@ public class frmBuscarPago extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        tfNombre4 = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         jlNombre4 = new javax.swing.JLabel();
         jlNombre1 = new javax.swing.JLabel();
-        tfNombre3 = new javax.swing.JTextField();
-        tfNombre2 = new javax.swing.JTextField();
+        txtImpuesto = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         jlNombre3 = new javax.swing.JLabel();
         jlNombre5 = new javax.swing.JLabel();
-        tfNombre1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        tfNombre = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
         jlNombre2 = new javax.swing.JLabel();
         h1Busqueda = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        tfNombre4.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfNombre4.setForeground(new java.awt.Color(153, 153, 153));
-        tfNombre4.setText("fecha...");
-        tfNombre4.setBorder(null);
-        tfNombre4.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtFecha.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        txtFecha.setForeground(new java.awt.Color(153, 153, 153));
+        txtFecha.setText("fecha...");
+        txtFecha.setBorder(null);
+        txtFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombre4MousePressed(evt);
+                txtFechaMousePressed(evt);
             }
         });
-        tfNombre4.addActionListener(new java.awt.event.ActionListener() {
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNombre4ActionPerformed(evt);
+                txtFechaActionPerformed(evt);
             }
         });
 
@@ -65,33 +77,33 @@ public class frmBuscarPago extends javax.swing.JPanel {
         jlNombre1.setForeground(new java.awt.Color(21, 14, 48));
         jlNombre1.setText("Impuesto:");
 
-        tfNombre3.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfNombre3.setForeground(new java.awt.Color(153, 153, 153));
-        tfNombre3.setText("impuesto...");
-        tfNombre3.setBorder(null);
-        tfNombre3.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtImpuesto.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        txtImpuesto.setForeground(new java.awt.Color(153, 153, 153));
+        txtImpuesto.setText("impuesto...");
+        txtImpuesto.setBorder(null);
+        txtImpuesto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombre3MousePressed(evt);
+                txtImpuestoMousePressed(evt);
             }
         });
-        tfNombre3.addActionListener(new java.awt.event.ActionListener() {
+        txtImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNombre3ActionPerformed(evt);
+                txtImpuestoActionPerformed(evt);
             }
         });
 
-        tfNombre2.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfNombre2.setForeground(new java.awt.Color(153, 153, 153));
-        tfNombre2.setText("monto...");
-        tfNombre2.setBorder(null);
-        tfNombre2.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtMonto.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        txtMonto.setForeground(new java.awt.Color(153, 153, 153));
+        txtMonto.setText("monto...");
+        txtMonto.setBorder(null);
+        txtMonto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombre2MousePressed(evt);
+                txtMontoMousePressed(evt);
             }
         });
-        tfNombre2.addActionListener(new java.awt.event.ActionListener() {
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNombre2ActionPerformed(evt);
+                txtMontoActionPerformed(evt);
             }
         });
 
@@ -103,30 +115,35 @@ public class frmBuscarPago extends javax.swing.JPanel {
         jlNombre5.setForeground(new java.awt.Color(21, 14, 48));
         jlNombre5.setText("Nombre:");
 
-        tfNombre1.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfNombre1.setForeground(new java.awt.Color(153, 153, 153));
-        tfNombre1.setText("Nombre...");
-        tfNombre1.setBorder(null);
-        tfNombre1.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtNombre.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(153, 153, 153));
+        txtNombre.setText("Nombre...");
+        txtNombre.setBorder(null);
+        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombre1MousePressed(evt);
+                txtNombreMousePressed(evt);
             }
         });
 
-        jButton3.setText("Buscar");
-
-        tfNombre.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfNombre.setForeground(new java.awt.Color(153, 153, 153));
-        tfNombre.setText("Ingrese el ID...");
-        tfNombre.setBorder(null);
-        tfNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombreMousePressed(evt);
-            }
-        });
-        tfNombre.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNombreActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        txtId.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        txtId.setForeground(new java.awt.Color(153, 153, 153));
+        txtId.setText("Ingrese el ID...");
+        txtId.setBorder(null);
+        txtId.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtIdMousePressed(evt);
+            }
+        });
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
             }
         });
 
@@ -151,9 +168,9 @@ public class frmBuscarPago extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(h1Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,10 +180,10 @@ public class frmBuscarPago extends javax.swing.JPanel {
                             .addComponent(jlNombre5))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(288, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -177,24 +194,24 @@ public class frmBuscarPago extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre2)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre5)
-                    .addComponent(tfNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre3)
-                    .addComponent(tfNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre1)
-                    .addComponent(tfNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre4)
-                    .addComponent(tfNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(150, 150, 150))
         );
 
@@ -210,56 +227,92 @@ public class frmBuscarPago extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNombre4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombre4MousePressed
+    private void txtFechaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombre4MousePressed
+    }//GEN-LAST:event_txtFechaMousePressed
 
-    private void tfNombre4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombre4ActionPerformed
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombre4ActionPerformed
+    }//GEN-LAST:event_txtFechaActionPerformed
 
-    private void tfNombre3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombre3MousePressed
+    private void txtImpuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtImpuestoMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombre3MousePressed
+    }//GEN-LAST:event_txtImpuestoMousePressed
 
-    private void tfNombre3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombre3ActionPerformed
+    private void txtImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpuestoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombre3ActionPerformed
+    }//GEN-LAST:event_txtImpuestoActionPerformed
 
-    private void tfNombre2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombre2MousePressed
+    private void txtMontoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMontoMousePressed
         // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-    }//GEN-LAST:event_tfNombre2MousePressed
+    }//GEN-LAST:event_txtMontoMousePressed
 
-    private void tfNombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombre2ActionPerformed
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombre2ActionPerformed
+    }//GEN-LAST:event_txtMontoActionPerformed
 
-    private void tfNombre1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombre1MousePressed
+    private void txtNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombre1MousePressed
+    }//GEN-LAST:event_txtNombreMousePressed
 
-    private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
+    private void txtIdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdMousePressed
         // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-    }//GEN-LAST:event_tfNombreMousePressed
+    }//GEN-LAST:event_txtIdMousePressed
 
-    private void tfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombreActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+        
+       String idPagoStr = txtId.getText();
+       String montoStr = txtMonto.getText();
+       String impuestoStr = txtImpuesto.getText();
+ 
+       
+       //convertir a String
+       idPago = Integer.parseInt(idPagoStr);
+       Double monto = Double.parseDouble(montoStr);
+       Double impuesto = Double.parseDouble(impuestoStr);
+               
+       try{
+           
+           cPagos pagoEncontrado = cPagos.buscarPago(idPago);
+           
+           if(pagoEncontrado!=null){
+               
+               txtNombre.setText(pagoEncontrado.getNombre());
+               txtMonto.setText(String.valueOf(monto));
+               txtImpuesto.setText(String.valueOf(impuesto));
+               txtFecha.setText(fecha);
+               
+               
+           }
+       
+       
+       
+       }catch(Exception e){
+       
+       }
+      
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel h1Busqueda;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlNombre1;
     private javax.swing.JLabel jlNombre2;
     private javax.swing.JLabel jlNombre3;
     private javax.swing.JLabel jlNombre4;
     private javax.swing.JLabel jlNombre5;
-    private javax.swing.JTextField tfNombre;
-    private javax.swing.JTextField tfNombre1;
-    private javax.swing.JTextField tfNombre2;
-    private javax.swing.JTextField tfNombre3;
-    private javax.swing.JTextField tfNombre4;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtImpuesto;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
