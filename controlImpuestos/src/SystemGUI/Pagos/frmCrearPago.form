@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="553" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -68,13 +68,13 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tfNombre3" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                                      <Component id="tfNombre" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                                      <Component id="tfNombre1" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="txtImpuesto" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="txtMonto" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="txtNombre" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="tfNombre2" min="-2" pref="230" max="-2" attributes="0"/>
+                                          <Component id="txtFecha" min="-2" pref="230" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                                          <Component id="jButton3" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="btnGuardar" min="-2" pref="90" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -93,23 +93,23 @@
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfNombre1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="txtNombre" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlNombre2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfNombre" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="txtMonto" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="tfNombre3" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="txtImpuesto" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jlNombre1" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="tfNombre2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jButton3" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="txtFecha" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jlNombre3" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -141,7 +141,7 @@
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfNombre1">
+        <Component class="javax.swing.JTextField" name="txtNombre">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="12" style="2"/>
@@ -155,7 +155,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tfNombre1MousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtNombreMousePressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNombre2">
@@ -169,7 +169,7 @@
             <Property name="text" type="java.lang.String" value="Monto:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfNombre">
+        <Component class="javax.swing.JTextField" name="txtMonto">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="12" style="2"/>
@@ -183,8 +183,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tfNombreMousePressed"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNombreActionPerformed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtMontoMousePressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMontoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNombre1">
@@ -198,7 +198,7 @@
             <Property name="text" type="java.lang.String" value="Impuesto:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfNombre3">
+        <Component class="javax.swing.JTextField" name="txtImpuesto">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="12" style="2"/>
@@ -212,8 +212,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tfNombre3MousePressed"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNombre3ActionPerformed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtImpuestoMousePressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtImpuestoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNombre3">
@@ -227,7 +227,7 @@
             <Property name="text" type="java.lang.String" value="Fecha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfNombre2">
+        <Component class="javax.swing.JTextField" name="txtFecha">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="12" style="2"/>
@@ -241,14 +241,17 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tfNombre2MousePressed"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNombre2ActionPerformed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtFechaMousePressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFechaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pagar"/>
+            <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
