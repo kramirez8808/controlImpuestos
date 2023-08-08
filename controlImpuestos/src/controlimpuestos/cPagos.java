@@ -20,7 +20,7 @@ public class cPagos {
     private double impuesto;
     private String nombre;
 
-    public cPagos(int idPago, double monto, String fecha, double impuesto, String nombre) {
+    public cPagos(double monto, String fecha, double impuesto, String nombre) {
         this.idPago = idPago;
         this.monto = monto;
         this.fecha = fecha;
