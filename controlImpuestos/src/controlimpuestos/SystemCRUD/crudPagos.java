@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
  * @author danie
  */
 public class crudPagos {
-    
-   
+
+
     
     public void guardarPago(cPagos pago)throws SQLException {
         
@@ -73,7 +73,7 @@ public class crudPagos {
                 double impuesto = res.getDouble("impuesto");
                 String nombre = res.getString("nombre");
                
-            return new cPagos(id, monto, fecha, impuesto, nombre);
+            return new cPagos(monto, fecha, impuesto, nombre);
             
             }else {
                 //no hay resultados
