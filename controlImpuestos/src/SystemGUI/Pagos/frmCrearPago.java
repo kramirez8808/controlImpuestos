@@ -253,7 +253,9 @@ public class frmCrearPago extends javax.swing.JPanel {
             crudPagos crud = new crudPagos();
             crud.guardarPago(nuevoPago);
 
-        }catch(Exception e){JOptionPane.showMessageDialog(null, "Error" +e);}
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error" +e);
+        }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 

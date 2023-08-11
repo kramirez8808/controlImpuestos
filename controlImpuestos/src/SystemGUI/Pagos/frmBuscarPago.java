@@ -264,13 +264,11 @@ public class frmBuscarPago extends javax.swing.JPanel {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        
-        
+             
        String idPagoStr = txtId.getText();
        String montoStr = txtMonto.getText();
        String impuestoStr = txtImpuesto.getText();
- 
+       fecha = txtFecha.getText();
        
        //convertir a String
        idPago = Integer.parseInt(idPagoStr);
@@ -287,15 +285,9 @@ public class frmBuscarPago extends javax.swing.JPanel {
                txtMonto.setText(String.valueOf(monto));
                txtImpuesto.setText(String.valueOf(impuesto));
                txtFecha.setText(fecha);
-               
-               
-           }
-       
-       
-       
-       }catch(Exception e){
-       
-       }
+            }    
+        }catch(Exception e){      
+    }
       
     }//GEN-LAST:event_btnBuscarActionPerformed
 
