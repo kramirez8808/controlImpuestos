@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controlimpuestos.SystemCRUD;
 
 import controlimpuestos.cPagos;
@@ -19,9 +16,7 @@ import javax.swing.JOptionPane;
  * @author danie
  */
 public class crudPagos {
-
-
-    
+ 
     public void guardarPago(cPagos pago)throws SQLException {
         
         Connection conn = cConexion.getConnection();
@@ -48,7 +43,6 @@ public class crudPagos {
         
         }
     }
- 
     
     public cPagos buscarPago(int idPago)throws SQLException {
         
