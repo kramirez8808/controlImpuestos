@@ -35,7 +35,7 @@ public class crudClientes {
         Connection conn = cConexion.getConnection();
 
         //Definir SQL query para insertar datos en la tabla
-        String query = "INSERT INTO clientes (nombre, telefono, correo, cedula, direccion, tipoCliente, tipoContribuyente)"
+        String query = "INSERT INTO clientes (nombre, cedula, correo, telefono, direccion, tipoCliente, tipoContribuyente)"
                 + "VALUES (?,?,?,?,?,?,?)";
 
         try {

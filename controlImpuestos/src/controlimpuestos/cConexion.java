@@ -38,9 +38,9 @@ public class cConexion {
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS clientes (" + //Crear tabla clientes si no existe
                                 "idCliente INT NOT NULL AUTO_INCREMENT," + 
                                 "nombre VARCHAR(50) NOT NULL," + 
-                                "telefono VARCHAR(10) NOT NULL," + 
-                                "correo VARCHAR(50) NOT NULL," + 
                                 "cedula VARCHAR(10) NOT NULL," + 
+                                "correo VARCHAR(50) NOT NULL," + 
+                                "telefono VARCHAR(10) NOT NULL," + 
                                 "direccion VARCHAR(100) NOT NULL," +
                                 "tipoCliente VARCHAR(20) NOT NULL," +
                                 "tipoContribuyente VARCHAR(30) NOT NULL," +
