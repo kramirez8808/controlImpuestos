@@ -3,7 +3,6 @@ package SystemGUI.Pagos;
 
 import controlimpuestos.SystemCRUD.crudPagos;
 import controlimpuestos.cPagos;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +19,7 @@ public class frmBuscarPago extends javax.swing.JPanel {
     private int idPago;
     private String nombre;
     private String monto;
-    private String impuesto;
+    private String impuestos;
     private String fecha;
 
     
@@ -51,12 +50,16 @@ public class frmBuscarPago extends javax.swing.JPanel {
         txtId = new javax.swing.JTextField();
         jlNombre2 = new javax.swing.JLabel();
         h1Busqueda = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         txtFecha.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(153, 153, 153));
-        txtFecha.setText("fecha...");
         txtFecha.setBorder(null);
         txtFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -79,7 +82,6 @@ public class frmBuscarPago extends javax.swing.JPanel {
 
         txtImpuesto.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         txtImpuesto.setForeground(new java.awt.Color(153, 153, 153));
-        txtImpuesto.setText("impuesto...");
         txtImpuesto.setBorder(null);
         txtImpuesto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -94,7 +96,6 @@ public class frmBuscarPago extends javax.swing.JPanel {
 
         txtMonto.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         txtMonto.setForeground(new java.awt.Color(153, 153, 153));
-        txtMonto.setText("monto...");
         txtMonto.setBorder(null);
         txtMonto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -117,7 +118,6 @@ public class frmBuscarPago extends javax.swing.JPanel {
 
         txtNombre.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(153, 153, 153));
-        txtNombre.setText("Nombre...");
         txtNombre.setBorder(null);
         txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -134,7 +134,6 @@ public class frmBuscarPago extends javax.swing.JPanel {
 
         txtId.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         txtId.setForeground(new java.awt.Color(153, 153, 153));
-        txtId.setText("Ingrese el ID...");
         txtId.setBorder(null);
         txtId.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -155,6 +154,22 @@ public class frmBuscarPago extends javax.swing.JPanel {
         h1Busqueda.setFont(new java.awt.Font("Roboto", 3, 22)); // NOI18N
         h1Busqueda.setText("Búsqueda de Pagos");
 
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(21, 14, 48));
+
+        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator2.setForeground(new java.awt.Color(21, 14, 48));
+
+        jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator3.setForeground(new java.awt.Color(21, 14, 48));
+
+        jSeparator4.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator4.setForeground(new java.awt.Color(21, 14, 48));
+
+        jSeparator5.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator5.setForeground(new java.awt.Color(21, 14, 48));
+        jSeparator5.setAlignmentY(0.2F);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,12 +181,14 @@ public class frmBuscarPago extends javax.swing.JPanel {
                         .addComponent(jlNombre2)
                         .addGap(7, 7, 7)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(h1Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(h1Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlNombre4)
@@ -183,7 +200,11 @@ public class frmBuscarPago extends javax.swing.JPanel {
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(288, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -196,23 +217,33 @@ public class frmBuscarPago extends javax.swing.JPanel {
                     .addComponent(jlNombre2)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre5)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre3)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre1)
                     .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addGap(3, 3, 3)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre4)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(150, 150, 150))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -266,36 +297,38 @@ public class frmBuscarPago extends javax.swing.JPanel {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
              
        String idPagoStr = txtId.getText();
-       String montoStr = txtMonto.getText();
-       String impuestoStr = txtImpuesto.getText();
-       fecha = txtFecha.getText();
+
        
        //convertir a String
        idPago = Integer.parseInt(idPagoStr);
-       Double monto = Double.parseDouble(montoStr);
-       Double impuesto = Double.parseDouble(impuestoStr);
                
-       try{
-           
-           cPagos pagoEncontrado = cPagos.buscarPago(idPago);
-           
-           if(pagoEncontrado!=null){
-               
-               txtNombre.setText(pagoEncontrado.getNombre());
-               txtMonto.setText(String.valueOf(monto));
-               txtImpuesto.setText(String.valueOf(impuesto));
-               txtFecha.setText(fecha);
+       if (!idPagoStr.isEmpty()) {
+        int idPago = Integer.parseInt(idPagoStr);
+
+        try {
+            cPagos pagoEncontrado = cPagos.buscarPago(idPago);
+
+            if (pagoEncontrado != null) {
+                txtNombre.setText(pagoEncontrado.getNombre());
+                txtMonto.setText(String.valueOf(pagoEncontrado.getMonto()));
+                txtImpuesto.setText(String.valueOf(pagoEncontrado.getImpuestos()));
+                txtFecha.setText(pagoEncontrado.getFecha());
             }    
         }catch(Exception e){      
     }
       
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel h1Busqueda;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel jlNombre1;
     private javax.swing.JLabel jlNombre2;
     private javax.swing.JLabel jlNombre3;
