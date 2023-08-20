@@ -62,11 +62,8 @@ public class cConexion {
                                 "nombre varchar(50) NOT NULL," + 
                                 "monto DOUBLE NOT NULL," + 
                                 "fecha DATE NOT NULL," +
-                                "idCliente INT NOT NULL," +
-                                "idImpuestos INT NOT NULL," +
-                                "PRIMARY KEY (idPago)," +
-                                "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente)," +
-                                "FOREIGN KEY (idImpuestos) REFERENCES impuestos(idImpuestos))");
+                                "impuestos INT NOT NULL," +
+                                "PRIMARY KEY (idPago))");
 
             //Crear Tabla Usuarios
             //Evaluar si se debe crear una clase cUsuarios en java para manejar los usuarios ¿?
