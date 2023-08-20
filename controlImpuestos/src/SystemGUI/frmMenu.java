@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package SystemGUI;
 
 import SystemGUI.Clientes.*;
+import SystemGUI.Pagos.*;
 import controlimpuestos.cConexion;
 
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +18,7 @@ public class frmMenu extends javax.swing.JFrame {
     /**
      * Creates new form frmClientes
      */
-    public frmMenu() {
+    public frmMenu() throws SQLException {
         initComponents();
 
         //Llamar al metodo para inicializar la DB
@@ -166,6 +164,11 @@ public class frmMenu extends javax.swing.JFrame {
         jlPagos.setForeground(new java.awt.Color(21, 14, 48));
         jlPagos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlPagos.setText("Pagos");
+        jlPagos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlPagosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnPagosLayout = new javax.swing.GroupLayout(btnPagos);
         btnPagos.setLayout(btnPagosLayout);
@@ -410,12 +413,33 @@ public class frmMenu extends javax.swing.JFrame {
         frmClientesCrear clientesCrear = new frmClientesCrear();
         clientesCrear.setSize(630, 560);
         clientesCrear.setLocation(0, 0);
+        
 
         jpDynamic.removeAll();
         jpDynamic.add(clientesCrear, BorderLayout.CENTER);
         jpDynamic.revalidate();
         jpDynamic.repaint();
     }//GEN-LAST:event_jlRegistroMouseClicked
+
+    private void jlPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlPagosMouseClicked
+        // TODO add your handling code here:
+        
+        frmCrearPago crearPago = new frmCrearPago();
+        crearPago.setSize(630, 560);
+        crearPago.setLocation(0, 0);
+        jpDynamic.removeAll();
+        jpDynamic.add(crearPago, BorderLayout.CENTER);
+        jpDynamic.revalidate();
+        jpDynamic.repaint();
+        
+//        frmBuscarPago buscarPago = new frmBuscarPago();
+//        buscarPago.setSize(630, 560);
+//        buscarPago.setLocation(0, 0);
+//        jpDynamic.removeAll();
+//        jpDynamic.add(buscarPago, BorderLayout.CENTER);
+//        jpDynamic.revalidate();
+//        jpDynamic.repaint();
+    }//GEN-LAST:event_jlPagosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -448,9 +472,16 @@ public class frmMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try{
                 new frmMenu().setVisible(true);
+                }catch(Exception e){
             }
+            
+        
+        }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
