@@ -9,7 +9,7 @@ public class cConexion {
     //Variables para la conexion con el servidor de base de datos (MySQL)
     public static final String DB_URL = "jdbc:mysql://localhost:3306/"; //URL de la base de datos
     public static final String DB_USER = "root"; //Usuario de la base de datos
-    public static final String DB_PASS = "fidelitas1232ytu-"; //Contrasena de la base de datos
+    public static final String DB_PASS = "root1234"; //Contrasena de la base de datos
 
     public static Connection getConnection() {
         Connection conn = null;
