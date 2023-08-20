@@ -1,12 +1,6 @@
 
 package controlimpuestos;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Date;
-import javax.swing.JOptionPane;
-import java.sql.SQLException;
 
 /**
  *
@@ -52,12 +46,12 @@ public class cPagos {
         this.fecha = fecha;
     }
 
-    public double getImpuesto() {
+    public double getImpuestos() {
         return impuestos;
     }
 
-    public void setImpuesto(double impuesto) {
-        this.impuestos = impuesto;
+    public void setImpuesto(double impuestos) {
+        this.impuestos = impuestos;
     }
 
     public String getNombre() {
@@ -72,6 +66,6 @@ public class cPagos {
 
     @Override
     public String toString() {
-        return "cPagos{" + "id=" + idPago + ", monto=" + monto + ", fecha=" + fecha + ", impuesto=" + impuestos + ", cliente=" + nombre + '}';
+        return "cPagos{" + "id=" + idPago + ", monto=" + monto + ", fecha=" + fecha + ", impuestos=" + impuestos + ", cliente=" + nombre + '}';
     }
 }
