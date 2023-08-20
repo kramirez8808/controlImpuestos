@@ -10,41 +10,34 @@ package controlimpuestos;
  */
 public class cEmpleados extends scPersona {
     //Atributos
-    private String idEmpleado;
     private String puesto;
-    private int salario;
+    private String salario;
 
     //Constructor
-    public cEmpleados(String idEmpleado, String puesto, int salario, String nombre, String telefono, String correo, String cedula, String direccion) {
-        super(nombre, telefono, correo, cedula, direccion);
-        this.idEmpleado = idEmpleado;
+    public cEmpleados(  String nombre, String cedula, String correo,String telefono,  String direccion, String puesto, String salario) {
+        super(nombre, cedula, correo,telefono,  direccion);
         this.puesto = puesto;
         this.salario = salario;
     }
 
     //GET
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
 
     public String getPuesto() {
         return puesto;
     }
 
-    public int getSalario() {
+    public String getSalario() {
         return salario;
     }
 
     //SET
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
+
 
     public void setPuesto(String puesto) {
         this.puesto = puesto;
     }
 
-    public void setSalario(int salario) {
+    public void setSalario(String salario) {
         this.salario = salario;
     }
 
@@ -52,11 +45,10 @@ public class cEmpleados extends scPersona {
     @Override
     public void mostrarDatos() {
         System.out.println("Nombre: " + getNombre());
-        System.out.println("Telefono: " + getTelefono());
-        System.out.println("Correo: " + getCorreo());
         System.out.println("Cedula: " + getCedula());
+        System.out.println("Correo: " + getCorreo());
+        System.out.println("Telefono: " + getTelefono());
         System.out.println("Direccion: " + getDireccion());
-        System.out.println("ID Empleado: " + getIdEmpleado());
         System.out.println("Puesto: " + getPuesto());
         System.out.println("Salario: " + getSalario());
     }

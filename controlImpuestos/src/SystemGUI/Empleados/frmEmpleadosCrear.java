@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package SystemGUI.Empleados;
+import javax.swing.JOptionPane;
+import controlimpuestos.cEmpleados;
+import controlimpuestos.SystemCRUD.crudEmpleados;
 
 /**
  *
@@ -13,9 +16,21 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
     /**
      * Creates new form frmEmpleadosCrear
      */
-    public frmEmpleadosCrear() {
+     private crudEmpleados empleado;
+    private String nombre;
+    private String cedula;
+    private String correo;
+    private String telefono;
+    private String direccion;
+    private String puesto;
+    private String salario;
+    
+    public frmEmpleadosCrear() {       
         initComponents();
+
+        empleado = new crudEmpleados(); 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,21 +45,29 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
         h1Registro = new javax.swing.JLabel();
         jlNombre = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        tfNombreEmpleado = new javax.swing.JTextField();
+        tfNombre = new javax.swing.JTextField();
         jlTelefono = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        tfTelefonoEmpleado = new javax.swing.JTextField();
+        tfTelefono = new javax.swing.JTextField();
         jlCorreo = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        tfCorreoEmpleado = new javax.swing.JTextField();
+        tfCorreo = new javax.swing.JTextField();
         jlCedula = new javax.swing.JLabel();
-        tfCedulaEmpleado = new javax.swing.JTextField();
+        tfCedula = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         jlDireccion = new javax.swing.JLabel();
-        taDireccionEmpleado = new javax.swing.JTextArea();
+        taDireccion = new javax.swing.JTextArea();
         jlcharWarning = new javax.swing.JLabel();
         btnCrear = new javax.swing.JPanel();
         jlCrear = new javax.swing.JLabel();
+        jlNombre1 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jlNombre2 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        tfPuesto = new javax.swing.JTextField();
+        jlNombre3 = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        tfSalario = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,23 +79,23 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
 
         jlNombre.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlNombre.setForeground(new java.awt.Color(21, 14, 48));
-        jlNombre.setText("Nombre:");
-        jPanel1.add(jlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jlNombre.setText("Puesto:");
+        jPanel1.add(jlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(21, 14, 48));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 230, 10));
 
-        tfNombreEmpleado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfNombreEmpleado.setForeground(new java.awt.Color(153, 153, 153));
-        tfNombreEmpleado.setText("Ingrese el nombre");
-        tfNombreEmpleado.setBorder(null);
-        tfNombreEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+        tfNombre.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfNombre.setForeground(new java.awt.Color(153, 153, 153));
+        tfNombre.setText("Ingrese el nombre");
+        tfNombre.setBorder(null);
+        tfNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombreEmpleadoMousePressed(evt);
+                tfNombreMousePressed(evt);
             }
         });
-        jPanel1.add(tfNombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 230, 30));
+        jPanel1.add(tfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 230, 30));
 
         jlTelefono.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlTelefono.setForeground(new java.awt.Color(21, 14, 48));
@@ -83,16 +106,16 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
         jSeparator2.setForeground(new java.awt.Color(21, 14, 48));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 230, 10));
 
-        tfTelefonoEmpleado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfTelefonoEmpleado.setForeground(new java.awt.Color(153, 153, 153));
-        tfTelefonoEmpleado.setText("Ingrese el teléfono");
-        tfTelefonoEmpleado.setBorder(null);
-        tfTelefonoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        tfTelefono.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfTelefono.setForeground(new java.awt.Color(153, 153, 153));
+        tfTelefono.setText("Ingrese el teléfono");
+        tfTelefono.setBorder(null);
+        tfTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTelefonoEmpleadoActionPerformed(evt);
+                tfTelefonoActionPerformed(evt);
             }
         });
-        jPanel1.add(tfTelefonoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 230, 30));
+        jPanel1.add(tfTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 230, 30));
 
         jlCorreo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlCorreo.setForeground(new java.awt.Color(21, 14, 48));
@@ -103,32 +126,32 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
         jSeparator3.setForeground(new java.awt.Color(21, 14, 48));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 230, 10));
 
-        tfCorreoEmpleado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfCorreoEmpleado.setForeground(new java.awt.Color(153, 153, 153));
-        tfCorreoEmpleado.setText("Ingrese el correo");
-        tfCorreoEmpleado.setBorder(null);
-        tfCorreoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        tfCorreo.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfCorreo.setForeground(new java.awt.Color(153, 153, 153));
+        tfCorreo.setText("Ingrese el correo");
+        tfCorreo.setBorder(null);
+        tfCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCorreoEmpleadoActionPerformed(evt);
+                tfCorreoActionPerformed(evt);
             }
         });
-        jPanel1.add(tfCorreoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 230, 30));
+        jPanel1.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 230, 30));
 
         jlCedula.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlCedula.setForeground(new java.awt.Color(21, 14, 48));
         jlCedula.setText("Cédula:");
         jPanel1.add(jlCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        tfCedulaEmpleado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfCedulaEmpleado.setForeground(new java.awt.Color(153, 153, 153));
-        tfCedulaEmpleado.setText("Ingrese la cédula");
-        tfCedulaEmpleado.setBorder(null);
-        tfCedulaEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        tfCedula.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfCedula.setForeground(new java.awt.Color(153, 153, 153));
+        tfCedula.setText("Ingrese la cédula");
+        tfCedula.setBorder(null);
+        tfCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCedulaEmpleadoActionPerformed(evt);
+                tfCedulaActionPerformed(evt);
             }
         });
-        jPanel1.add(tfCedulaEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 230, 30));
+        jPanel1.add(tfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 230, 30));
 
         jSeparator4.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator4.setForeground(new java.awt.Color(21, 14, 48));
@@ -139,12 +162,12 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
         jlDireccion.setText("Dirección:");
         jPanel1.add(jlDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
-        taDireccionEmpleado.setColumns(20);
-        taDireccionEmpleado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        taDireccionEmpleado.setForeground(new java.awt.Color(21, 14, 48));
-        taDireccionEmpleado.setRows(5);
-        taDireccionEmpleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        jPanel1.add(taDireccionEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 590, -1));
+        taDireccion.setColumns(20);
+        taDireccion.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        taDireccion.setForeground(new java.awt.Color(21, 14, 48));
+        taDireccion.setRows(5);
+        taDireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        jPanel1.add(taDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 590, -1));
 
         jlcharWarning.setFont(new java.awt.Font("Roboto Light", 2, 12)); // NOI18N
         jlcharWarning.setForeground(new java.awt.Color(21, 14, 48));
@@ -153,6 +176,15 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
 
         btnCrear.setBackground(new java.awt.Color(21, 14, 48));
         btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCrear.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                btnCrearAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jlCrear.setBackground(new java.awt.Color(21, 14, 48));
         jlCrear.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
@@ -173,6 +205,55 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
         );
 
         jPanel1.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 500, -1, 40));
+
+        jlNombre1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlNombre1.setForeground(new java.awt.Color(21, 14, 48));
+        jlNombre1.setText("Nombre:");
+        jPanel1.add(jlNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jSeparator5.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator5.setForeground(new java.awt.Color(21, 14, 48));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 230, 10));
+
+        jlNombre2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlNombre2.setForeground(new java.awt.Color(21, 14, 48));
+        jlNombre2.setText("Nombre:");
+        jPanel1.add(jlNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jSeparator6.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator6.setForeground(new java.awt.Color(21, 14, 48));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 230, 10));
+
+        tfPuesto.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfPuesto.setForeground(new java.awt.Color(153, 153, 153));
+        tfPuesto.setText("Ingrese el puesto");
+        tfPuesto.setBorder(null);
+        tfPuesto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tfPuestoMousePressed(evt);
+            }
+        });
+        jPanel1.add(tfPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 230, 30));
+
+        jlNombre3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlNombre3.setForeground(new java.awt.Color(21, 14, 48));
+        jlNombre3.setText("Salario");
+        jPanel1.add(jlNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+
+        jSeparator7.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator7.setForeground(new java.awt.Color(21, 14, 48));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 230, 10));
+
+        tfSalario.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfSalario.setForeground(new java.awt.Color(153, 153, 153));
+        tfSalario.setText("Ingrese el salario");
+        tfSalario.setBorder(null);
+        tfSalario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tfSalarioMousePressed(evt);
+            }
+        });
+        jPanel1.add(tfSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 230, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -196,25 +277,60 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNombreEmpleadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreEmpleadoMousePressed
+    private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
         // TODO add your handling code here:
-        if (tfNombreEmpleado.getText().equals("Ingrese el nombre")) {
-            tfNombreEmpleado.setText("");
-            tfNombreEmpleado.setForeground(btnCrear.getForeground());
+        if (tfNombre.getText().equals("Ingrese el nombre")) {
+            tfNombre.setText("");
+            tfNombre.setForeground(btnCrear.getForeground());
         }
-    }//GEN-LAST:event_tfNombreEmpleadoMousePressed
+    }//GEN-LAST:event_tfNombreMousePressed
 
-    private void tfTelefonoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonoEmpleadoActionPerformed
+    private void tfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfTelefonoEmpleadoActionPerformed
+    }//GEN-LAST:event_tfTelefonoActionPerformed
 
-    private void tfCorreoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoEmpleadoActionPerformed
+    private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfCorreoEmpleadoActionPerformed
+    }//GEN-LAST:event_tfCorreoActionPerformed
 
-    private void tfCedulaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaEmpleadoActionPerformed
+    private void tfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfCedulaEmpleadoActionPerformed
+    }//GEN-LAST:event_tfCedulaActionPerformed
+
+    private void tfPuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfPuestoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPuestoMousePressed
+
+    private void tfSalarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSalarioMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSalarioMousePressed
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {
+        nombre = tfNombre.getText();
+        cedula = tfCedula.getText();
+        correo = tfCorreo.getText();
+        telefono = tfTelefono.getText();
+        direccion = taDireccion.getText();
+        puesto = tfPuesto.getText();
+        salario  = tfSalario.getText();
+
+        cEmpleados nuevoEmpleado = new cEmpleados(nombre,cedula,correo,telefono,direccion,puesto,salario);
+
+        try{
+
+            crudEmpleados crud = new crudEmpleados();
+
+            crud.guardarEmpleado(nuevoEmpleado);
+
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error" +e);
+        }
+    }
+    
+             
+    private void btnCrearAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnCrearAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCrearAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -225,17 +341,25 @@ public class frmEmpleadosCrear extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JLabel jlCedula;
     private javax.swing.JLabel jlCorreo;
     private javax.swing.JLabel jlCrear;
     private javax.swing.JLabel jlDireccion;
     private javax.swing.JLabel jlNombre;
+    private javax.swing.JLabel jlNombre1;
+    private javax.swing.JLabel jlNombre2;
+    private javax.swing.JLabel jlNombre3;
     private javax.swing.JLabel jlTelefono;
     private javax.swing.JLabel jlcharWarning;
-    private javax.swing.JTextArea taDireccionEmpleado;
-    private javax.swing.JTextField tfCedulaEmpleado;
-    private javax.swing.JTextField tfCorreoEmpleado;
-    private javax.swing.JTextField tfNombreEmpleado;
-    private javax.swing.JTextField tfTelefonoEmpleado;
+    private javax.swing.JTextArea taDireccion;
+    private javax.swing.JTextField tfCedula;
+    private javax.swing.JTextField tfCorreo;
+    private javax.swing.JTextField tfNombre;
+    private javax.swing.JTextField tfPuesto;
+    private javax.swing.JTextField tfSalario;
+    private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
 }

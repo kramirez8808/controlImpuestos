@@ -13,6 +13,7 @@ import java.sql.ResultSet;
  * @author danie
  */
 public class cLogin {
+    
     public boolean autenticarUsuario (String usuario, String contrasena )
     {
     
