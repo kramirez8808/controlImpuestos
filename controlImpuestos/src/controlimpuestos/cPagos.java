@@ -17,14 +17,14 @@ public class cPagos {
     private int idPago;
     private double monto;
     private String fecha;
-    private double impuesto;
+    private double impuestos;
     private String nombre;
 
-    public cPagos(double monto, String fecha, double impuesto, String nombre) {
+    public cPagos(double monto, String fecha, double impuestos, String nombre) {
         this.idPago = idPago;
         this.monto = monto;
         this.fecha = fecha;
-        this.impuesto = impuesto;
+        this.impuestos = impuestos;
         this.nombre = nombre;
     }
 
@@ -53,11 +53,11 @@ public class cPagos {
     }
 
     public double getImpuesto() {
-        return impuesto;
+        return impuestos;
     }
 
     public void setImpuesto(double impuesto) {
-        this.impuesto = impuesto;
+        this.impuestos = impuesto;
     }
 
     public String getNombre() {
@@ -72,6 +72,6 @@ public class cPagos {
 
     @Override
     public String toString() {
-        return "cPagos{" + "id=" + idPago + ", monto=" + monto + ", fecha=" + fecha + ", impuesto=" + impuesto + ", cliente=" + nombre + '}';
+        return "cPagos{" + "id=" + idPago + ", monto=" + monto + ", fecha=" + fecha + ", impuesto=" + impuestos + ", cliente=" + nombre + '}';
     }
 }
