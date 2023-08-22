@@ -2,27 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package SystemGUI.Impuesto;
+package SystemGUI.Usuarios;
 
+import SystemGUI.Usuarios.*;
 import javax.swing.JOptionPane;
 
-import controlimpuestos.cImpuestos;
-import controlimpuestos.SystemCRUD.crudImpuestos;
+import controlimpuestos.cUsuarios;
+import controlimpuestos.SystemCRUD.crudUsuarios;
 
 /**
  *
  * @author fanta
  */
-public class frmImpuestoBuscar extends javax.swing.JPanel {
+public class frmUsuarioBuscar extends javax.swing.JPanel {
 
     //Variables requeridas para obtener los datos del formulario
-    private String descripcion, tasaImpuesto, 
-    fechaVencimiento, idImpuesto, idAnterior;
+    private String nombreUsuario, contrasena,idUsuario, idAnterior;
 
-    //Instancia del objeto SystemCRUD.crudImpuestos
-    private crudImpuestos crudImpuestos;
+    //Instancia del objeto SystemCRUD.crudUsuarios
+    private crudUsuarios crudUsuarios;
 
-    public static cImpuestos impuestoResultado;
+    public static cUsuarios usuarioResultado;
 
     private java.awt.Color lightGray = new java.awt.Color(153,153,153);
 
@@ -30,11 +30,11 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
     /**
      * Creates new form frmTest
      */
-    public frmImpuestoBuscar() {
+    public frmUsuarioBuscar() {
         initComponents();
 
-        //Instanciar la clase crudImpuestos
-        crudImpuestos = new crudImpuestos();
+        //Instanciar la clase crudUsuarios
+        crudUsuarios = new crudUsuarios();
 
         pnlBuscar.setVisible(true);
         pnlResultado.setVisible(false);
@@ -51,9 +51,9 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
 
         pnlBuscar = new javax.swing.JPanel();
         h1Busqueda = new javax.swing.JLabel();
-        jlFecha = new javax.swing.JLabel();
+        jlUsuario = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        tfFecha = new javax.swing.JTextField();
+        tfUsuario = new javax.swing.JTextField();
         jlID = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         tfID = new javax.swing.JTextField();
@@ -65,15 +65,12 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
         jlEliminar = new javax.swing.JLabel();
         btnEditar = new javax.swing.JPanel();
         jlEditar = new javax.swing.JLabel();
-        jlTasa = new javax.swing.JLabel();
-        tfTasaResultado = new javax.swing.JTextField();
+        jlUsuarioResultado = new javax.swing.JLabel();
+        tfUsuarioResultado = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jlFecha1 = new javax.swing.JLabel();
-        tfFechaResultado = new javax.swing.JTextField();
+        jlContrasena = new javax.swing.JLabel();
+        pfContrasenaResultado = new javax.swing.JPasswordField();
         jSeparator4 = new javax.swing.JSeparator();
-        taDescripcionResultado = new javax.swing.JTextArea();
-        jlDescripcion = new javax.swing.JLabel();
-        jlcharWarning = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -83,28 +80,28 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
 
         h1Busqueda.setBackground(new java.awt.Color(21, 14, 48));
         h1Busqueda.setFont(new java.awt.Font("Roboto", 3, 22)); // NOI18N
-        h1Busqueda.setText("Búsqueda de impuestos");
+        h1Busqueda.setText("Búsqueda de usuarios");
         pnlBuscar.add(h1Busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 26, 268, 40));
 
-        jlFecha.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlFecha.setForeground(new java.awt.Color(21, 14, 48));
-        jlFecha.setText("Por Fecha de Vencimiento:");
-        pnlBuscar.add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 106, -1, -1));
+        jlUsuario.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlUsuario.setForeground(new java.awt.Color(21, 14, 48));
+        jlUsuario.setText("Por Nombre de Usuario:");
+        pnlBuscar.add(jlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 106, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(21, 14, 48));
-        pnlBuscar.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 230, 10));
+        pnlBuscar.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 230, 10));
 
-        tfFecha.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfFecha.setForeground(new java.awt.Color(153, 153, 153));
-        tfFecha.setText("Ingrese la fecha de vencimiento");
-        tfFecha.setBorder(null);
-        tfFecha.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfUsuario.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfUsuario.setForeground(new java.awt.Color(153, 153, 153));
+        tfUsuario.setText("Ingrese el nombre de usuario");
+        tfUsuario.setBorder(null);
+        tfUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                tfFechaFocusGained(evt);
+                tfUsuarioFocusGained(evt);
             }
         });
-        pnlBuscar.add(tfFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 230, 30));
+        pnlBuscar.add(tfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 230, 30));
 
         jlID.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlID.setForeground(new java.awt.Color(21, 14, 48));
@@ -113,7 +110,7 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
 
         jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator2.setForeground(new java.awt.Color(21, 14, 48));
-        pnlBuscar.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 80, 10));
+        pnlBuscar.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 80, 10));
 
         tfID.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfID.setForeground(new java.awt.Color(153, 153, 153));
@@ -124,7 +121,7 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
                 tfIDFocusGained(evt);
             }
         });
-        pnlBuscar.add(tfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 80, 30));
+        pnlBuscar.add(tfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 80, 30));
 
         btnBuscar.setBackground(new java.awt.Color(21, 14, 48));
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -220,85 +217,56 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
 
         pnlResultado.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, -1, -1));
 
-        jlTasa.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlTasa.setForeground(new java.awt.Color(21, 14, 48));
-        jlTasa.setText("Tasa del impuesto:");
-        pnlResultado.add(jlTasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jlUsuarioResultado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlUsuarioResultado.setForeground(new java.awt.Color(21, 14, 48));
+        jlUsuarioResultado.setText("Usuario:");
+        pnlResultado.add(jlUsuarioResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        tfTasaResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfTasaResultado.setForeground(new java.awt.Color(153, 153, 153));
-        tfTasaResultado.setBorder(null);
-        tfTasaResultado.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfTasaResultadoFocusGained(evt);
-            }
-        });
-        pnlResultado.add(tfTasaResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 230, 30));
+        tfUsuarioResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfUsuarioResultado.setForeground(new java.awt.Color(153, 153, 153));
+        tfUsuarioResultado.setBorder(null);
+        pnlResultado.add(tfUsuarioResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 230, 30));
 
         jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator3.setForeground(new java.awt.Color(21, 14, 48));
         pnlResultado.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 230, 10));
 
-        jlFecha1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlFecha1.setForeground(new java.awt.Color(21, 14, 48));
-        jlFecha1.setText("Fecha de Vencimiento:");
-        pnlResultado.add(jlFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jlContrasena.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlContrasena.setForeground(new java.awt.Color(21, 14, 48));
+        jlContrasena.setText("Contraseña:");
+        pnlResultado.add(jlContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        tfFechaResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfFechaResultado.setForeground(new java.awt.Color(153, 153, 153));
-        tfFechaResultado.setBorder(null);
-        tfFechaResultado.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfFechaResultadoFocusGained(evt);
-            }
-        });
-        pnlResultado.add(tfFechaResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 230, 30));
+        pfContrasenaResultado.setForeground(new java.awt.Color(153, 153, 153));
+        pfContrasenaResultado.setBorder(null);
+        pnlResultado.add(pfContrasenaResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 230, 30));
 
         jSeparator4.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator4.setForeground(new java.awt.Color(21, 14, 48));
         pnlResultado.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 230, 10));
-
-        taDescripcionResultado.setColumns(20);
-        taDescripcionResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        taDescripcionResultado.setForeground(new java.awt.Color(21, 14, 48));
-        taDescripcionResultado.setRows(5);
-        taDescripcionResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        pnlResultado.add(taDescripcionResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 590, -1));
-
-        jlDescripcion.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlDescripcion.setForeground(new java.awt.Color(21, 14, 48));
-        jlDescripcion.setText("Descripción:");
-        pnlResultado.add(jlDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
-
-        jlcharWarning.setFont(new java.awt.Font("Roboto Light", 2, 12)); // NOI18N
-        jlcharWarning.setForeground(new java.awt.Color(21, 14, 48));
-        jlcharWarning.setText("Max 100 caracteres.");
-        pnlResultado.add(jlcharWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 340, -1, -1));
 
         add(pnlResultado, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEditarMouseClicked
         //Guardar ID anterior para la busqueda en DB
-        idAnterior = String.valueOf(crudImpuestos.returnIdAnterior());
+        idAnterior = String.valueOf(crudUsuarios.returnIdAnterior());
 
         //Obtener los datos del formulario
-        descripcion = taDescripcionResultado.getText();
-        tasaImpuesto = tfTasaResultado.getText();
-        fechaVencimiento = tfFechaResultado.getText();
+        nombreUsuario = tfUsuarioResultado.getText();
+        contrasena = String.valueOf(pfContrasenaResultado.getPassword());
+        
         //Verificar que los campos no esten vacios
-        if (!descripcion.equals("") || !tasaImpuesto.equals("") || !fechaVencimiento.equals("")) {
+        if (!nombreUsuario.equals("") || !contrasena.equals("")) {
             try {
-                //Actualizar los datos del objeto impuesto previamente encontrado
-                impuestoResultado.setDescripcion(descripcion);;
-                impuestoResultado.setTasaImpuesto(Double.parseDouble(tasaImpuesto));
-                impuestoResultado.setFecha(fechaVencimiento);
+                //Actualizar los datos del objeto usuario previamente encontrado
+                usuarioResultado.setUsuario(nombreUsuario);
+                usuarioResultado.setContrasena(contrasena);
 
                 //Llamar al metodo de actualizar
-                crudImpuestos.actualizarImpuesto(impuestoResultado, idAnterior);
+                crudUsuarios.actualizarUsuario(usuarioResultado, idAnterior);
 
                 //Mostrar mensaje de exito
-                JOptionPane.showMessageDialog(null, "Impuesto actualizado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Usuario actualizado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en el proceso de actualización: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -309,19 +277,19 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
     }//GEN-LAST:event_jlEditarMouseClicked
 
     private void jlEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEliminarMousePressed
-        //Obtener el ID del impuesto a eliminar
-        idAnterior = String.valueOf(crudImpuestos.returnIdAnterior());
+        //Obtener el ID del usuario a eliminar
+        idAnterior = String.valueOf(crudUsuarios.returnIdAnterior());
 
-        //Confirmar que se desea eliminar el impuesto
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el impuesto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        //Confirmar que se desea eliminar el usuario
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el usuario?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         try {
             //Eliminar el cliente en caso de seleccionar confirmar
             if (opcion == JOptionPane.YES_OPTION) {
                 //Se invoca el metodo de eliminarCliente
-                crudImpuestos.eliminarImpuesto(impuestoResultado);
+                crudUsuarios.eliminarUsuario(usuarioResultado);
 
-                //Evitar que se seleccione el campo "Por Fecha:" por defecto al volver al panel de busqueda
+                //Evitar que se seleccione el campo "Por Nombre:" por defecto al volver al panel de busqueda
                 h1Busqueda.requestFocusInWindow();
 
                 //Volver a la pantalla de busqueda
@@ -340,27 +308,28 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
 
     private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
         //Obtener el texto de los campos
-        fechaVencimiento = tfFecha.getText();
-        idImpuesto = tfID.getText();
+        nombreUsuario = tfUsuario.getText();
+        idUsuario = tfID.getText();
 
         //Buscar y mostrar los datos segun el campo llenado
-        if (!fechaVencimiento.equals("") && !fechaVencimiento.equals("Ingrese la fecha de vencimiento")) {
+        if (!nombreUsuario.equals("") && !nombreUsuario.equals("Ingrese el nombre de usuario")) {
 
             //Llamar al metodo de busqueda y guardar los resultados
             try {
-                impuestoResultado = crudImpuestos.buscarImpuestoFecha(fechaVencimiento);
+                usuarioResultado = crudUsuarios.buscarUsuarioNombre(nombreUsuario);
 
                 h1Busqueda.requestFocusInWindow();
-                tfFecha.setText("Ingrese el nombre");
-                tfFecha.setForeground(lightGray);
+                tfUsuario.setText("Ingrese el nombre de usuario");
+                tfUsuario.setForeground(lightGray);
                 tfID.setText("Ingrese el ID");
                 tfID.setForeground(lightGray);
 
                 //Verificar que el cliente exista y mostrar los datos en el nuevo panel
-                if (impuestoResultado != null) {
-                    taDescripcionResultado.setText(impuestoResultado.getDescripcion());
-                    tfTasaResultado.setText(String.valueOf(impuestoResultado.getTasaImpuesto()));
-                    tfFechaResultado.setText(impuestoResultado.getFecha());
+                if (usuarioResultado != null) {
+                    tfUsuarioResultado.setForeground(btnBuscar.getForeground());
+                    pfContrasenaResultado.setForeground(btnBuscar.getForeground());
+                    tfUsuarioResultado.setText(usuarioResultado.getUsuario());
+                    pfContrasenaResultado.setText(usuarioResultado.getContrasena());
 
                     //Cambiar de panel
                     pnlBuscar.setVisible(false);
@@ -372,23 +341,24 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-        } else if (!idImpuesto.equals("") && !idImpuesto.equals("Ingrese el ID")) {
+        } else if (!idUsuario.equals("") && !idUsuario.equals("Ingrese el ID")) {
 
             //Llamar al metodo de busqueda y guardar los resultados
             try {
-                impuestoResultado = crudImpuestos.buscarImpuestoID(idImpuesto);
+                usuarioResultado = crudUsuarios.buscarUsuarioID(idUsuario);
 
                 h1Busqueda.requestFocusInWindow();
-                tfFecha.setText("Ingrese el nombre");
-                tfFecha.setForeground(lightGray);
+                tfUsuario.setText("Ingrese el nombre de usuario");
+                tfUsuario.setForeground(lightGray);
                 tfID.setText("Ingrese el ID");
                 tfID.setForeground(lightGray);
 
                 //Verificar que el cliente exista y mostrar los datos en el nuevo panel
-                if (impuestoResultado != null) {
-                    taDescripcionResultado.setText(impuestoResultado.getDescripcion());
-                    tfTasaResultado.setText(String.valueOf(impuestoResultado.getTasaImpuesto()));
-                    tfFechaResultado.setText(impuestoResultado.getFecha());
+                if (usuarioResultado != null) {
+                    tfUsuarioResultado.setForeground(btnBuscar.getForeground());
+                    pfContrasenaResultado.setForeground(btnBuscar.getForeground());
+                    tfUsuarioResultado.setText(usuarioResultado.getUsuario());
+                    pfContrasenaResultado.setText(usuarioResultado.getContrasena());
 
                     //Cambiar de panel
                     pnlBuscar.setVisible(false);
@@ -411,29 +381,13 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tfIDFocusGained
 
-    private void tfFechaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFechaFocusGained
+    private void tfUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUsuarioFocusGained
         // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-        if (tfFecha.getText().equals("Ingrese la fecha de vencimiento")) {
-            tfFecha.setText("");
-            tfFecha.setForeground(btnBuscar.getForeground());
+        if (tfUsuario.getText().equals("Ingrese el nombre de usuario")) {
+            tfUsuario.setText("");
+            tfUsuario.setForeground(btnBuscar.getForeground());
         }
-    }//GEN-LAST:event_tfFechaFocusGained
-
-    private void tfTasaResultadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTasaResultadoFocusGained
-        //Efecto tipo placeholder para el campo Nombre
-        if (tfTasaResultado.getText().equals("Ingrese la tasa del impuesto")) {
-            tfTasaResultado.setText("");
-            tfTasaResultado.setForeground(btnBuscar.getForeground());
-        }
-    }//GEN-LAST:event_tfTasaResultadoFocusGained
-
-    private void tfFechaResultadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFechaResultadoFocusGained
-        //Efecto tipo placeholder para el campo Cedula
-        if (tfFecha.getText().equals("Ingrese la cédula")) {
-            tfFecha.setText("");
-            tfFecha.setForeground(btnBuscar.getForeground());
-        }
-    }//GEN-LAST:event_tfFechaResultadoFocusGained
+    }//GEN-LAST:event_tfUsuarioFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -447,20 +401,17 @@ public class frmImpuestoBuscar extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel jlBuscar;
-    private javax.swing.JLabel jlDescripcion;
+    private javax.swing.JLabel jlContrasena;
     private javax.swing.JLabel jlEditar;
     private javax.swing.JLabel jlEliminar;
-    private javax.swing.JLabel jlFecha;
-    private javax.swing.JLabel jlFecha1;
     private javax.swing.JLabel jlID;
-    private javax.swing.JLabel jlTasa;
-    private javax.swing.JLabel jlcharWarning;
+    private javax.swing.JLabel jlUsuario;
+    private javax.swing.JLabel jlUsuarioResultado;
+    private javax.swing.JPasswordField pfContrasenaResultado;
     private javax.swing.JPanel pnlBuscar;
     private javax.swing.JPanel pnlResultado;
-    private javax.swing.JTextArea taDescripcionResultado;
-    private javax.swing.JTextField tfFecha;
-    private javax.swing.JTextField tfFechaResultado;
     private javax.swing.JTextField tfID;
-    private javax.swing.JTextField tfTasaResultado;
+    private javax.swing.JTextField tfUsuario;
+    private javax.swing.JTextField tfUsuarioResultado;
     // End of variables declaration//GEN-END:variables
 }

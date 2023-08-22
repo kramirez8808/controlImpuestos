@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package SystemGUI.Usuarios;
+package SystemGUI.Impuesto;
 
-import SystemGUI.Impuesto.*;
 import SystemGUI.Clientes.*;
 import java.awt.BorderLayout;
 
@@ -12,12 +11,12 @@ import java.awt.BorderLayout;
  *
  * @author fanta
  */
-public class frmUsuarios extends javax.swing.JPanel {
+public class frmImpuestos extends javax.swing.JPanel {
 
     /**
      * Creates new form frmClientes
      */
-    public frmUsuarios() {
+    public frmImpuestos() {
         initComponents();
         crearImpuesto.setVisible(true);
         buscarImpuesto.setVisible(false);
@@ -41,9 +40,9 @@ public class frmUsuarios extends javax.swing.JPanel {
         jlRegistro = new javax.swing.JLabel();
         jpDynamic = new javax.swing.JPanel();
         crearImpuesto = new javax.swing.JPanel();
-        frmUsuarioCrear1 = new SystemGUI.Usuarios.frmUsuarioCrear();
+        frmImpuestoCrear1 = new SystemGUI.Impuesto.frmImpuestoCrear();
         buscarImpuesto = new javax.swing.JPanel();
-        frmUsuarioBuscar1 = new SystemGUI.Usuarios.frmUsuarioBuscar();
+        frmImpuestoBuscar1 = new SystemGUI.Impuesto.frmImpuestoBuscar();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -139,12 +138,14 @@ public class frmUsuarios extends javax.swing.JPanel {
         jpDynamic.setLayout(new java.awt.CardLayout());
 
         crearImpuesto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        crearImpuesto.add(frmUsuarioCrear1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 560));
+        crearImpuesto.add(frmImpuestoCrear1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 560));
 
         jpDynamic.add(crearImpuesto, "card2");
 
         buscarImpuesto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        buscarImpuesto.add(frmUsuarioBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 560));
+
+        frmImpuestoBuscar1.setMinimumSize(new java.awt.Dimension(630, 560));
+        buscarImpuesto.add(frmImpuestoBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 560));
 
         jpDynamic.add(buscarImpuesto, "card3");
 
@@ -174,8 +175,8 @@ public class frmUsuarios extends javax.swing.JPanel {
     private javax.swing.JPanel buscarImpuesto;
     private javax.swing.JPanel crearImpuesto;
     private javax.swing.JPanel divisor;
-    private SystemGUI.Usuarios.frmUsuarioBuscar frmUsuarioBuscar1;
-    private SystemGUI.Usuarios.frmUsuarioCrear frmUsuarioCrear1;
+    private SystemGUI.Impuesto.frmImpuestoBuscar frmImpuestoBuscar1;
+    private SystemGUI.Impuesto.frmImpuestoCrear frmImpuestoCrear1;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jlBusqueda;
     private javax.swing.JLabel jlRegistro;

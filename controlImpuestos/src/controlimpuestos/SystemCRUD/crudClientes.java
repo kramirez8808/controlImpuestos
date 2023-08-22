@@ -106,7 +106,7 @@ public class crudClientes {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
@@ -149,7 +149,7 @@ public class crudClientes {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
@@ -193,7 +193,7 @@ public class crudClientes {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
@@ -242,7 +242,7 @@ public class crudClientes {
 
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el cliente. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();

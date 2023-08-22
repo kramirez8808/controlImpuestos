@@ -47,28 +47,31 @@ public class cConexion {
                                 "PRIMARY KEY (idCliente))");
             
             //Crear Tabla Impuestos
-            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS impuestos (" + //Crear tabla impuestos si no existe
-                                "idImpuestos INT NOT NULL AUTO_INCREMENT," +
-                                "nombre VARCHAR(50) NOT NULL," + 
-                                "cedula VARCHAR(10) NOT NULL," +
+            //Pendiente evaluar fechaVencimiento o fechaCreacion
+            //Descripcion cambiada de 50 a 100 caracteres
+            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS impuestos (" + //Crear tabla pagos si no existe
+                                "idImpuesto INT NOT NULL AUTO_INCREMENT," +
                                 "descripcion VARCHAR(100) NOT NULL," + 
                                 "tasaImpuesto DOUBLE NOT NULL," +
-                                "fechaVencimiento DATE NOT NULL," +
-                                "PRIMARY KEY (idImpuestos))");
+                                "fechaVencimiento VARCHAR(30) NOT NULL," +
+                                "PRIMARY KEY (idImpuesto))");
             
             //Crear Tabla Pagos  
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS pagos (" + //Crear tabla pagos si no existe
                                 "idPago INT NOT NULL AUTO_INCREMENT," +
                                 "nombre varchar(50) NOT NULL," + 
                                 "monto DOUBLE NOT NULL," + 
-                                "fecha DATE NOT NULL," +
-                                "impuestos INT NOT NULL," +
-                                "PRIMARY KEY (idPago))");
+                                "fecha VARCHAR(30) NOT NULL," +
+                                "idCliente INT NOT NULL," +
+                                "idImpuesto INT NOT NULL," +
+                                "PRIMARY KEY (idPago)," +
+                                "FOREIGN KEY (idCliente) REFERENCES clientes(idCliente)," +
+                                "FOREIGN KEY (idImpuesto) REFERENCES impuestos(idImpuesto))");
 
             //Crear Tabla Usuarios
             //Evaluar si se debe crear una clase cUsuarios en java para manejar los usuarios ¿?
             //Usuario VARCHAR cambiado de 50 a 30 caracteres  
-            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS usuarios (" + //Crear tabla usuarios si no existe
+            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS usuarios (" + //Crear tabla clientes si no existe
                                 "idUsuario INT NOT NULL AUTO_INCREMENT," + 
                                 "usuario VARCHAR(30) NOT NULL," + 
                                 "contrasena VARCHAR(50) NOT NULL," +
@@ -80,9 +83,9 @@ public class cConexion {
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS empleados (" + //Crear tabla empleados si no existe
                                 "idEmpleado INT NOT NULL AUTO_INCREMENT," + 
                                 "nombre VARCHAR(50) NOT NULL," + 
-                                "cedula VARCHAR(10) NOT NULL," + 
-                                "correo VARCHAR(50) NOT NULL," + 
                                 "telefono VARCHAR(10) NOT NULL," + 
+                                "correo VARCHAR(50) NOT NULL," + 
+                                "cedula VARCHAR(10) NOT NULL," + 
                                 "direccion VARCHAR(100) NOT NULL," + 
                                 "puesto VARCHAR(50) NOT NULL," +
                                 "salario DOUBLE NOT NULL," +

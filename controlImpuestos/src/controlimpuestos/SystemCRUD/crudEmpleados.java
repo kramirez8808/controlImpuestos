@@ -4,29 +4,38 @@
  */
 package controlimpuestos.SystemCRUD;
 
-import static controlimpuestos.SystemCRUD.crudClientes.queryUseDB;
 import controlimpuestos.cEmpleados;
+import controlimpuestos.cConexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import controlimpuestos.cEmpleados;
-import controlimpuestos.cConexion;
 
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Rachel
+ * @author fanta
  */
 public class crudEmpleados {
-    
+
+
+    //Metodo para seleccionar la base de datos
+    public static void queryUseDB(Connection conn) throws SQLException {
+        String selectDB = "USE controlImpuestos"; //Query para seleccionar la base de datos
+        
+        PreparedStatement prStmt = conn.prepareStatement(selectDB);
+        prStmt.executeUpdate();
+    }
+
+    //Metodo para crear un Empleado
     public void guardarEmpleado(cEmpleados empleado) throws SQLException {
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
 
         //Definir SQL query para insertar datos en la tabla
-        String query = "INSERT INTO empleados (nombre, cedula, correo, telefono, direccion, puesto, salario)"
+        String query = "INSERT INTO empleados (nombre, telefono, correo, cedula, direccion, puesto, salario)"
                 + "VALUES (?,?,?,?,?,?,?)";
 
         try {
@@ -41,7 +50,7 @@ public class crudEmpleados {
             prStmt.setString(4, empleado.getCedula());
             prStmt.setString(5, empleado.getDireccion());
             prStmt.setString(6, empleado.getPuesto());
-            prStmt.setString(7, empleado.getSalario());
+            prStmt.setString(7, String.valueOf(empleado.getSalario()));
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -52,7 +61,7 @@ public class crudEmpleados {
             //Mostrar mensaje de exito
             JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente. Datos creados:\n" + empleado.toString(), "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 
-            } catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al registrar empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
@@ -60,6 +69,7 @@ public class crudEmpleados {
         }
 
     }
+
     //Metodos de busqueda segun el campo llenado
     public cEmpleados buscarEmpleadoNombre(String nombreBusqueda) throws SQLException {
         //Crear conexion con DB
@@ -83,20 +93,20 @@ public class crudEmpleados {
 
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
-                String cedula = rs.getString("cedula");
+                String telefono = rs.getString("telefono");
                 String correo = rs.getString("correo");
-                String telefono = rs.getString("telefono");                
+                String cedula = rs.getString("cedula");
                 String direccion = rs.getString("direccion");
                 String puesto = rs.getString("puesto");
                 String salario = rs.getString("salario");
             
-                return new cEmpleados(nombre, cedula, correo,telefono,  direccion, puesto, salario);
+                return new cEmpleados(nombre, telefono, correo, cedula, direccion, puesto, Double.valueOf(salario));
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
@@ -127,19 +137,19 @@ public class crudEmpleados {
 
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
-                String cedula = rs.getString("cedula");
+                String telefono = rs.getString("telefono");
                 String correo = rs.getString("correo");
-                String telefono = rs.getString("telefono");                
+                String cedula = rs.getString("cedula");
                 String direccion = rs.getString("direccion");
                 String puesto = rs.getString("puesto");
                 String salario = rs.getString("salario");
             
-                return new cEmpleados(nombre, cedula, correo,telefono,  direccion, puesto, salario);
+                return new cEmpleados(nombre, telefono, correo, cedula, direccion, puesto, Double.valueOf(salario));
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
@@ -170,20 +180,20 @@ public class crudEmpleados {
 
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
-                String cedula = rs.getString("cedula");
+                String telefono = rs.getString("telefono");
                 String correo = rs.getString("correo");
-                String telefono = rs.getString("telefono");                
+                String cedula = rs.getString("cedula");
                 String direccion = rs.getString("direccion");
                 String puesto = rs.getString("puesto");
                 String salario = rs.getString("salario");
             
-                return new cEmpleados(nombre, cedula, correo,telefono,  direccion, puesto, salario);
+                return new cEmpleados(nombre, telefono, correo, cedula, direccion, puesto, Double.valueOf(salario));
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
@@ -191,29 +201,76 @@ public class crudEmpleados {
         return null;
     }
 
-    
+    public cEmpleados buscarEmpleadoID(String idBusqueda) throws SQLException {
 
-    //Metodo para actualizar la informacion del Empleado encontrado
-    public void actualizarEmpleado(cEmpleados empleado) throws SQLException {
+        //Convertir el idBusqueda a int
+        int idBusquedaInt = Integer.parseInt(idBusqueda);
+
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
         
-        //Query para actualizar la informacion del cliente
-        String query = "UPDATE empleados SET nombre = ?, cedula = ?, correo = ?,  telefono = ?, direccion = ?, puesto = ?, salario = ? WHERE cedula = ?";
+        //Queries para las busquedas segun el campo seleccionado
+        String queryID = "SELECT * FROM empleados WHERE idEmpleado = ?";
+        
+
+        try {
+            //Crear objetos PreparedStatement para ejecutar los queries
+            PreparedStatement prStmt = conn.prepareStatement(queryID);
+
+            //Definir el campo de busqueda
+            prStmt.setInt(1, idBusquedaInt);
+
+            //Se selecciona la base de datos
+            queryUseDB(conn);
+
+            //Crear objeto ResultSet para recibir los resultados de la busqueda
+            ResultSet rs = prStmt.executeQuery();
+
+            if (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String telefono = rs.getString("telefono");
+                String correo = rs.getString("correo");
+                String cedula = rs.getString("cedula");
+                String direccion = rs.getString("direccion");
+                String puesto = rs.getString("puesto");
+                String salario = rs.getString("salario");
+            
+                return new cEmpleados(nombre, telefono, correo, cedula, direccion, puesto, Double.valueOf(salario));
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al buscar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            //Cerrar conexion con DB
+            conn.close();
+        }
+        return null;
+    }
+
+    //Metodo para actualizar la informacion del empleado encontrado
+    public void actualizarEmpleado(cEmpleados empleadoResultado, String cedulaAnterior) throws SQLException {
+        //Crear conexion con DB
+        Connection conn = cConexion.getConnection();
+        
+        //Query para actualizar la informacion del empleado
+        String query = "UPDATE empleados SET nombre = ?, telefono = ?, correo = ?, cedula = ?, direccion = ?, puesto = ?, salario = ? WHERE cedula = ?";
 
         try {
             //Crear objetos PreparedStatement para ejecutar los queries
             PreparedStatement prStmt = conn.prepareStatement(query);
 
             //Definir los campos a actualizar
-            prStmt.setString(1, empleado.getNombre());
-            prStmt.setString(2, empleado.getTelefono());
-            prStmt.setString(3, empleado.getCorreo());
-            prStmt.setString(4, empleado.getCedula());
-            prStmt.setString(5, empleado.getDireccion());
-            prStmt.setString(6, empleado.getPuesto());
-            prStmt.setString(7, empleado.getSalario());
-
+            prStmt.setString(1, empleadoResultado.getNombre());
+            prStmt.setString(2, empleadoResultado.getTelefono());
+            prStmt.setString(3, empleadoResultado.getCorreo());
+            prStmt.setString(4, empleadoResultado.getCedula());
+            prStmt.setString(5, empleadoResultado.getDireccion());
+            prStmt.setString(6, empleadoResultado.getPuesto());
+            prStmt.setString(7, String.valueOf(empleadoResultado.getSalario()));
+            prStmt.setString(8, cedulaAnterior);
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -232,20 +289,19 @@ public class crudEmpleados {
     }
 
     //Metodo para eliminar el empleado encontrado
-    public void eliminarEmpleado(cEmpleados empleado){
+    public void eliminarEmpleado(cEmpleados empleadoResultado){
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
 
-       
+        //Query para eliminar el empleado
+        String query = "DELETE FROM empleados WHERE cedula = ?";
 
         try {
-             //Query para eliminar el cliente
-             String query = "DELETE FROM empleados WHERE cedula = ?";
             //Crear objeto PreparedStatement para ejecutar el query
             PreparedStatement prStmt = conn.prepareStatement(query);
 
-            //Definir el campo para buscar el cliente a eliminar dentro de la DB
-            prStmt.setString(1, empleado.getCedula());
+            //Definir el campo para buscar el empleado a eliminar dentro de la DB
+            prStmt.setString(1, empleadoResultado.getCedula());
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -259,5 +315,6 @@ public class crudEmpleados {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el empleado. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-   }
+    }
+
 }

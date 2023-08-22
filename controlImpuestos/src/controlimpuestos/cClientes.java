@@ -49,10 +49,4 @@ public class cClientes extends scPersona {
         System.out.println("Tipo de cliente: " + getTipoCliente());
         System.out.println("Tipo de contribuyente: " + getTipoContribuyente());
     }
-
-    //Metodos Abstract
-    @Override
-    public void crearPersona() {
-        //Pendiente
-    }
 }

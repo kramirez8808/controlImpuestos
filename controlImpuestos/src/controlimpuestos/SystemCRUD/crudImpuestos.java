@@ -4,22 +4,25 @@
  */
 package controlimpuestos.SystemCRUD;
 
-import static controlimpuestos.SystemCRUD.crudClientes.queryUseDB;
-import controlimpuestos.cConexion;
 import controlimpuestos.cImpuestos;
+import controlimpuestos.cConexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author jsilv
+ * @author fanta
  */
 public class crudImpuestos {
-    
+
+    int idAnterior;
+
+
     //Metodo para seleccionar la base de datos
     public static void queryUseDB(Connection conn) throws SQLException {
         String selectDB = "USE controlImpuestos"; //Query para seleccionar la base de datos
@@ -27,26 +30,25 @@ public class crudImpuestos {
         PreparedStatement prStmt = conn.prepareStatement(selectDB);
         prStmt.executeUpdate();
     }
-    
-    //Método para crear un impuesto
+
+    //Metodo para crear un impuesto
     public void guardarImpuesto(cImpuestos impuesto) throws SQLException {
-        //Crea conexión con BD
+        //Crear conexion con DB
         Connection conn = cConexion.getConnection();
+
         //Definir SQL query para insertar datos en la tabla
-        String query = "INSERT INTO impuestos (nombre, cedula, descripcion, tasaImpuesto, fechaVencimiento)"
-                + "VALUES (?,?,?,?,?)";
-        
+        String query = "INSERT INTO impuestos (descripcion, tasaImpuesto, fechaVencimiento)"
+                + "VALUES (?,?,?)";
+
         try {
             
             //Crear objetos PreparedStatement para ejecutar los queries
             PreparedStatement prStmt = conn.prepareStatement(query);
 
             //Asignar valores a los parametros del query
-            prStmt.setString(1, impuesto.getNombre());
-            prStmt.setString(2, impuesto.getCedula());
-            prStmt.setString(3, impuesto.getDescripcion());
-            prStmt.setString(4, impuesto.getTasaImpuesto());
-            prStmt.setString(5, impuesto.getFecha());
+            prStmt.setString(1, impuesto.getDescripcion());
+            prStmt.setString(2, String.valueOf(impuesto.getTasaImpuesto()));
+            prStmt.setString(3, impuesto.getFecha());
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -63,22 +65,23 @@ public class crudImpuestos {
             //Cerrar conexion con DB
             conn.close();
         }
+
     }
-    
+
     //Metodos de busqueda segun el campo llenado
-    public cImpuestos buscarImpuestoNombre(String nombreBusqueda) throws SQLException {
+    public cImpuestos buscarImpuestoFecha(String fechaBusqueda) throws SQLException {
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
         
         //Queries para las busquedas segun el campo seleccionado
-        String queryNombre = "SELECT * FROM impuestos WHERE nombre = ?";
+        String queryFecha = "SELECT * FROM impuestos WHERE fechaVencimiento = ?";
 
         try {
             //Crear objetos PreparedStatement para ejecutar los queries
-            PreparedStatement prStmt = conn.prepareStatement(queryNombre);
+            PreparedStatement prStmt = conn.prepareStatement(queryFecha);
 
             //Definir el campo de busqueda
-            prStmt.setString(1, nombreBusqueda);
+            prStmt.setString(1, fechaBusqueda);
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -87,14 +90,13 @@ public class crudImpuestos {
             ResultSet rs = prStmt.executeQuery();
 
             if (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String cedula = rs.getString("cedula");
                 String descripcion = rs.getString("descripcion");
                 String tasaImpuesto = rs.getString("tasaImpuesto");
                 String fechaVencimiento = rs.getString("fechaVencimiento");
+                idAnterior = Integer.parseInt(rs.getString("idImpuesto"));
                 
             
-                return new cImpuestos(nombre, cedula, descripcion, tasaImpuesto, fechaVencimiento);
+                return new cImpuestos(descripcion, Double.valueOf(tasaImpuesto), fechaVencimiento);
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -107,21 +109,25 @@ public class crudImpuestos {
         }
         return null;
     }
-    
-    public cImpuestos buscarImpuestoCedula(String cedulaBusqueda) throws SQLException {
+
+    public cImpuestos buscarImpuestoID(String idBusqueda) throws SQLException {
+
+        //Convertir el idBusqueda a int
+        int idBusquedaInt = Integer.parseInt(idBusqueda);
+
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
         
         //Queries para las busquedas segun el campo seleccionado
-        String queryCedula = "SELECT * FROM impuestos WHERE cedula = ?";
+        String queryID = "SELECT * FROM impuestos WHERE idImpuesto = ?";
         
 
         try {
             //Crear objetos PreparedStatement para ejecutar los queries
-            PreparedStatement prStmt = conn.prepareStatement(queryCedula);
+            PreparedStatement prStmt = conn.prepareStatement(queryID);
 
             //Definir el campo de busqueda
-            prStmt.setString(1, cedulaBusqueda);
+            prStmt.setInt(1, idBusquedaInt);
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -130,88 +136,43 @@ public class crudImpuestos {
             ResultSet rs = prStmt.executeQuery();
 
             if (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String cedula = rs.getString("cedula");
                 String descripcion = rs.getString("descripcion");
                 String tasaImpuesto = rs.getString("tasaImpuesto");
                 String fechaVencimiento = rs.getString("fechaVencimiento");
-                
+                idAnterior = Integer.parseInt(rs.getString("idImpuesto"));
             
-                return new cImpuestos(nombre, cedula, descripcion, tasaImpuesto, fechaVencimiento);
+                return new cImpuestos(descripcion, Double.valueOf(tasaImpuesto), fechaVencimiento);
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
+
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el impuesto. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar el impuesto. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
         }
         return null;
     }
-    
- 
-    
-    public cImpuestos buscarImpuestoDescripcion(String descripcionBusqueda) throws SQLException {
-        //Crear conexion con DB
-        Connection conn = cConexion.getConnection();
-        
-        //Queries para las busquedas segun el campo seleccionado
-        String queryDescripcion = "SELECT * FROM impuestos WHERE descripcion = ?";
-        
 
-        try {
-            //Crear objetos PreparedStatement para ejecutar los queries
-            PreparedStatement prStmt = conn.prepareStatement(queryDescripcion);
-
-            //Definir el campo de busqueda
-            prStmt.setString(1, descripcionBusqueda);
-
-            //Se selecciona la base de datos
-            queryUseDB(conn);
-
-            //Crear objeto ResultSet para recibir los resultados de la busqueda
-            ResultSet rs = prStmt.executeQuery();
-
-            if (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String cedula = rs.getString("cedula");
-                String descripcion = rs.getString("descripcion");
-                String tasaImpuesto = rs.getString("tasaImpuesto");
-                String fechaVencimiento = rs.getString("fechaVencimiento");
-                
-            
-                return new cImpuestos(nombre, cedula, descripcion, tasaImpuesto, fechaVencimiento);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron resultados para la busqueda", "Error", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar buscar el impuesto. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            //Cerrar conexion con DB
-            conn.close();
-        }
-        return null;
-    }
     //Metodo para actualizar la informacion del impuesto encontrado
-    public void actualizarImpuestos(cImpuestos impuesto) throws SQLException {
+    public void actualizarImpuesto(cImpuestos impuestoResultado, String idAnterior) throws SQLException {
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
         
-        //Query para actualizar la informacion del cliente
-        String query = "UPDATE impuestos SET nombre = ?, cedula = ?, descripcion = ?, tasaImpuesto = ?, fechaVencimiento = ? WHERE cedula = ?";
+        //Query para actualizar la informacion del impuesto
+        String query = "UPDATE impuestos SET descripcion = ?, tasaImpuesto = ?, fechaVencimiento = ? WHERE idImpuesto = ?";
 
         try {
             //Crear objetos PreparedStatement para ejecutar los queries
             PreparedStatement prStmt = conn.prepareStatement(query);
 
             //Definir los campos a actualizar
-            prStmt.setString(1, impuesto.getNombre());
-            prStmt.setString(2, impuesto.getCedula());
-            prStmt.setString(3, impuesto.getDescripcion());
-            prStmt.setString(4, impuesto.getTasaImpuesto());
-            prStmt.setString(5, impuesto.getFecha());
-
+            prStmt.setString(1, impuestoResultado.getDescripcion());
+            prStmt.setString(2, String.valueOf(impuestoResultado.getTasaImpuesto()));
+            prStmt.setString(3, impuestoResultado.getFecha());
+            prStmt.setString(4, String.valueOf(idAnterior));
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -220,30 +181,29 @@ public class crudImpuestos {
             prStmt.executeUpdate();
 
             //Mostrar mensaje de exito
-            JOptionPane.showMessageDialog(null, "Impuestos actualizados.", "Actualizacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Impuesto actualizado.", "Actualizacion exitosa", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar los impuestos. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al actualizar el impuesto. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //Cerrar conexion con DB
             conn.close();
         }
     }
-    
+
     //Metodo para eliminar el impuesto encontrado
-    public void eliminarImpuestos(cImpuestos impuesto){
+    public void eliminarImpuesto(cImpuestos impuestoResultado){
         //Crear conexion con DB
         Connection conn = cConexion.getConnection();
 
-       
+        //Query para eliminar el impuesto
+        String query = "DELETE FROM impuestos WHERE idImpuesto = ?";
 
         try {
-             //Query para eliminar el cliente
-             String query = "DELETE FROM impuestos WHERE cedula = ?";
             //Crear objeto PreparedStatement para ejecutar el query
             PreparedStatement prStmt = conn.prepareStatement(query);
 
-            //Definir el campo para buscar el cliente a eliminar dentro de la DB
-            prStmt.setString(1, impuesto.getCedula());
+            //Definir el campo para buscar el impuesto a eliminar dentro de la DB
+            prStmt.setString(1, String.valueOf(idAnterior));
 
             //Se selecciona la base de datos
             queryUseDB(conn);
@@ -252,10 +212,15 @@ public class crudImpuestos {
             prStmt.executeUpdate();
 
             //Mostrar mensaje de exito
-            JOptionPane.showMessageDialog(null, "Impuestos eliminados.", "Eliminacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Impuesto eliminado.", "Eliminacion exitosa", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar los impuestos. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al eliminar el impuesto. Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-   }
+    }
+
+    public int returnIdAnterior() {
+        return idAnterior;
+    }
+
 }

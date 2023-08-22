@@ -6,9 +6,18 @@ package controlimpuestos;
 
 /**
  *
- * @author Rachel
+ * @author fanta
  */
 public class cUsuarios {
+    private String usuario;
+    private String contrasena;
+
+    public cUsuarios(String usuario, String contrasena) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+    }
+
+    //GET
     public String getUsuario() {
         return usuario;
     }
@@ -17,6 +26,7 @@ public class cUsuarios {
         return contrasena;
     }
 
+    //SET
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
@@ -24,11 +34,9 @@ public class cUsuarios {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    private String usuario;
-    private String contrasena;
-    
-    public cUsuarios(String usuario, String contrasena) {
-        this.usuario = usuario;
-        this.contrasena = contrasena;
+
+    @Override
+    public String toString(){
+        return "Usuario: " + usuario + "\nContraseña: " + contrasena;
     }
 }

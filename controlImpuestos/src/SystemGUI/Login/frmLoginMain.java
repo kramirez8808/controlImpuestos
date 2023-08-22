@@ -4,21 +4,21 @@
  */
 package SystemGUI.Login;
 
-import SystemGUI.Usuarios.frmUsuarios;
 import SystemGUI.frmMenu;
-import javax.swing.JOptionPane;
 import controlimpuestos.cLogin;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Rachel
+ * @author fanta
  */
-public class frmAutenticacion extends javax.swing.JFrame {
+public class frmLoginMain extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmAutenticacion
-     */
-    
-        String usuario;
+    String usuario;
     String contrasena;
     
     
@@ -26,13 +26,12 @@ public class frmAutenticacion extends javax.swing.JFrame {
     private cLogin login;
     
    
-    public frmAutenticacion() {
+    public frmLoginMain() {
         initComponents();
         
         login = new cLogin();
         
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,112 +42,91 @@ public class frmAutenticacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        bg = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnCambiarContrasena = new javax.swing.JButton();
-        btnLogin = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         pfContrasena = new javax.swing.JPasswordField();
         txtUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCambiarContrasena.setBackground(new java.awt.Color(255, 120, 37));
-        btnCambiarContrasena.setForeground(new java.awt.Color(153, 0, 0));
-        btnCambiarContrasena.setText("Cambiar contraseña");
-        btnCambiarContrasena.setBorder(null);
-        btnCambiarContrasena.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCambiarContrasena.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(180, 4, 4));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("LOGIN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambiarContrasenaActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCambiarContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 190, 20));
-
-        btnLogin.setBackground(new java.awt.Color(180, 4, 4));
-        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin.setText("LOGIN");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, 190, 50));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 190, 50));
 
         pfContrasena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pfContrasena.setText("jPasswordField1");
-        jPanel2.add(pfContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 120, 40));
+        jPanel2.add(pfContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 120, 40));
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 120, 40));
+        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 120, 40));
 
         jLabel2.setBackground(new java.awt.Color(180, 4, 4));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/Login.png"))); // NOI18N
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 4, 4)));
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, -1, 600));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 510));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
-        );
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         usuario =  txtUsuario.getText();
         contrasena = new String(pfContrasena.getPassword());
+        System.out.print(login.autenticarUsuario(usuario, contrasena));
 
         if(login.autenticarUsuario(usuario, contrasena))
         {
 
-            frmMenu segundoFrame = new frmMenu();
-            segundoFrame.setVisible(true);
-
+            frmMenu menuPrincipal;
+            try {
+                menuPrincipal = new frmMenu();
+                menuPrincipal.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else
         {
             JOptionPane.showMessageDialog(this, "Credenciales inválidas");
         }
 
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
-
-    private void btnCambiarContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarContrasenaActionPerformed
-            frmUsuarios usuario = new frmUsuarios();
-            usuario.setVisible(true);
-            dispose();
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCambiarContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,29 +145,29 @@ public class frmAutenticacion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmAutenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmAutenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmAutenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmAutenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmAutenticacion().setVisible(true);
+                new frmLoginMain().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCambiarContrasena;
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JPanel bg;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField pfContrasena;
     private javax.swing.JTextField txtUsuario;

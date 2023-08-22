@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package SystemGUI.Usuarios;
+package SystemGUI.Empleados;
 
-import SystemGUI.Impuesto.*;
 import SystemGUI.Clientes.*;
 import java.awt.BorderLayout;
 
@@ -12,15 +11,15 @@ import java.awt.BorderLayout;
  *
  * @author fanta
  */
-public class frmUsuarios extends javax.swing.JPanel {
+public class frmEmpleados extends javax.swing.JPanel {
 
     /**
      * Creates new form frmClientes
      */
-    public frmUsuarios() {
+    public frmEmpleados() {
         initComponents();
-        crearImpuesto.setVisible(true);
-        buscarImpuesto.setVisible(false);
+        crearEmpleado.setVisible(true);
+        buscarEmpleado.setVisible(false);
     }
 
     /**
@@ -40,10 +39,10 @@ public class frmUsuarios extends javax.swing.JPanel {
         btnRegistro = new javax.swing.JPanel();
         jlRegistro = new javax.swing.JLabel();
         jpDynamic = new javax.swing.JPanel();
-        crearImpuesto = new javax.swing.JPanel();
-        frmUsuarioCrear1 = new SystemGUI.Usuarios.frmUsuarioCrear();
-        buscarImpuesto = new javax.swing.JPanel();
-        frmUsuarioBuscar1 = new SystemGUI.Usuarios.frmUsuarioBuscar();
+        crearEmpleado = new javax.swing.JPanel();
+        frmEmpleadosCrear1 = new SystemGUI.Empleados.frmEmpleadosCrear();
+        buscarEmpleado = new javax.swing.JPanel();
+        frmEmpleadosBuscar2 = new SystemGUI.Empleados.frmEmpleadosBuscar();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -138,15 +137,17 @@ public class frmUsuarios extends javax.swing.JPanel {
 
         jpDynamic.setLayout(new java.awt.CardLayout());
 
-        crearImpuesto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        crearImpuesto.add(frmUsuarioCrear1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 560));
+        crearEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        crearEmpleado.add(frmEmpleadosCrear1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jpDynamic.add(crearImpuesto, "card2");
+        jpDynamic.add(crearEmpleado, "card2");
 
-        buscarImpuesto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        buscarImpuesto.add(frmUsuarioBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 560));
+        buscarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpDynamic.add(buscarImpuesto, "card3");
+        frmEmpleadosBuscar2.setPreferredSize(new java.awt.Dimension(630, 560));
+        buscarEmpleado.add(frmEmpleadosBuscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jpDynamic.add(buscarEmpleado, "card3");
 
         bg.add(jpDynamic, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 630, 560));
 
@@ -156,14 +157,14 @@ public class frmUsuarios extends javax.swing.JPanel {
     private void jlBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBusquedaMouseClicked
         // TODO add your handling code here:
         
-        crearImpuesto.setVisible(false);
-        buscarImpuesto.setVisible(true);
+        crearEmpleado.setVisible(false);
+        buscarEmpleado.setVisible(true);
     }//GEN-LAST:event_jlBusquedaMouseClicked
 
     private void jlRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlRegistroMouseClicked
         // TODO add your handling code here:
-        crearImpuesto.setVisible(true);
-        buscarImpuesto.setVisible(false);
+        crearEmpleado.setVisible(true);
+        buscarEmpleado.setVisible(false);
     }//GEN-LAST:event_jlRegistroMouseClicked
 
 
@@ -171,11 +172,11 @@ public class frmUsuarios extends javax.swing.JPanel {
     private javax.swing.JPanel bg;
     private javax.swing.JPanel btnBusqueda;
     private javax.swing.JPanel btnRegistro;
-    private javax.swing.JPanel buscarImpuesto;
-    private javax.swing.JPanel crearImpuesto;
+    private javax.swing.JPanel buscarEmpleado;
+    private javax.swing.JPanel crearEmpleado;
     private javax.swing.JPanel divisor;
-    private SystemGUI.Usuarios.frmUsuarioBuscar frmUsuarioBuscar1;
-    private SystemGUI.Usuarios.frmUsuarioCrear frmUsuarioCrear1;
+    private SystemGUI.Empleados.frmEmpleadosBuscar frmEmpleadosBuscar2;
+    private SystemGUI.Empleados.frmEmpleadosCrear frmEmpleadosCrear1;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jlBusqueda;
     private javax.swing.JLabel jlRegistro;

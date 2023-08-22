@@ -76,7 +76,4 @@ abstract public class scPersona {
         System.out.println("Direccion: "+direccion);
     }
 
-    //Metodos Abstract
-    public abstract void crearPersona();
-
 }

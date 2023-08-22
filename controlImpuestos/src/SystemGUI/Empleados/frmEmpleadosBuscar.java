@@ -3,34 +3,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package SystemGUI.Empleados;
+
+import SystemGUI.Empleados.*;
 import javax.swing.JOptionPane;
-import controlimpuestos.cEmpleados;
+
 import controlimpuestos.SystemCRUD.crudEmpleados;
+import controlimpuestos.cEmpleados;
 
 /**
  *
- * @author Rachel
+ * @author fanta
  */
 public class frmEmpleadosBuscar extends javax.swing.JPanel {
 
+    //Variables requeridas para obtener los datos del formulario
+    private String nombre, telefono, 
+    correo, cedula, direccion, 
+    puesto, salario, idEmpleado;
+
+    //Instancia del objeto SystemCRUD.crudEmpleados
+    private crudEmpleados crudEmpleados;
+
+    public static cEmpleados empleadoResultado;
+
+    private java.awt.Color lightGray = new java.awt.Color(153,153,153);
+
+
     /**
-     * Creates new form frmEmpleadosBuscar
+     * Creates new form frmTest
      */
-  private crudEmpleados empleado;
-    private String nombre;
-    private String cedula;
-    private String correo;
-    private String telefono;
-    private String direccion;
-    private String puesto;
-    private String salario;
-    
-    public frmEmpleadosBuscar() {       
+    public frmEmpleadosBuscar() {
         initComponents();
 
-        empleado = new crudEmpleados(); 
-    }
+        //Instanciar la clase crudEmpleados
+        crudEmpleados = new crudEmpleados();
 
+        pnlBuscar.setVisible(true);
+        pnlResultado.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +56,9 @@ public class frmEmpleadosBuscar extends javax.swing.JPanel {
         jlNombre = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         tfNombre = new javax.swing.JTextField();
+        jlID = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        tfID = new javax.swing.JTextField();
         jlCorreo = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         tfCorreo = new javax.swing.JTextField();
@@ -53,24 +66,39 @@ public class frmEmpleadosBuscar extends javax.swing.JPanel {
         tfCedula = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         btnBuscar = new javax.swing.JPanel();
-        jlBuscarEmpleadoB = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
+        jlBuscar = new javax.swing.JLabel();
+        pnlResultado = new javax.swing.JPanel();
+        h1Registro = new javax.swing.JLabel();
         jlNombre1 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        tfNombreResultado = new javax.swing.JTextField();
+        jlTelefono = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
-        tfPuesto = new javax.swing.JTextField();
+        tfTelefonoResultado = new javax.swing.JTextField();
+        jlCorreoResultado = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        tfCorreoResultado = new javax.swing.JTextField();
+        jlCedula1 = new javax.swing.JLabel();
+        tfCedulaResultado = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
-        tfSalario = new javax.swing.JTextField();
-        jlNombre4 = new javax.swing.JLabel();
-        jlNombre2 = new javax.swing.JLabel();
+        jlDireccion = new javax.swing.JLabel();
+        taDireccionResultado = new javax.swing.JTextArea();
+        jlcharWarning = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JPanel();
+        jlEliminar = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JPanel();
+        jlEditar = new javax.swing.JLabel();
+        jlPuesto = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        tfDireccion = new javax.swing.JTextField();
-        jlNombre3 = new javax.swing.JLabel();
         jSeparator10 = new javax.swing.JSeparator();
-        tfTelefono = new javax.swing.JTextField();
-        btnEliminar = new javax.swing.JButton();
+        jlSalario = new javax.swing.JLabel();
+        tfPuestoResultado = new javax.swing.JTextField();
+        jSeparator11 = new javax.swing.JSeparator();
+        tfSalarioResultado = new javax.swing.JTextField();
+        jSeparator12 = new javax.swing.JSeparator();
 
-        setPreferredSize(new java.awt.Dimension(593, 508));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new java.awt.CardLayout());
 
         pnlBuscar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -80,49 +108,66 @@ public class frmEmpleadosBuscar extends javax.swing.JPanel {
 
         jlNombre.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlNombre.setForeground(new java.awt.Color(21, 14, 48));
-        jlNombre.setText("Nombre:");
+        jlNombre.setText("Por Nombre:");
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(21, 14, 48));
 
         tfNombre.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfNombre.setForeground(new java.awt.Color(153, 153, 153));
-        tfNombre.setText("Ingrese Nombre");
+        tfNombre.setText("Ingrese el nombre");
         tfNombre.setBorder(null);
-        tfNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfNombreMousePressed(evt);
+        tfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfNombreFocusGained(evt);
+            }
+        });
+
+        jlID.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlID.setForeground(new java.awt.Color(21, 14, 48));
+        jlID.setText("Por ID:");
+
+        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator2.setForeground(new java.awt.Color(21, 14, 48));
+
+        tfID.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfID.setForeground(new java.awt.Color(153, 153, 153));
+        tfID.setText("Ingrese el ID");
+        tfID.setBorder(null);
+        tfID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfIDFocusGained(evt);
             }
         });
 
         jlCorreo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlCorreo.setForeground(new java.awt.Color(21, 14, 48));
-        jlCorreo.setText("Correo:");
+        jlCorreo.setText("Por Correo:");
 
         jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator3.setForeground(new java.awt.Color(21, 14, 48));
 
         tfCorreo.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfCorreo.setForeground(new java.awt.Color(153, 153, 153));
-        tfCorreo.setText("Ingrese Correo");
+        tfCorreo.setText("Ingrese el correo");
         tfCorreo.setBorder(null);
-        tfCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCorreoActionPerformed(evt);
+        tfCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfCorreoFocusGained(evt);
             }
         });
 
         jlCedula.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jlCedula.setForeground(new java.awt.Color(21, 14, 48));
-        jlCedula.setText("Cédula:");
+        jlCedula.setText("Por Cédula:");
 
         tfCedula.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
         tfCedula.setForeground(new java.awt.Color(153, 153, 153));
-        tfCedula.setText("Ingrese Cédula");
+        tfCedula.setText("Ingrese la cédula");
         tfCedula.setBorder(null);
-        tfCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCedulaActionPerformed(evt);
+        tfCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfCedulaFocusGained(evt);
             }
         });
 
@@ -132,15 +177,15 @@ public class frmEmpleadosBuscar extends javax.swing.JPanel {
         btnBuscar.setBackground(new java.awt.Color(21, 14, 48));
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jlBuscarEmpleadoB.setBackground(new java.awt.Color(21, 14, 48));
-        jlBuscarEmpleadoB.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        jlBuscarEmpleadoB.setForeground(new java.awt.Color(255, 255, 255));
-        jlBuscarEmpleadoB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlBuscarEmpleadoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/searchMini.png"))); // NOI18N
-        jlBuscarEmpleadoB.setText("Buscar");
-        jlBuscarEmpleadoB.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlBuscar.setBackground(new java.awt.Color(21, 14, 48));
+        jlBuscar.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        jlBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jlBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/searchMini.png"))); // NOI18N
+        jlBuscar.setText("Buscar");
+        jlBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBuscarEmpleadoBMouseClicked(evt);
+                jlBuscarMouseClicked(evt);
             }
         });
 
@@ -148,442 +193,592 @@ public class frmEmpleadosBuscar extends javax.swing.JPanel {
         btnBuscar.setLayout(btnBuscarLayout);
         btnBuscarLayout.setHorizontalGroup(
             btnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlBuscarEmpleadoB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(jlBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         btnBuscarLayout.setVerticalGroup(
             btnBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlBuscarEmpleadoB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jlBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
-
-        btnEditar.setBackground(new java.awt.Color(21, 14, 48));
-        btnEditar.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setText("Editar");
-        btnEditar.setPreferredSize(new java.awt.Dimension(100, 40));
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnLimpiar.setBackground(new java.awt.Color(21, 14, 48));
-        btnLimpiar.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.setPreferredSize(new java.awt.Dimension(100, 40));
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
-            }
-        });
-
-        jlNombre1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlNombre1.setForeground(new java.awt.Color(21, 14, 48));
-        jlNombre1.setText("Puesto:");
-
-        jSeparator6.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator6.setForeground(new java.awt.Color(21, 14, 48));
-
-        tfPuesto.setEditable(false);
-        tfPuesto.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfPuesto.setForeground(new java.awt.Color(153, 153, 153));
-        tfPuesto.setText("Puesto");
-        tfPuesto.setBorder(null);
-        tfPuesto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfPuestoMousePressed(evt);
-            }
-        });
-
-        jSeparator8.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator8.setForeground(new java.awt.Color(21, 14, 48));
-
-        tfSalario.setEditable(false);
-        tfSalario.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfSalario.setForeground(new java.awt.Color(153, 153, 153));
-        tfSalario.setText("Salario");
-        tfSalario.setBorder(null);
-        tfSalario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfSalarioMousePressed(evt);
-            }
-        });
-
-        jlNombre4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlNombre4.setForeground(new java.awt.Color(21, 14, 48));
-        jlNombre4.setText("Salario");
-
-        jlNombre2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlNombre2.setForeground(new java.awt.Color(21, 14, 48));
-        jlNombre2.setText("Dirección");
-
-        jSeparator9.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator9.setForeground(new java.awt.Color(21, 14, 48));
-
-        tfDireccion.setEditable(false);
-        tfDireccion.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfDireccion.setForeground(new java.awt.Color(153, 153, 153));
-        tfDireccion.setText("Direccion");
-        tfDireccion.setBorder(null);
-        tfDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfDireccionMousePressed(evt);
-            }
-        });
-
-        jlNombre3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jlNombre3.setForeground(new java.awt.Color(21, 14, 48));
-        jlNombre3.setText("Telefono");
-
-        jSeparator10.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator10.setForeground(new java.awt.Color(21, 14, 48));
-
-        tfTelefono.setEditable(false);
-        tfTelefono.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
-        tfTelefono.setForeground(new java.awt.Color(153, 153, 153));
-        tfTelefono.setText("Teléfono");
-        tfTelefono.setBorder(null);
-        tfTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tfTelefonoMousePressed(evt);
-            }
-        });
-
-        btnEliminar.setBackground(new java.awt.Color(21, 14, 48));
-        btnEliminar.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setPreferredSize(new java.awt.Dimension(100, 40));
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlBuscarLayout = new javax.swing.GroupLayout(pnlBuscar);
         pnlBuscar.setLayout(pnlBuscarLayout);
         pnlBuscarLayout.setHorizontalGroup(
             pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBuscarLayout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
+                .addGap(0, 20, Short.MAX_VALUE)
                 .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlNombre3)
+                    .addGroup(pnlBuscarLayout.createSequentialGroup()
+                        .addComponent(jlNombre)
+                        .addGap(32, 32, 32)
+                        .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90)
+                        .addComponent(jlID)
+                        .addGap(39, 39, 39)
+                        .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlBuscarLayout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(h1Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(pnlBuscarLayout.createSequentialGroup()
-                            .addComponent(jlCedula)
-                            .addGap(61, 61, 61)
-                            .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBuscarLayout.createSequentialGroup()
-                                .addComponent(jlNombre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBuscarLayout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(pnlBuscarLayout.createSequentialGroup()
-                                .addComponent(jlCorreo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlBuscarLayout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlNombre2)
-                            .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(pnlBuscarLayout.createSequentialGroup()
-                                    .addComponent(jlNombre1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                                    .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(pnlBuscarLayout.createSequentialGroup()
-                                    .addComponent(jlNombre4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(0, 252, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(170, 170, 170)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBuscarLayout.createSequentialGroup()
+                        .addComponent(jlCedula)
+                        .addGap(39, 39, 39)
+                        .addComponent(tfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBuscarLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBuscarLayout.createSequentialGroup()
+                        .addComponent(jlCorreo)
+                        .addGap(40, 40, 40)
+                        .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBuscarLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBuscarLayout.createSequentialGroup()
+                        .addGap(490, 490, 490)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(h1Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         pnlBuscarLayout.setVerticalGroup(
             pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBuscarLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(h1Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlBuscarLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlNombre)
+                            .addComponent(jlID))))
+                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBuscarLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(10, 10, 10)
                         .addComponent(jlCedula))
+                    .addComponent(tfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBuscarLayout.createSequentialGroup()
-                        .addComponent(tfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlCorreo)
+                        .addGap(10, 10, 10)
+                        .addComponent(jlCorreo))
                     .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBuscarLayout.createSequentialGroup()
-                        .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlNombre3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBuscarLayout.createSequentialGroup()
-                        .addComponent(tfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlNombre2))
-                .addGap(8, 8, 8)
-                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBuscarLayout.createSequentialGroup()
-                        .addComponent(tfPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlNombre1))
-                .addGap(18, 18, 18)
-                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlNombre4))
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23))
+                .addGap(238, 238, 238)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        add(pnlBuscar, "card2");
+
+        pnlResultado.setBackground(new java.awt.Color(255, 255, 255));
+        pnlResultado.setLayout(null);
+
+        h1Registro.setBackground(new java.awt.Color(21, 14, 48));
+        h1Registro.setFont(new java.awt.Font("Roboto", 3, 22)); // NOI18N
+        h1Registro.setText("Resultado de la búsqueda");
+        pnlResultado.add(h1Registro);
+        h1Registro.setBounds(20, 20, 260, 40);
+
+        jlNombre1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlNombre1.setForeground(new java.awt.Color(21, 14, 48));
+        jlNombre1.setText("Nombre:");
+        pnlResultado.add(jlNombre1);
+        jlNombre1.setBounds(20, 100, 53, 17);
+
+        jSeparator5.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator5.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator5);
+        jSeparator5.setBounds(90, 120, 230, 10);
+
+        tfNombreResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfNombreResultado.setForeground(new java.awt.Color(21, 14, 48));
+        tfNombreResultado.setBorder(null);
+        pnlResultado.add(tfNombreResultado);
+        tfNombreResultado.setBounds(90, 90, 230, 30);
+
+        jlTelefono.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlTelefono.setForeground(new java.awt.Color(21, 14, 48));
+        jlTelefono.setText("Teléfono:");
+        pnlResultado.add(jlTelefono);
+        jlTelefono.setBounds(20, 280, 57, 17);
+
+        jSeparator6.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator6.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator6);
+        jSeparator6.setBounds(90, 300, 230, 10);
+
+        tfTelefonoResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfTelefonoResultado.setForeground(new java.awt.Color(21, 14, 48));
+        tfTelefonoResultado.setBorder(null);
+        pnlResultado.add(tfTelefonoResultado);
+        tfTelefonoResultado.setBounds(90, 270, 230, 30);
+
+        jlCorreoResultado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlCorreoResultado.setForeground(new java.awt.Color(21, 14, 48));
+        jlCorreoResultado.setText("Correo:");
+        pnlResultado.add(jlCorreoResultado);
+        jlCorreoResultado.setBounds(20, 220, 45, 17);
+
+        jSeparator7.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator7.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator7);
+        jSeparator7.setBounds(90, 240, 230, 10);
+
+        tfCorreoResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfCorreoResultado.setForeground(new java.awt.Color(21, 14, 48));
+        tfCorreoResultado.setBorder(null);
+        pnlResultado.add(tfCorreoResultado);
+        tfCorreoResultado.setBounds(90, 210, 230, 30);
+
+        jlCedula1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlCedula1.setForeground(new java.awt.Color(21, 14, 48));
+        jlCedula1.setText("Cédula:");
+        pnlResultado.add(jlCedula1);
+        jlCedula1.setBounds(20, 160, 46, 17);
+
+        tfCedulaResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfCedulaResultado.setForeground(new java.awt.Color(21, 14, 48));
+        tfCedulaResultado.setBorder(null);
+        pnlResultado.add(tfCedulaResultado);
+        tfCedulaResultado.setBounds(90, 150, 230, 30);
+
+        jSeparator8.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator8.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator8);
+        jSeparator8.setBounds(90, 180, 230, 10);
+
+        jlDireccion.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlDireccion.setForeground(new java.awt.Color(21, 14, 48));
+        jlDireccion.setText("Dirección:");
+        pnlResultado.add(jlDireccion);
+        jlDireccion.setBounds(20, 350, 60, 17);
+
+        taDireccionResultado.setColumns(20);
+        taDireccionResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        taDireccionResultado.setForeground(new java.awt.Color(21, 14, 48));
+        taDireccionResultado.setRows(5);
+        taDireccionResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        pnlResultado.add(taDireccionResultado);
+        taDireccionResultado.setBounds(20, 370, 590, 77);
+
+        jlcharWarning.setFont(new java.awt.Font("Roboto Light", 2, 12)); // NOI18N
+        jlcharWarning.setForeground(new java.awt.Color(21, 14, 48));
+        jlcharWarning.setText("Max 100 caracteres.");
+        pnlResultado.add(jlcharWarning);
+        jlcharWarning.setBounds(500, 450, 106, 15);
+
+        btnEliminar.setBackground(new java.awt.Color(255, 51, 51));
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jlEliminar.setBackground(new java.awt.Color(21, 14, 48));
+        jlEliminar.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        jlEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jlEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/deleteMini.png"))); // NOI18N
+        jlEliminar.setText("Eliminar");
+        jlEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlEliminarMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnEliminarLayout = new javax.swing.GroupLayout(btnEliminar);
+        btnEliminar.setLayout(btnEliminarLayout);
+        btnEliminarLayout.setHorizontalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        btnEliminarLayout.setVerticalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
+
+        pnlResultado.add(btnEliminar);
+        btnEliminar.setBounds(510, 500, 100, 40);
+
+        btnEditar.setBackground(new java.awt.Color(21, 14, 48));
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jlEditar.setBackground(new java.awt.Color(21, 14, 48));
+        jlEditar.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        jlEditar.setForeground(new java.awt.Color(255, 255, 255));
+        jlEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/editMini.png"))); // NOI18N
+        jlEditar.setText("Editar");
+        jlEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlEditarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnEditarLayout = new javax.swing.GroupLayout(btnEditar);
+        btnEditar.setLayout(btnEditarLayout);
+        btnEditarLayout.setHorizontalGroup(
+            btnEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        btnEditarLayout.setVerticalGroup(
+            btnEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        pnlResultado.add(btnEditar);
+        btnEditar.setBounds(400, 500, 100, 40);
+
+        jlPuesto.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlPuesto.setForeground(new java.awt.Color(21, 14, 48));
+        jlPuesto.setText("Puesto:");
+        pnlResultado.add(jlPuesto);
+        jlPuesto.setBounds(360, 100, 47, 17);
+
+        jSeparator9.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator9.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator9);
+        jSeparator9.setBounds(380, 100, 0, 3);
+
+        jSeparator10.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator10.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator10);
+        jSeparator10.setBounds(380, 100, 0, 3);
+
+        jlSalario.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jlSalario.setForeground(new java.awt.Color(21, 14, 48));
+        jlSalario.setText("Salario:");
+        pnlResultado.add(jlSalario);
+        jlSalario.setBounds(360, 280, 46, 17);
+
+        tfPuestoResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfPuestoResultado.setForeground(new java.awt.Color(21, 14, 48));
+        tfPuestoResultado.setBorder(null);
+        pnlResultado.add(tfPuestoResultado);
+        tfPuestoResultado.setBounds(430, 90, 180, 30);
+
+        jSeparator11.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator11.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator11);
+        jSeparator11.setBounds(430, 120, 180, 10);
+
+        tfSalarioResultado.setFont(new java.awt.Font("Roboto", 2, 12)); // NOI18N
+        tfSalarioResultado.setForeground(new java.awt.Color(21, 14, 48));
+        tfSalarioResultado.setBorder(null);
+        pnlResultado.add(tfSalarioResultado);
+        tfSalarioResultado.setBounds(430, 270, 180, 30);
+
+        jSeparator12.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator12.setForeground(new java.awt.Color(21, 14, 48));
+        pnlResultado.add(jSeparator12);
+        jSeparator12.setBounds(430, 300, 180, 10);
+
+        add(pnlResultado, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreMousePressed
-        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
-        if (tfNombre.getText().equals("Ingrese el nombre del cliente")) {
-            tfNombre.setText("");
-            tfNombre.setForeground(btnBuscar.getForeground());
-        }
-    }//GEN-LAST:event_tfNombreMousePressed
-
-    private void tfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCorreoActionPerformed
-
-    private void jlBuscarEmpleadoBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarEmpleadoBMouseClicked
-
-    }//GEN-LAST:event_jlBuscarEmpleadoBMouseClicked
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
+        //Obtener el texto de los campos
         nombre = tfNombre.getText();
         cedula = tfCedula.getText();
         correo = tfCorreo.getText();
-        telefono = tfTelefono.getText();
-        direccion = tfDireccion.getText();
-        puesto = tfPuesto.getText();
-        salario  = tfSalario.getText();
+        idEmpleado = tfID.getText();
 
-        try {
-            // Buscar el estudiante en la base de datos usando la cédula
-            cEmpleados EmpleadoEncontrado = empleado.buscarEmpleadoCedula(cedula);
-            if (EmpleadoEncontrado != null) {
-                // Si se encontró el estudiante, actualizar sus datos con la nueva información
-                EmpleadoEncontrado.setNombre(nombre);
-                EmpleadoEncontrado.setCedula(cedula);
-                EmpleadoEncontrado.setCorreo(correo);
-                EmpleadoEncontrado.setTelefono(telefono);
-                EmpleadoEncontrado.setDireccion(direccion);
-                EmpleadoEncontrado.setPuesto(puesto);
-                EmpleadoEncontrado.setSalario(salario);
+        //Buscar y mostrar los datos segun el campo llenado
+        if (!nombre.equals("") && !nombre.equals("Ingrese el nombre")) {
 
-                // Llamar al método en el objeto cCrudEstudiante para actualizar el estudiante en la base de datos
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                empleadoResultado = crudEmpleados.buscarEmpleadoNombre(nombre);
 
-                empleado.actualizarEmpleado(EmpleadoEncontrado);
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
 
-                // Mostrar un mensaje de éxito
-            } else {
-                // Si no se encontró el estudiante, mostrar un mensaje indicando que no fue encontrado
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con la cédula ingresada.");
-            }
+                //Verificar que el empleado exista y mostrar los datos en el nuevo panel
+                if (empleadoResultado != null) {
+                    tfNombreResultado.setText(empleadoResultado.getNombre());
+                    tfCedulaResultado.setText(empleadoResultado.getCedula());
+                    tfCorreoResultado.setText(empleadoResultado.getCorreo());
+                    tfTelefonoResultado.setText(empleadoResultado.getTelefono());
+                    taDireccionResultado.setText(empleadoResultado.getDireccion());
+                    tfPuestoResultado.setText(empleadoResultado.getPuesto());
+                    tfSalarioResultado.setText(String.valueOf(empleadoResultado.getSalario()));
 
-        }catch(Exception e){
-
-        }
-
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-        private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {   
-            cedula = tfCedula.getText();
-
-        try{
-
-            cEmpleados EmpleadoEncontrado = empleado.buscarEmpleadoCedula(cedula);
-            if (EmpleadoEncontrado!=null)
-            {
-                tfNombre.setText(EmpleadoEncontrado.getNombre());
-                tfCedula.setText(EmpleadoEncontrado.getCedula());
-                tfCorreo.setText(EmpleadoEncontrado.getCorreo());
-                tfTelefono.setText(EmpleadoEncontrado.getTelefono());
-                tfDireccion.setText(EmpleadoEncontrado.getDireccion());
-                tfPuesto.setText(EmpleadoEncontrado.getPuesto());
-                tfSalario.setText(EmpleadoEncontrado.getSalario());
-            }
-
-        }catch(Exception e){
-
-        }
-
-        }                                       
-
-    
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-    try {
-
-               tfNombre.setText("");
-               tfCedula.setText("");
-               tfCorreo.setText("");
-               tfTelefono.setText("");
-               tfDireccion.setText("");
-               tfPuesto.setText("");
-               tfSalario.setText("");
-               
-           }catch(Exception e){
-
-           }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void tfPuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfPuestoMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPuestoMousePressed
-
-    private void tfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCedulaActionPerformed
-
-    private void tfSalarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSalarioMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSalarioMousePressed
-
-    private void tfDireccionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfDireccionMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDireccionMousePressed
-
-    private void tfTelefonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfTelefonoMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTelefonoMousePressed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        cedula = tfCedula.getText();
-
-        try {
-            // Buscar el estudiante en la base de datos usando la cédula
-            cEmpleados empleadoEncontrado = empleado.buscarEmpleadoCedula(cedula);
-            if (empleadoEncontrado != null) {
-                int opcion =  JOptionPane.showConfirmDialog(this,"Seguro que desea eliminar el registro???",
-                    "CONFIRMACION",JOptionPane.YES_NO_OPTION);
-                if(opcion== JOptionPane.YES_OPTION){
-                    empleado.eliminarEmpleado(empleadoEncontrado);
-                    tfNombre.setText("");
-                    tfCedula.setText("");
-                    tfCorreo.setText("");
-                    tfTelefono.setText("");
-                    tfDireccion.setText("");
-                    tfPuesto.setText("");
-                    tfSalario.setText("");
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
 
                 }
-                // Mostrar un mensaje de éxito
-                JOptionPane.showMessageDialog(this, "Empleado eliminado correctamente.");
-            } else {
-                // Si no se encontró el estudiante, mostrar un mensaje indicando que no fue encontrado
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con la cedula ingresada.");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-        }catch(Exception e){
+        } else if (!cedula.equals("") && !cedula.equals("Ingrese la cédula")) {
 
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                empleadoResultado = crudEmpleados.buscarEmpleadoCedula(cedula);
+
+
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
+
+                //Verificar que el empleado exista y mostrar los datos en el nuevo panel
+                if (empleadoResultado != null) {
+                    tfNombreResultado.setText(empleadoResultado.getNombre());
+                    tfCedulaResultado.setText(empleadoResultado.getCedula());
+                    tfCorreoResultado.setText(empleadoResultado.getCorreo());
+                    tfTelefonoResultado.setText(empleadoResultado.getTelefono());
+                    taDireccionResultado.setText(empleadoResultado.getDireccion());
+                    tfPuestoResultado.setText(empleadoResultado.getPuesto());
+                    tfSalarioResultado.setText(String.valueOf(empleadoResultado.getSalario()));
+
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (!correo.equals("") && !correo.equals("Ingrese el correo")) {
+            
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                empleadoResultado = crudEmpleados.buscarEmpleadoCorreo(correo);
+
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
+
+                //Verificar que el empleado exista y mostrar los datos en el nuevo panel
+                if (empleadoResultado != null) {
+                    tfNombreResultado.setText(empleadoResultado.getNombre());
+                    tfCedulaResultado.setText(empleadoResultado.getCedula());
+                    tfCorreoResultado.setText(empleadoResultado.getCorreo());
+                    tfTelefonoResultado.setText(empleadoResultado.getTelefono());
+                    taDireccionResultado.setText(empleadoResultado.getDireccion());
+                    tfPuestoResultado.setText(empleadoResultado.getPuesto());
+                    tfSalarioResultado.setText(String.valueOf(empleadoResultado.getSalario()));
+
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (!idEmpleado.equals("") && !idEmpleado.equals("Ingrese el ID")) {
+
+            //Llamar al metodo de busqueda y guardar los resultados
+            try {
+                empleadoResultado = crudEmpleados.buscarEmpleadoID(idEmpleado);
+
+                h1Busqueda.requestFocusInWindow();
+                tfNombre.setText("Ingrese el nombre");
+                tfNombre.setForeground(lightGray);
+                tfCedula.setText("Ingrese la cédula");
+                tfCedula.setForeground(lightGray);
+                tfCorreo.setText("Ingrese el correo");
+                tfCorreo.setForeground(lightGray);
+                tfID.setText("Ingrese el ID");
+                tfID.setForeground(lightGray);
+
+                //Verificar que el empleado exista y mostrar los datos en el nuevo panel
+                if (empleadoResultado != null) {
+                    tfNombreResultado.setText(empleadoResultado.getNombre());
+                    tfCedulaResultado.setText(empleadoResultado.getCedula());
+                    tfCorreoResultado.setText(empleadoResultado.getCorreo());
+                    tfTelefonoResultado.setText(empleadoResultado.getTelefono());
+                    taDireccionResultado.setText(empleadoResultado.getDireccion());
+                    tfPuestoResultado.setText(empleadoResultado.getPuesto());
+                    tfSalarioResultado.setText(String.valueOf(empleadoResultado.getSalario()));
+
+                    //Cambiar de panel
+                    pnlBuscar.setVisible(false);
+                    pnlResultado.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de busqueda: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar al menos un campo para realizar la búsqueda", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }//GEN-LAST:event_jlBuscarMouseClicked
 
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    private void tfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusGained
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+        if (tfNombre.getText().equals("Ingrese el nombre")) {
+            tfNombre.setText("");
+            tfNombre.setForeground(btnBuscar.getForeground());
+        }
+    }//GEN-LAST:event_tfNombreFocusGained
+
+    private void tfCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCedulaFocusGained
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+        if (tfCedula.getText().equals("Ingrese la cédula")) {
+            tfCedula.setText("");
+            tfCedula.setForeground(btnBuscar.getForeground());
+        }
+    }//GEN-LAST:event_tfCedulaFocusGained
+
+    private void tfCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCorreoFocusGained
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+            if (tfCorreo.getText().equals("Ingrese el correo")) {
+            tfCorreo.setText("");
+            tfCorreo.setForeground(btnBuscar.getForeground());
+        }
+    }//GEN-LAST:event_tfCorreoFocusGained
+
+    private void tfIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfIDFocusGained
+        // Metodo para eliminar el texto por default y cambiar a un color más oscuro. Tambien evita que el texto se borre cuando el usuario escribe
+        if (tfID.getText().equals("Ingrese el ID")) {
+            tfID.setText("");
+            tfID.setForeground(btnBuscar.getForeground());
+        }
+    }//GEN-LAST:event_tfIDFocusGained
+
+    private void jlEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEditarMouseClicked
+        //Guardar cedula anterior para la busqueda en DB
+        String cedulaAnterior = empleadoResultado.getCedula();
+
+        //Obtener los datos del formulario
+        nombre = tfNombreResultado.getText();
+        cedula = tfCedulaResultado.getText();
+        correo = tfCorreoResultado.getText();
+        telefono = tfTelefonoResultado.getText();
+        direccion = taDireccionResultado.getText();
+        puesto = tfPuestoResultado.getText();
+        salario = tfSalarioResultado.getText();
+
+        //Verificar que los campos no esten vacios
+        if (!nombre.equals("") || !cedula.equals("") || !correo.equals("") || !telefono.equals("") || !direccion.equals("")) {
+            try {
+                //Actualizar los datos del objeto empleado previamente encontrado
+                empleadoResultado.setNombre(nombre);
+                empleadoResultado.setCedula(cedula);
+                empleadoResultado.setCorreo(correo);
+                empleadoResultado.setTelefono(telefono);
+                empleadoResultado.setDireccion(direccion);
+                empleadoResultado.setPuesto(puesto);
+                empleadoResultado.setSalario(Double.valueOf(salario));
+
+                //Llamar al metodo de actualizar
+                crudEmpleados.actualizarEmpleado(empleadoResultado, cedulaAnterior);
+
+                //Mostrar mensaje de exito
+                JOptionPane.showMessageDialog(null, "Empleado actualizado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso de actualización: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jlEditarMouseClicked
+
+    private void jlEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEliminarMousePressed
+        //Obtener la cedula del empleado a eliminar, se toma desde el mismo panel de resultado
+        cedula = tfCedulaResultado.getText();
+
+        //Confirmar que se desea eliminar el empleado
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el empleado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        try {
+            //Eliminar el empleado en caso de seleccionar confirmar
+            if (opcion == JOptionPane.YES_OPTION) {
+                //Se invoca el metodo de eliminarEmpleado
+                crudEmpleados.eliminarEmpleado(empleadoResultado);
+
+                //Evitar que se seleccione el campo "Por Nombre:" por defecto al volver al panel de busqueda
+                h1Busqueda.requestFocusInWindow();
+
+                //Volver a la pantalla de busqueda
+                pnlResultado.setVisible(false);
+                pnlBuscar.setVisible(true);
+
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Se ha cancelado el proceso de eliminación", "Eliminación cancelada", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en el proceso de eliminación: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jlEliminarMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnBuscar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JPanel btnEditar;
+    private javax.swing.JPanel btnEliminar;
     private javax.swing.JLabel h1Busqueda;
+    private javax.swing.JLabel h1Registro;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JLabel jlBuscarEmpleadoB;
+    private javax.swing.JLabel jlBuscar;
     private javax.swing.JLabel jlCedula;
+    private javax.swing.JLabel jlCedula1;
     private javax.swing.JLabel jlCorreo;
+    private javax.swing.JLabel jlCorreoResultado;
+    private javax.swing.JLabel jlDireccion;
+    private javax.swing.JLabel jlEditar;
+    private javax.swing.JLabel jlEliminar;
+    private javax.swing.JLabel jlID;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JLabel jlNombre1;
-    private javax.swing.JLabel jlNombre2;
-    private javax.swing.JLabel jlNombre3;
-    private javax.swing.JLabel jlNombre4;
+    private javax.swing.JLabel jlPuesto;
+    private javax.swing.JLabel jlSalario;
+    private javax.swing.JLabel jlTelefono;
+    private javax.swing.JLabel jlcharWarning;
     private javax.swing.JPanel pnlBuscar;
+    private javax.swing.JPanel pnlResultado;
+    private javax.swing.JTextArea taDireccionResultado;
     private javax.swing.JTextField tfCedula;
+    private javax.swing.JTextField tfCedulaResultado;
     private javax.swing.JTextField tfCorreo;
-    private javax.swing.JTextField tfDireccion;
+    private javax.swing.JTextField tfCorreoResultado;
+    private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfNombre;
-    private javax.swing.JTextField tfPuesto;
-    private javax.swing.JTextField tfSalario;
-    private javax.swing.JTextField tfTelefono;
+    private javax.swing.JTextField tfNombreResultado;
+    private javax.swing.JTextField tfPuestoResultado;
+    private javax.swing.JTextField tfSalarioResultado;
+    private javax.swing.JTextField tfTelefonoResultado;
     // End of variables declaration//GEN-END:variables
 }

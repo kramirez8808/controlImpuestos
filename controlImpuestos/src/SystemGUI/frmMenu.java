@@ -1,11 +1,21 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package SystemGUI;
 
 import SystemGUI.Clientes.*;
-import SystemGUI.Pagos.*;
+import SystemGUI.Empleados.frmEmpleados;
+import SystemGUI.Impuesto.frmImpuestos;
+import SystemGUI.Pagos.frmPagos;
+import SystemGUI.Usuarios.frmUsuarios;
+import SystemGUI.Login.*;
 import controlimpuestos.cConexion;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -26,14 +36,6 @@ public class frmMenu extends javax.swing.JFrame {
 
         mainLogo.requestFocusInWindow(); //Metodo para darle el foco al logo y evitar que el textField se seleccione al iniciar
         
-        frmClientesCrear clientesCrear = new frmClientesCrear();
-        clientesCrear.setSize(630, 560);
-        clientesCrear.setLocation(0, 0);
-
-        jpDynamic.removeAll();
-        jpDynamic.add(clientesCrear, BorderLayout.CENTER);
-        jpDynamic.revalidate();
-        jpDynamic.repaint();
     }
     
     public JPanel getParentPanel() {
@@ -66,12 +68,8 @@ public class frmMenu extends javax.swing.JFrame {
         btnLogout = new javax.swing.JPanel();
         jlLogout = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jpMain = new javax.swing.JPanel();
         divisor = new javax.swing.JPanel();
-        header = new javax.swing.JPanel();
-        btnBusqueda = new javax.swing.JPanel();
-        jlBusqueda = new javax.swing.JLabel();
-        btnRegistro = new javax.swing.JPanel();
-        jlRegistro = new javax.swing.JLabel();
         jpDynamic = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,6 +96,11 @@ public class frmMenu extends javax.swing.JFrame {
         jlClientes.setForeground(new java.awt.Color(21, 14, 48));
         jlClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlClientes.setText("Clientes");
+        jlClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlClientesMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnClientesLayout = new javax.swing.GroupLayout(btnClientes);
         btnClientes.setLayout(btnClientesLayout);
@@ -120,6 +123,11 @@ public class frmMenu extends javax.swing.JFrame {
         jlEmpleados.setForeground(new java.awt.Color(21, 14, 48));
         jlEmpleados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlEmpleados.setText("Empleados");
+        jlEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlEmpleadosMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnEmpleadosLayout = new javax.swing.GroupLayout(btnEmpleados);
         btnEmpleados.setLayout(btnEmpleadosLayout);
@@ -142,6 +150,11 @@ public class frmMenu extends javax.swing.JFrame {
         jlImpuestos.setForeground(new java.awt.Color(21, 14, 48));
         jlImpuestos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlImpuestos.setText("Impuestos");
+        jlImpuestos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlImpuestosMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnImpuestosLayout = new javax.swing.GroupLayout(btnImpuestos);
         btnImpuestos.setLayout(btnImpuestosLayout);
@@ -165,8 +178,8 @@ public class frmMenu extends javax.swing.JFrame {
         jlPagos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlPagos.setText("Pagos");
         jlPagos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlPagosMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlPagosMousePressed(evt);
             }
         });
 
@@ -191,6 +204,11 @@ public class frmMenu extends javax.swing.JFrame {
         jlUsuarios.setForeground(new java.awt.Color(21, 14, 48));
         jlUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlUsuarios.setText("Usuarios");
+        jlUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlUsuariosMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnUsuariosLayout = new javax.swing.GroupLayout(btnUsuarios);
         btnUsuarios.setLayout(btnUsuariosLayout);
@@ -211,6 +229,11 @@ public class frmMenu extends javax.swing.JFrame {
 
         jlLogout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemGUI/images/logout.png"))); // NOI18N
+        jlLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlLogoutMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnLogoutLayout = new javax.swing.GroupLayout(btnLogout);
         btnLogout.setLayout(btnLogoutLayout);
@@ -282,6 +305,8 @@ public class frmMenu extends javax.swing.JFrame {
 
         bg.add(jpSideMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 600));
 
+        jpMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         divisor.setBackground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout divisorLayout = new javax.swing.GroupLayout(divisor);
@@ -295,77 +320,7 @@ public class frmMenu extends javax.swing.JFrame {
             .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        bg.add(divisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 5, 600));
-
-        header.setBackground(new java.awt.Color(221, 221, 221));
-
-        btnBusqueda.setBackground(new java.awt.Color(21, 14, 48));
-        btnBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jlBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        jlBusqueda.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        jlBusqueda.setForeground(new java.awt.Color(255, 255, 255));
-        jlBusqueda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlBusqueda.setText("Búsqueda");
-        jlBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBusquedaMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnBusquedaLayout = new javax.swing.GroupLayout(btnBusqueda);
-        btnBusqueda.setLayout(btnBusquedaLayout);
-        btnBusquedaLayout.setHorizontalGroup(
-            btnBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        btnBusquedaLayout.setVerticalGroup(
-            btnBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        btnRegistro.setBackground(new java.awt.Color(21, 14, 48));
-        btnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jlRegistro.setBackground(new java.awt.Color(255, 255, 255));
-        jlRegistro.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        jlRegistro.setForeground(new java.awt.Color(255, 255, 255));
-        jlRegistro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlRegistro.setText("Registro");
-        jlRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlRegistroMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnRegistroLayout = new javax.swing.GroupLayout(btnRegistro);
-        btnRegistro.setLayout(btnRegistroLayout);
-        btnRegistroLayout.setHorizontalGroup(
-            btnRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        btnRegistroLayout.setVerticalGroup(
-            btnRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
-        header.setLayout(headerLayout);
-        headerLayout.setHorizontalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        headerLayout.setVerticalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        bg.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 630, 40));
+        jpMain.add(divisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 600));
 
         jpDynamic.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -377,10 +332,12 @@ public class frmMenu extends javax.swing.JFrame {
         );
         jpDynamicLayout.setVerticalGroup(
             jpDynamicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        bg.add(jpDynamic, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 630, 560));
+        jpMain.add(jpDynamic, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 600));
+
+        bg.add(jpMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 630, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -396,50 +353,72 @@ public class frmMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jlBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBusquedaMouseClicked
-        // TODO add your handling code here:
-        frmClientesBuscar clientesBuscar = new frmClientesBuscar();
-        clientesBuscar.setSize(630, 560);
-        clientesBuscar.setLocation(0, 0);
+    private void jlEmpleadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEmpleadosMousePressed
+        frmEmpleados empleadosWindow = new frmEmpleados();
+        
+        empleadosWindow.setSize(630, 600);
+        empleadosWindow.setLocation(0, 0);
 
         jpDynamic.removeAll();
-        jpDynamic.add(clientesBuscar, BorderLayout.CENTER);
+        jpDynamic.add(empleadosWindow, BorderLayout.CENTER);
         jpDynamic.revalidate();
         jpDynamic.repaint();
-    }//GEN-LAST:event_jlBusquedaMouseClicked
+    }//GEN-LAST:event_jlEmpleadosMousePressed
 
-    private void jlRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlRegistroMouseClicked
-        // TODO add your handling code here:
-        frmClientesCrear clientesCrear = new frmClientesCrear();
-        clientesCrear.setSize(630, 560);
-        clientesCrear.setLocation(0, 0);
+    private void jlClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlClientesMousePressed
+        frmClientes clientesWindow = new frmClientes();
         
+        clientesWindow.setSize(630, 600);
+        clientesWindow.setLocation(0, 0);
 
         jpDynamic.removeAll();
-        jpDynamic.add(clientesCrear, BorderLayout.CENTER);
+        jpDynamic.add(clientesWindow, BorderLayout.CENTER);
         jpDynamic.revalidate();
         jpDynamic.repaint();
-    }//GEN-LAST:event_jlRegistroMouseClicked
+    }//GEN-LAST:event_jlClientesMousePressed
 
-    private void jlPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlPagosMouseClicked
-        // TODO add your handling code here:
+    private void jlImpuestosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlImpuestosMousePressed
+        frmImpuestos impuestosWindow = new frmImpuestos();
         
-        frmCrearPago crearPago = new frmCrearPago();
-        crearPago.setSize(630, 560);
-        crearPago.setLocation(0, 0);
+        impuestosWindow.setSize(630, 600);
+        impuestosWindow.setLocation(0, 0);
+
         jpDynamic.removeAll();
-        jpDynamic.add(crearPago, BorderLayout.CENTER);
+        jpDynamic.add(impuestosWindow, BorderLayout.CENTER);
         jpDynamic.revalidate();
         jpDynamic.repaint();
+    }//GEN-LAST:event_jlImpuestosMousePressed
+
+    private void jlUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlUsuariosMousePressed
+        frmUsuarios usuariosWindow = new frmUsuarios();
         
-//        frmBuscarPago buscarPago = new frmBuscarPago();
-//        buscarPago.setSize(630, 560);
-//        buscarPago.setLocation(0, 0);
-//        jpDynamic.removeAll();
-//        jpDynamic.add(buscarPago, BorderLayout.CENTER);
-//        jpDynamic.revalidate();
-//        jpDynamic.repaint();
-    }//GEN-LAST:event_jlPagosMouseClicked
+        usuariosWindow.setSize(630, 600);
+        usuariosWindow.setLocation(0, 0);
+
+        jpDynamic.removeAll();
+        jpDynamic.add(usuariosWindow, BorderLayout.CENTER);
+        jpDynamic.revalidate();
+        jpDynamic.repaint();
+    }//GEN-LAST:event_jlUsuariosMousePressed
+
+    private void jlPagosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlPagosMousePressed
+        frmPagos pagosWindow = new frmPagos();
+        
+        pagosWindow.setSize(630, 600);
+        pagosWindow.setLocation(0, 0);
+
+        jpDynamic.removeAll();
+        jpDynamic.add(pagosWindow, BorderLayout.CENTER);
+        jpDynamic.revalidate();
+        jpDynamic.repaint();
+    }//GEN-LAST:event_jlPagosMousePressed
+
+    private void jlLogoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMousePressed
+        // TODO add your handling code here:
+        frmLoginMain loginWindow = new frmLoginMain();
+        this.setVisible(false);
+        loginWindow.setVisible(true);
+    }//GEN-LAST:event_jlLogoutMousePressed
 
     /**
      * @param args the command line arguments
@@ -472,40 +451,33 @@ public class frmMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try{
-                new frmMenu().setVisible(true);
-                }catch(Exception e){
+                try {
+                    new frmMenu().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            
-        
-        }
         });
-        
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JPanel btnBusqueda;
     private javax.swing.JPanel btnClientes;
     private javax.swing.JPanel btnEmpleados;
     private javax.swing.JPanel btnImpuestos;
     private javax.swing.JPanel btnLogout;
     private javax.swing.JPanel btnPagos;
-    private javax.swing.JPanel btnRegistro;
     private javax.swing.JPanel btnUsuarios;
     private javax.swing.JPanel divisor;
-    private javax.swing.JPanel header;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel jlBusqueda;
     private javax.swing.JLabel jlClientes;
     private javax.swing.JLabel jlEmpleados;
     private javax.swing.JLabel jlImpuestos;
     private javax.swing.JLabel jlLogout;
     private javax.swing.JLabel jlPagos;
-    private javax.swing.JLabel jlRegistro;
     private javax.swing.JLabel jlUsuarios;
     private javax.swing.JPanel jpDynamic;
+    private javax.swing.JPanel jpMain;
     private javax.swing.JPanel jpSideMenu;
     private javax.swing.JLabel mainLogo;
     private javax.swing.JLabel nombreSistema;
