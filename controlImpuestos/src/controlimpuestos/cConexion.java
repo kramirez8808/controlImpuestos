@@ -47,10 +47,10 @@ public class cConexion {
                                 "PRIMARY KEY (idCliente))");
             
             //Crear Tabla Impuestos
-            //Pendiente evaluar fechaVencimiento o fechaCreacion
-            //Descripcion cambiada de 50 a 100 caracteres
             conn.createStatement().execute("CREATE TABLE IF NOT EXISTS impuestos (" + //Crear tabla impuestos si no existe
                                 "idImpuestos INT NOT NULL AUTO_INCREMENT," +
+                                "nombre VARCHAR(50) NOT NULL," + 
+                                "cedula VARCHAR(10) NOT NULL," +
                                 "descripcion VARCHAR(100) NOT NULL," + 
                                 "tasaImpuesto DOUBLE NOT NULL," +
                                 "fechaVencimiento DATE NOT NULL," +
