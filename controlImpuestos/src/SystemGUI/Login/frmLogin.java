@@ -59,7 +59,6 @@ public class frmLogin extends javax.swing.JPanel {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 190, 50));
 
         pfContrasena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        pfContrasena.setText("jPasswordField1");
         jPanel2.add(pfContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 120, 40));
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {

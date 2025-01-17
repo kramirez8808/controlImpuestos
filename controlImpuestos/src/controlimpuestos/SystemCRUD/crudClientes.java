@@ -26,7 +26,7 @@ public class crudClientes {
         String selectDB = "USE controlImpuestos"; //Query para seleccionar la base de datos
         
         PreparedStatement prStmt = conn.prepareStatement(selectDB);
-        prStmt.executeUpdate();
+        prStmt.executeUpdate(); 
     }
 
     //Metodo para crear un cliente

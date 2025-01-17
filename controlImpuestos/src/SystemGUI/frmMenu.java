@@ -415,9 +415,15 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void jlLogoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoutMousePressed
         // TODO add your handling code here:
-        frmLoginMain loginWindow = new frmLoginMain();
+        frmLoginMain loginWindow;
+        try {
+            loginWindow = new frmLoginMain();
+            loginWindow.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false);
-        loginWindow.setVisible(true);
+        
     }//GEN-LAST:event_jlLogoutMousePressed
 
     /**
